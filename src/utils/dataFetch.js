@@ -35,6 +35,24 @@ export default function dataFetch({query, variables,}: dataFetchOptions) {
 
   return fetch(API_URL, apiConfig)
     .then(function(response) {
-      return response.data;
+      let contentType = response.headers.get('content-type');
+      if(response.ok)
+      {
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+          return response.json().then(json => {
+            return json;
+          });
+        }
+        else if (contentType && contentType.indexOf('text') !== -1) {
+          return response.text().then(text => {
+            return text;
+          });
+        } else {
+          return response;
+        }
+      } else {
+        console.error(`Response status ${response.status} during dataFetch for url ${response.url}.`);
+        throw response;
+      }
     });
 }

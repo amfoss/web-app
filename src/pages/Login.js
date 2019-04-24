@@ -1,8 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import 'babel-polyfill';
 import { Tooltip, Button, Card, FormGroup, InputGroup } from '@blueprintjs/core';
-
 import Topbar from '../components/topbar';
+
+import dataFetch from '../utils/dataFetch';
+
+const query = `
+mutation TokenAuth($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+        token
+        refreshToken
+    }
+}`;
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,11 +20,20 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      token: null,
+      refreshToken: null,
       showPassword: false,
     };
     this.passwordEntry = this.passwordEntry.bind(this);
     this.usernameEntry = this.usernameEntry.bind(this);
     this.handleLockClick = this.handleLockClick.bind(this);
+  }
+
+  componentDidUpdate(){
+    if(this.state.token !== null)
+    {
+
+    }
   }
 
   passwordEntry(event) {
@@ -28,6 +47,17 @@ class Login extends React.Component {
   handleLockClick() {
     this.setState({ showPassword: !this.state.showPassword });
   }
+
+  login = async() =>
+  {
+    let variables = { "username": this.state.username, "password": this.state.password };
+    let response =  await dataFetch({ query, variables});
+    this.setState({
+      token: response.data.tokenAuth.token,
+      refreshToken: response.data.tokenAuth.refreshToken
+    });
+
+  };
 
   render() {
     const lockButton = (
@@ -59,7 +89,8 @@ class Login extends React.Component {
               type={this.state.showPassword ? 'text' : 'password'}
             />
           </FormGroup>
-          <Button type="submit" intent="primary" text="Login" />
+          <Button type="submit" intent="primary" text="Login" onClick={this.login} />
+          {this.state.response}
         </Card>
       </React.Fragment>
     );
