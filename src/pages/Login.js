@@ -29,10 +29,12 @@ class Login extends React.Component {
     this.handleLockClick = this.handleLockClick.bind(this);
   }
 
-  componentDidUpdate(){
-    if(this.state.token !== null)
-    {
-
+  componentDidUpdate() {
+    if (this.state.token !== null) {
+      const { token } = this.state;
+      const refreshtoken = this.state.refreshToken;
+      localStorage.setItem('token', token);
+      localStorage.setItem('refreshToken', refreshtoken);
     }
   }
 
@@ -48,15 +50,13 @@ class Login extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   }
 
-  login = async() =>
-  {
-    let variables = { "username": this.state.username, "password": this.state.password };
-    let response =  await dataFetch({ query, variables});
+  login = async () => {
+    const variables = { username: this.state.username, password: this.state.password };
+    const response = await dataFetch({ query, variables });
     this.setState({
       token: response.data.tokenAuth.token,
-      refreshToken: response.data.tokenAuth.refreshToken
+      refreshToken: response.data.tokenAuth.refreshToken,
     });
-
   };
 
   render() {

@@ -16,6 +16,22 @@ function LoginPage() {
   return <Login />;
 }
 
+const checkAuth = () => {
+  const token = localStorage.getItem('token');
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!token || !refreshToken) {
+    return false;
+  }
+
+  console.log('login worked');
+};
+
+const logout = () =>{
+  // Remove token from localStorage
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
+}
+
 function AppRoutes() {
   return (
     <Switch>

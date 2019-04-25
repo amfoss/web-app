@@ -2,7 +2,6 @@ import fetch from 'isomorphic-fetch';
 
 /*
  Isomorphic fetch that can be used as in in both the server and the client. Usage:
-
  import dataFetch from 'src/common/dataFetch';
  dataFetch({method: 'GET', url: '/v1/hey', query: {fullLength: true}, useDefaultHost: true})
  .then((json) => {
@@ -11,7 +10,6 @@ import fetch from 'isomorphic-fetch';
  .catch((err)=> {
     //do something {}
   })
-
  */
 
 const API_URL = 'http://127.0.0.1:3200/graphql/';
