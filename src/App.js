@@ -21,12 +21,6 @@ function DashboardPage() {
   return <Dashboard />;
 }
 
-const logout = () =>{
-  // Remove token from localStorage
-  localStorage.removeItem('token');
-  localStorage.removeItem('refreshToken');
-}
-
 function AppRoutes() {
   return (
     <Switch>

@@ -3,10 +3,12 @@ import { Helmet } from 'react-helmet';
 import 'babel-polyfill';
 import { Tooltip, Button, Card, FormGroup, InputGroup } from '@blueprintjs/core';
 import Topbar from '../components/topbar';
-import cookie from 'react-cookies';
-
+import Cookies from 'universal-cookie';
+import { Redirect } from 'react-router';
 
 import dataFetch from '../utils/dataFetch';
+
+const cookies = new Cookies();
 
 const query = `
 mutation TokenAuth($username: String!, $password: String!) {
@@ -25,17 +27,27 @@ class Login extends React.Component {
       token: null,
       refreshToken: null,
       showPassword: false,
+      cookieSet: false
     };
     this.passwordEntry = this.passwordEntry.bind(this);
     this.usernameEntry = this.usernameEntry.bind(this);
     this.handleLockClick = this.handleLockClick.bind(this);
   }
 
+  componentDidMount() {
+    let token = cookies.get('token');
+    if(token != null) {
+      this.setState({
+        cookieSet: true,
+      });
+    }
+  }
+
   componentDidUpdate() {
-    if (this.state.token !== null) {
-      console.log(this.state.refreshToken);
-      cookie.save('token',this.state.token);
-      cookie.save('refreshToken',this.state.refreshToken);
+    if (this.state.token !== null && !this.state.cookieSet) {
+      cookies.set('token', this.state.token, { path: '/' });
+      cookies.set('refreshToken',this.state.refreshToken, { path: '/' });
+      this.setState({ cookieSet: true });
     }
   }
 
@@ -61,6 +73,7 @@ class Login extends React.Component {
   };
 
   render() {
+    if (this.state.cookieSet) return <Redirect to="/" />;
     const lockButton = (
       <Tooltip content={`${this.state.showPassword ? 'Hide' : 'Show'} Password`}>
         <Button
