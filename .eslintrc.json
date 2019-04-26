@@ -28,12 +28,10 @@
       "argsIgnorePattern": "res|next|^err"
     }
   ],
-    "prefer-const": [
-    "error",
-    {
-      "destructuring": "all"
-    }
-  ],
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+    }],
     "arrow-body-style": [
     2,
     "as-needed"
