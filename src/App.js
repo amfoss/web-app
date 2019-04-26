@@ -7,15 +7,15 @@ import '@blueprintjs/core/lib/css/blueprint';
 import './styles/styles.sass';
 
 import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 
+const cookies = new Cookies();
+
 function HomePage() {
   const token = cookies.get('token');
-  if(token)
-    return  <Redirect to="/dashboard" />;
+  if (token) return <Redirect to="/dashboard" />;
   return <Redirect to="/login" />;
 }
 
@@ -26,15 +26,18 @@ function LoginPage() {
 function LogoutPage() {
   cookies.remove('token');
   cookies.remove('refreshToken');
+  cookies.remove('username');
+  localStorage.clear();
   return <Redirect to="/login" />;
 }
 
 function DashboardPage() {
+  const token = cookies.get('token');
+  if (!token) return <Redirect to="/login" />;
   return <Dashboard />;
 }
 
 function AppRoutes() {
-
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
@@ -46,7 +49,6 @@ function AppRoutes() {
 }
 
 export default function App() {
-
   return (
     <React.Fragment>
       <Helmet>

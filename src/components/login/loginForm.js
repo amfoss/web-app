@@ -4,7 +4,7 @@ import { Tooltip, Button, Card, FormGroup, InputGroup, Callout } from '@blueprin
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 
-import dataFetch from '../utils/dataFetch';
+import dataFetch from '../../utils/dataFetch';
 
 const cookies = new Cookies();
 
@@ -46,6 +46,7 @@ class LoginForm extends React.Component {
     if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
       cookies.set('token', response.data.tokenAuth.token, { path: '/' });
       cookies.set('refreshToken', response.data.tokenAuth.refreshToken, { path: '/' });
+      cookies.set('username', this.state.username, { path: '/' });
       this.setState({ cookieSet: true });
     } else {
       this.setState({ authFail: true });

@@ -19,38 +19,30 @@ type dataFetchOptions = {
   variables?: Object,
 };
 
-export default function dataFetch({query, variables,}: dataFetchOptions) {
-  let body = {
-    "query": query,
-    "variables": variables
+export default function dataFetch({ query, variables }: dataFetchOptions) {
+  const body = {
+    query,
+    variables,
   };
 
-  let apiConfig = {
+  const apiConfig = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   };
 
-  return fetch(API_URL, apiConfig)
-    .then(function(response) {
-      let contentType = response.headers.get('content-type');
-      if(response.ok)
-      {
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-          return response.json().then(json => {
-            return json;
-          });
-        }
-        else if (contentType && contentType.indexOf('text') !== -1) {
-          return response.text().then(text => {
-            return text;
-          });
-        } else {
-          return response;
-        }
-      } else {
-        console.error(`Response status ${response.status} during dataFetch for url ${response.url}.`);
-        throw response;
+  return fetch(API_URL, apiConfig).then(function(response) {
+    const contentType = response.headers.get('content-type');
+    if (response.ok) {
+      if (contentType && contentType.indexOf('application/json') !== -1) {
+        return response.json().then(json => json);
       }
-    });
+      if (contentType && contentType.indexOf('text') !== -1) {
+        return response.text().then(text => text);
+      }
+      return response;
+    }
+    console.error(`Response status ${response.status} during dataFetch for url ${response.url}.`);
+    throw response;
+  });
 }
