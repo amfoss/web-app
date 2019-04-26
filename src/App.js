@@ -7,6 +7,7 @@ import '@blueprintjs/core/lib/css/blueprint';
 import './styles/styles.sass';
 
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function HomePage() {
   return <h1>hello</h1>;
@@ -16,15 +17,9 @@ function LoginPage() {
   return <Login />;
 }
 
-const checkAuth = () => {
-  const token = localStorage.getItem('token');
-  const refreshToken = localStorage.getItem('refreshToken');
-  if (!token || !refreshToken) {
-    return false;
-  }
-
-  console.log('login worked');
-};
+function DashboardPage() {
+  return <Dashboard />;
+}
 
 const logout = () =>{
   // Remove token from localStorage
@@ -37,6 +32,7 @@ function AppRoutes() {
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/dashboard" component={DashboardPage} />
       <Redirect to="/" />
     </Switch>
   );

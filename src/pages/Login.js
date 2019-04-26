@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import 'babel-polyfill';
 import { Tooltip, Button, Card, FormGroup, InputGroup } from '@blueprintjs/core';
 import Topbar from '../components/topbar';
+import cookie from 'react-cookies';
+
 
 import dataFetch from '../utils/dataFetch';
 
@@ -31,10 +33,9 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     if (this.state.token !== null) {
-      const { token } = this.state;
-      const refreshtoken = this.state.refreshToken;
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshtoken);
+      console.log(this.state.refreshToken);
+      cookie.save('token',this.state.token);
+      cookie.save('refreshToken',this.state.refreshToken);
     }
   }
 
