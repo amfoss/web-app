@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel ./public/index.html -p 8000",
-    "build": "parcel build entry.js",
+    "build": "parcel build src/index.js  --detailed-report",
     "precommit": "lint-staged",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
