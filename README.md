@@ -14,7 +14,7 @@ Webapp for FOSS@Amrita
 
 #### NPM Commands
 * ```npm install``` - install all node modules (dependencies) to run the app
-* ``npm run dev`` - runs the app in development mode
+* ``npm run serve`` - runs the app in development mode in port 5000
 * ```npm run build``` - builds the app for production
 * ``npm run lint`` - shows lint errors
 * ``npm run lint:fix`` - fixes possible lint errors (as well as prettifies code)

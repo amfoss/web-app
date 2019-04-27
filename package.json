@@ -4,8 +4,8 @@
   "description": "webapp for FOSS@Amrita",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel ./public/index.html -p 8000",
-    "build": "parcel build src/index.js  --detailed-report",
+    "build": "parcel build ./public/index.html --detailed-report; cp ./dist/index.html ./dist/200.html;",
+    "serve": "parcel ./public/index.html -p 5000",
     "precommit": "lint-staged",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
