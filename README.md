@@ -40,7 +40,7 @@ Webapp for FOSS@Amrita
 [forks]: https://github.com/amfoss/webapp/network/members
 [license-badge]: https://img.shields.io/github/license/amfoss/cms.svg
 [license]: https://github.com/amfoss/gitlit/blob/master/LICENSE
-[issues-badge]: https://img.shields.io/github/issues/amfoss/cms.svg
+[issues-badge]: https://img.shields.io/github/issues/amfoss/WebApp.svg
 [issues]: https://github.com/amfoss/WebApp/issues
 [pr-badge]:https://img.shields.io/github/issues-pr/amfoss/WebApp.svg
 [prs]: https://github.com/amfoss/webapp/pulls
