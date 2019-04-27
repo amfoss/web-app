@@ -28,7 +28,8 @@ class Tasks extends React.Component {
     super(props);
     this.state = {
       setParams: false,
-      subStreams: null
+      subStreams: null,
+      title: ''
     };
   }
 
