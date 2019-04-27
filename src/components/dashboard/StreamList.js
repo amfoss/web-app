@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, Button, Card, FormGroup, InputGroup, Callout } from '@blueprintjs/core';
+import { Card } from '@blueprintjs/core';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';
@@ -53,14 +53,14 @@ class StreamList extends React.Component {
 
 
   render() {
-
     return (
-      <Card elevation="2">
-        {
           this.state.setStreams ? this.state.streams.map((stream) =>
-            <StreamCard name={stream.name} description={stream.description} slug={stream.slug} key={stream.slug}/> ) : null
-        }
-      </Card>
+            <StreamCard
+                  name={stream.name}
+                  description={stream.description}
+                  slug={stream.slug}
+                  key={stream.slug}
+            /> ) : null
     );
   }
 }

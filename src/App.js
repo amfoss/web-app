@@ -10,7 +10,8 @@ import Cookies from 'universal-cookie';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Tasks from './pages/Tasks'
+import Tasks from './pages/Tasks';
+import Task from './pages/Task';
 
 const cookies = new Cookies();
 
@@ -43,6 +44,11 @@ function TasksPage()
   return <Tasks />;
 }
 
+function TaskPage()
+{
+  return <Task />;
+}
+
 function AppRoutes() {
   return (
     <Switch>
@@ -51,6 +57,7 @@ function AppRoutes() {
       <Route exact path="/logout" component={LogoutPage} />
       <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/tasks" component={TasksPage} />
+      <Route exact path="/task" component={TaskPage} />
     </Switch>
   );
 }
