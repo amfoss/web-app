@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@blueprintjs/core';
+import { Row, Col } from 'react-grid';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';
@@ -13,7 +13,6 @@ query getStreams($type:String,$hasParent:Boolean)
     name
     slug
     type
-    description
   }
 }`;
 
@@ -51,16 +50,19 @@ class StreamList extends React.Component {
     }
   };
 
-
   render() {
     return (
-          this.state.setStreams ? this.state.streams.map((stream) =>
-            <StreamCard
-                  name={stream.name}
-                  description={stream.description}
-                  slug={stream.slug}
-                  key={stream.slug}
-            /> ) : null
+      this.state.setStreams ?
+        <Row>
+        { this.state.streams.map((stream) =>
+        <Col md={4} key={stream.slug}>
+        <StreamCard
+          name={stream.name}
+          slug={stream.slug}
+        /></Col>
+        )}
+        </Row>
+        : null
     );
   }
 }

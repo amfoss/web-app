@@ -44,11 +44,6 @@ function TasksPage()
   return <Tasks />;
 }
 
-function TaskPage()
-{
-  return <Task />;
-}
-
 function AppRoutes() {
   return (
     <Switch>
@@ -57,7 +52,7 @@ function AppRoutes() {
       <Route exact path="/logout" component={LogoutPage} />
       <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/tasks" component={TasksPage} />
-      <Route exact path="/task" component={TaskPage} />
+      <Route exact path="/tasks/:id" component={Task} />
     </Switch>
   );
 }

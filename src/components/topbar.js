@@ -3,6 +3,7 @@ import {Navbar, Menu, MenuItem, Button, Popover, Card} from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import dataFetch from '../utils/dataFetch';
+import classNames from 'classnames';
 
 const cookies = new Cookies();
 
@@ -85,7 +86,7 @@ class Topbar extends React.Component {
 
     return (
       <React.Fragment>
-        <Navbar>
+        <Navbar fixedToTop className={classNames('bp3-dark','top-bar')}>
           <Navbar.Group>
             <Navbar.Heading>amFOSS App</Navbar.Heading>
           </Navbar.Group>
@@ -94,7 +95,6 @@ class Topbar extends React.Component {
               <Popover content={profile_dropdown} position="bottom-left">
                 <div>
                   <img src={`http://127.0.0.1:3200/${this.state.avatar}`} style={{ width: '32px', borderRadius: '100vw' }} />
-                  <span>Hey {this.state.firstName} !</span>
                 </div>
               </Popover>
             </Navbar.Group> : null

@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 const propTypes = {
   name: PropTypes.string,
   slug: PropTypes.string,
-  description: PropTypes.string,
 };
 
 class StreamCard extends React.Component {
@@ -19,7 +18,6 @@ class StreamCard extends React.Component {
       <Link to={`/tasks?stream=${this.props.slug}`}>
         <Card elevation="2">
           <h1>{this.props.name}</h1>
-          {this.props.description}
         </Card>
       </Link>
     );

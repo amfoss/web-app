@@ -4,10 +4,8 @@ import Topbar from '../components/topbar';
 import { Flex, Box } from '@rebass/grid'
 import { RangeSlider, Label, Checkbox } from '@blueprintjs/core';
 
-import TaskList from '../components/tasks/taskList'
-
-
 import dataFetch from '../utils/dataFetch';
+import {Redirect} from 'react-router';
 
 const query = `query getTask($id: String!)
 {
@@ -40,25 +38,21 @@ class Task extends React.Component {
     super(props);
     this.state = {
       id: null,
-      setId: false
+      setId: false,
+      error: false
     };
   }
 
   componentDidMount() {
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
+    const { id } = this.props.match.params;
     this.setState({
-      id: params.get('id'),
+      id: id,
       setId: false,
       setData: false,
     });
   }
   componentDidUpdate(){
-    if(!this.state.setId)
-    {
-      this.getTask();
-    }
-
+    if(!this.state.setId) { this.getTask(); }
   }
 
   getTask = async () => {
@@ -74,9 +68,7 @@ class Task extends React.Component {
             date: response.data.task.date,
             setData: true
         });
-      } else {
-        console.log('error');
-      }
+      } else { this.setState({ error: true}) }
   };
 
   render() {
@@ -86,13 +78,13 @@ class Task extends React.Component {
           <title>Tasks Page</title>
         </Helmet>
         <Topbar />
+        { this.state.error ?  <Redirect to="/tasks" /> : null }
         { this.state.setData ? (
             <React.Fragment>
               <h1>{this.state.title}</h1>
               <p>{this.state.description}</p>
               <div>{this.state.points}</div>
             </React.Fragment>
-
         ): null
         }
       </React.Fragment>

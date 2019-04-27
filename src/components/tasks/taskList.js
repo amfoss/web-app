@@ -68,16 +68,19 @@ class TaskList extends React.Component {
 
 
   render() {
-
     return (
-          this.state.setTasks ? this.state.tasks.map((task) =>
-            <TaskCard
-              title={task.title}
-              difficulty={task.difficulty}
-              points={task.points}
-              id={task.id}
-              key={task.id}
-            /> ) : null
+      <div className='tasks-list'>
+        {this.state.setTasks ? this.state.tasks.map((task,i) =>
+          <TaskCard
+            title={task.title}
+            difficulty={task.difficulty}
+            points={task.points}
+            id={task.id}
+            key={task.id}
+            classNames={ i===0 ? "featured-task" : null}
+          />) : null
+        }
+      </div>
     );
   }
 }
