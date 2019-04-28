@@ -1,6 +1,5 @@
 import React from 'react';
 import { Breadcrumbs, IBreadcrumbProps, Icon } from '@blueprintjs/core';
-import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Topbar from '../components/topbar';
-import { Flex, Box } from '@rebass/grid'
-import { RangeSlider, Label, Checkbox } from '@blueprintjs/core';
+import { IBreadcrumbProps } from '@blueprintjs/core';
 
 import dataFetch from '../utils/dataFetch';
 import {Redirect} from 'react-router';
+import TitleBar from '../components/titlebar';
 
 const query = `query getTask($id: String!)
 {
@@ -64,7 +64,7 @@ class Task extends React.Component {
             description: response.data.task.description,
             points: response.data.task.points,
             difficulty: response.data.task.difficulty,
-            author: response.data.task.author,
+            name: response.data.task.author,
             date: response.data.task.date,
             setData: true
         });
@@ -72,6 +72,11 @@ class Task extends React.Component {
   };
 
   render() {
+    const breadcrumbs: IBreadcrumbProps[] = [
+      { href: "/", icon: "home", text: "Home" },
+      { href: "/tasks", icon: "home", text: "Tasks" },
+      { href: "/", icon:"home",text:"Task"}
+    ];
     return (
       <React.Fragment>
         <Helmet>
@@ -81,9 +86,11 @@ class Task extends React.Component {
         { this.state.error ?  <Redirect to="/tasks" /> : null }
         { this.state.setData ? (
             <React.Fragment>
-              <h1>{this.state.title}</h1>
-              <p>{this.state.description}</p>
-              <div>{this.state.points}</div>
+              <div className="page-container">
+                <TitleBar title={this.state.title} description={this.state.description} breadcrumbs={breadcrumbs} />
+                <div>{this.state.points}</div>
+                {this.state.difficulty}
+              </div>
             </React.Fragment>
         ): null
         }

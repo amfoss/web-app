@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from '@blueprintjs/core';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';

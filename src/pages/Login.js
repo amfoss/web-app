@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import 'babel-polyfill';
 import Topbar from '../components/topbar';
+import TitleBar from '../components/titlebar';
 import LoginForm from '../components/login/loginForm';
 
 class Login extends React.Component {
@@ -12,6 +13,9 @@ class Login extends React.Component {
           <title>Login Page</title>
         </Helmet>
         <Topbar />
+        <div className="page-container">
+          <TitleBar title="Welcome !"/>
+        </div>
         <LoginForm />
       </React.Fragment>
     );

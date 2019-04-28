@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tooltip, Button, Card, FormGroup, InputGroup, Callout } from '@blueprintjs/core';
+import { Row , Col } from 'react-grid';
 
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
@@ -86,23 +87,27 @@ class LoginForm extends React.Component {
     );
 
     return (
-      <Card elevation="2">
+      <Card elevation="2" className="login-card">
         <h1>Login</h1>
-        {this.state.authFail ? errorMessage : null}
-        <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
-          <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
-            <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
-          </FormGroup>
-          <FormGroup label="Password" labelFor="text-input" labelInfo="(required)">
-            <InputGroup
-              placeholder="Enter your password..."
-              onChange={this.passwordEntry}
-              rightElement={lockButton}
-              type={this.state.showPassword ? 'text' : 'password'}
-            />
-          </FormGroup>
-          <Button type="submit" intent="primary" text="Login" />
-        </form>
+        <Row>
+          <Col md={9}>
+            {this.state.authFail ? errorMessage : null}
+            <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
+              <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
+                <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
+              </FormGroup>
+              <FormGroup label="Password" labelFor="text-input" labelInfo="(required)">
+                <InputGroup
+                  placeholder="Enter your password"
+                  onChange={this.passwordEntry}
+                  rightElement={lockButton}
+                  type={this.state.showPassword ? 'text' : 'password'}
+                />
+              </FormGroup>
+              <Button type="submit" intent="primary" text="Login" />
+            </form>
+          </Col>
+        </Row>
       </Card>
     );
   }

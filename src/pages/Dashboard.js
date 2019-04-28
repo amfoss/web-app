@@ -4,7 +4,6 @@ import { Container } from 'react-grid';
 import Topbar from '../components/topbar';
 import StreamList from '../components/dashboard/StreamList';
 import TitleBar from '../components/titlebar';
-import {IBreadcrumbProps} from '@blueprintjs/core';
 
 class Dashboard extends React.Component {
 
