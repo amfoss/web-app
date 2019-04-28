@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Task from './pages/Task';
+import Profile from './pages/Profile';
 
 const cookies = new Cookies();
 
@@ -44,6 +45,11 @@ function TasksPage()
   return <Tasks />;
 }
 
+function ProfilePage()
+{
+  return <Profile />;
+}
+
 function AppRoutes() {
   return (
     <Switch>
@@ -53,6 +59,7 @@ function AppRoutes() {
       <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/tasks" component={TasksPage} />
       <Route exact path="/tasks/:id" component={Task} />
+      <Route exact path="/profile" component={ProfilePage} />
     </Switch>
   );
 }
