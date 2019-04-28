@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import 'babel-polyfill';
-import Topbar from '../components/topbar';
-import TitleBar from '../components/titlebar';
 import LoginForm from '../components/login/loginForm';
+import Topbar from '../components/topbar.js';
+import {Container, Row, Col } from 'react-grid';
 
 class Login extends React.Component {
   render() {
@@ -14,9 +14,16 @@ class Login extends React.Component {
         </Helmet>
         <Topbar />
         <div className="page-container">
-          <TitleBar title="Welcome !"/>
+          <Container>
+            <Row>
+              <Col md={6} lg={8}>
+              </Col>
+              <Col md={6} lg={4}>
+                <LoginForm />
+              </Col>
+            </Row>
+          </Container>
         </div>
-        <LoginForm />
       </React.Fragment>
     );
   }

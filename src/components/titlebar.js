@@ -11,7 +11,7 @@ class TitleBar extends React.Component {
   render() {
 
     return (
-      <div className={classNames('title-bar')}>
+      <div className={classNames('title-bar')} style={ this.props.noBottomMargin ? {marginBottom: 0} : null }>
         {
           this.props.breadcrumbs ? <Breadcrumbs items={this.props.breadcrumbs} /> : null
         }

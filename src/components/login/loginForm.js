@@ -89,25 +89,21 @@ class LoginForm extends React.Component {
     return (
       <Card elevation="2" className="login-card">
         <h1>Login</h1>
-        <Row>
-          <Col md={9}>
-            {this.state.authFail ? errorMessage : null}
-            <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
-              <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
-                <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
-              </FormGroup>
-              <FormGroup label="Password" labelFor="text-input" labelInfo="(required)">
-                <InputGroup
-                  placeholder="Enter your password"
-                  onChange={this.passwordEntry}
-                  rightElement={lockButton}
-                  type={this.state.showPassword ? 'text' : 'password'}
-                />
-              </FormGroup>
-              <Button type="submit" intent="primary" text="Login" />
-            </form>
-          </Col>
-        </Row>
+        {this.state.authFail ? errorMessage : null}
+        <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
+          <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
+            <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
+          </FormGroup>
+          <FormGroup label="Password" labelFor="text-input" labelInfo="(required)">
+            <InputGroup
+              placeholder="Enter your password"
+              onChange={this.passwordEntry}
+              rightElement={lockButton}
+              type={this.state.showPassword ? 'text' : 'password'}
+            />
+          </FormGroup>
+          <Button type="submit" intent="primary" text="Login" />
+        </form>
       </Card>
     );
   }

@@ -23,6 +23,7 @@
     "@rebass/grid": "^6.0.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
+    "html-react-parser": "^0.7.0",
     "isomorphic-fetch": "^2.2.1",
     "node-sass": "^4.11.0",
     "pages": "0.0.16",

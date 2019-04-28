@@ -1,11 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Topbar from '../components/topbar';
-import { IBreadcrumbProps } from '@blueprintjs/core';
-
-import dataFetch from '../utils/dataFetch';
+import { IBreadcrumbProps, Card } from '@blueprintjs/core';
+import {Container, Row, Col } from 'react-grid';
 import {Redirect} from 'react-router';
+import dataFetch from '../utils/dataFetch';
 import TitleBar from '../components/titlebar';
+import Topbar from '../components/topbar';
+import parse from 'html-react-parser';
+import {Navbar} from '@blueprintjs/core/lib/esnext';
 
 const query = `query getTask($id: String!)
 {
@@ -52,7 +54,7 @@ class Task extends React.Component {
     });
   }
   componentDidUpdate(){
-    if(!this.state.setId) { this.getTask(); }
+    if(!this.state.setData) { this.getTask(); }
   }
 
   getTask = async () => {
@@ -71,25 +73,68 @@ class Task extends React.Component {
       } else { this.setState({ error: true}) }
   };
 
+  getPoints()
+  {
+    let points = this.state.points.replace(/[^0-9\.]+/g, "");
+    return <span>{points + ' Points'}</span>;
+  }
+
+  getDifficulty()
+  {
+    const levels = {
+      "1": "Easy",
+      "2": "Moderate",
+      "3": "Tough",
+      "4": "Hard",
+    };
+    let key = this.state.difficulty.replace(/[^0-9\.]+/g, "");
+    return <span className={`difficulty_${key}`}>{levels[key]}</span>;
+  }
+
+  getDescription()
+  {
+    return <div>{parse(this.state.description)}</div>
+  }
+
   render() {
     const breadcrumbs: IBreadcrumbProps[] = [
       { href: "/", icon: "home", text: "Home" },
       { href: "/tasks", icon: "home", text: "Tasks" },
-      { href: "/", icon:"home",text:"Task"}
     ];
+    const taskinfo = (
+        this.state.setData ?
+          <div className='task-info'>
+            {this.getPoints()} | {this.getDifficulty()}
+          </div>: null
+    );
+
     return (
       <React.Fragment>
         <Helmet>
-          <title>Tasks Page</title>
+          <title>{`${this.state.title} | Tasks | amFOSS App1`}</title>
         </Helmet>
         <Topbar />
         { this.state.error ?  <Redirect to="/tasks" /> : null }
         { this.state.setData ? (
             <React.Fragment>
               <div className="page-container">
-                <TitleBar title={this.state.title} description={this.state.description} breadcrumbs={breadcrumbs} />
-                <div>{this.state.points}</div>
-                {this.state.difficulty}
+                <TitleBar title={this.state.title} description={taskinfo} breadcrumbs={breadcrumbs} noBottomMargin />
+                <Navbar>
+                  <Navbar.Group align="center">
+                    <Navbar.Heading>Task</Navbar.Heading>
+                    <Navbar.Heading>Submit</Navbar.Heading>
+                    <Navbar.Heading>View Submissions</Navbar.Heading>
+                  </Navbar.Group>
+                </Navbar>
+                <Container>
+                  <Row>
+                      <Col lg={8}>
+                        <Card>
+                          { this.getDescription() }
+                        </Card>
+                      </Col>
+                  </Row>
+                </Container>
               </div>
             </React.Fragment>
         ): null

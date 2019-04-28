@@ -1,7 +1,9 @@
 import React from 'react';
-import {Card, Menu} from '@blueprintjs/core';
+import {Card} from '@blueprintjs/core';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+
+import StreamProgress from './StreamProgress';
 
 const propTypes = {
   name: PropTypes.string,
@@ -18,6 +20,7 @@ class StreamCard extends React.Component {
       <Link to={`/tasks?stream=${this.props.slug}`}>
         <Card elevation="2" interactive>
           <h1>{this.props.name}</h1>
+          <StreamProgress slug={this.props.slug} />
         </Card>
       </Link>
     );
