@@ -78,6 +78,9 @@ class Topbar extends React.Component {
     const profile_dropdown = (
       <Menu>
         <MenuItem text="Settings" icon="settings"/>
+        <Link to="/profile">
+          <MenuItem text="Profile" icon="person"/>
+        </Link>
         <Link to="/logout">
           <MenuItem text="Logout" icon="log-out"/>
         </Link>
