@@ -18,10 +18,10 @@ class StreamCard extends React.Component {
 
     return (
       <Link to={`/tasks?stream=${this.props.slug}`}>
-        <Card elevation="2" interactive>
+        <Card elevation="2" className="stream-card" interactive>
           <h1>{this.props.name}</h1>
           <StreamProgress slug={this.props.slug} />
-        </Card>
+        </Card><br /><br />
       </Link>
     );
   }

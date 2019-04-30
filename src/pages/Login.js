@@ -16,9 +16,8 @@ class Login extends React.Component {
         <div className="page-container">
           <Container>
             <Row>
-              <Col md={6} lg={8}>
-              </Col>
-              <Col md={6} lg={4}>
+              <Col md={4} lg={4}></Col>
+              <Col md={6} lg={4} style={{top: 150}}>
                 <LoginForm />
               </Col>
             </Row>
