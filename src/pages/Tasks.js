@@ -29,7 +29,8 @@ class Tasks extends React.Component {
     this.state = {
       setParams: false,
       subStreams: null,
-      title: ''
+      title: '',
+      pointRange: [0,10],
     };
   }
 
@@ -42,16 +43,13 @@ class Tasks extends React.Component {
       maxPoints: params.get('maxPoints')||10,
       minDifficulty: params.get('minDifficulty')||1,
       maxDifficulty: params.get('maxDifficulty')||4,
-      setParams: true
+      setParams: true,
     });
   }
 
   componentDidUpdate() {
       if(this.state.setParams && this.state.subStreams == null)
       { this.getSubStreams()  }
-      else {
-        console.log(this.state.subStreams);
-      }
   }
 
   getSubStreams = async () => {
@@ -64,13 +62,19 @@ class Tasks extends React.Component {
     }
   };
 
+  setRange = (values) => {
+    this.setState({ 
+      pointRange: values 
+    });
+    { this.getSubStreams()  }
+  }
+
   render() {
     const breadcrumbs: IBreadcrumbProps[] = [
       { href: "/", icon: "home", text: "Home" },
       { href: "/tasks", icon: "home", text: "Tasks" },
     ];
 
-    const pointRange = [parseInt(this.state.minPoints),parseInt(this.state.maxPoints)];
     return (
       <React.Fragment>
         <Helmet>
@@ -84,7 +88,7 @@ class Tasks extends React.Component {
               <Col md={3} order={{md:"last"}}>
                 <h3>Filters</h3>
                 <Label>Points Range</Label>
-                <RangeSlider min={0} max={10}  value={pointRange} />
+                <RangeSlider min={0} max={10} onChange={this.setRange} value={this.state.pointRange} />
                 <Label>Difficulty </Label>
                 <Checkbox label="Easy"  />
                 <Checkbox label="Medium" />
