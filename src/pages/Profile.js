@@ -23,7 +23,6 @@ class Profile extends React.Component {
       firstName: '',
       lastName: '',
       avatar: '',
-      role: '',
       profileSet: false,
       dataSet: false,
       isLoggedIn: false
@@ -49,9 +48,8 @@ class Profile extends React.Component {
     const firstName = localStorage.getItem('first_name');
     const lastName = localStorage.getItem('last_name');
     const avatar = localStorage.getItem('avatar');
-    const role = localStorage.getItem('role');
     const username = cookies.get('username');
-    this.setState({ firstName, lastName, avatar, role, username, dataSet: true });
+    this.setState({ firstName, lastName, avatar, username, dataSet: true });
   }
 
   render(){
@@ -71,7 +69,6 @@ class Profile extends React.Component {
                 <Col sm={9} md={9}>
                   <h1>{this.state.firstName} {this.state.lastName}</h1>
                   <h5>@{this.state.username}</h5>
-                  <h3>{this.state.role}</h3>
                 </Col>
               </Row>
             </Card>

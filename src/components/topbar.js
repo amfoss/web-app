@@ -15,7 +15,6 @@ query getProfile($username: String!, $token: String!)
     firstName
     lastName
     avatar
-    role
   }
 }`;
 
@@ -29,7 +28,6 @@ class Topbar extends React.Component {
       firstName: '',
       lastName: '',
       avatar: '',
-      role: '',
       profileSet: false,
       dataSet: false,
       isLoggedIn: false
@@ -60,7 +58,6 @@ class Topbar extends React.Component {
       localStorage.setItem('first_name', response.data.profile.firstName);
       localStorage.setItem('last_name', response.data.profile.lastName);
       localStorage.setItem('avatar', response.data.profile.avatar);
-      localStorage.setItem('role', response.data.profile.role);
       this.setState({ profileSet: true });
     }
   };
@@ -69,9 +66,8 @@ class Topbar extends React.Component {
     const firstName = localStorage.getItem('first_name');
     const lastName = localStorage.getItem('last_name');
     const avatar = localStorage.getItem('avatar');
-    const role = localStorage.getItem('role');
     const username = cookies.get('username');
-    this.setState({ firstName, lastName, avatar, role, username, dataSet: true });
+    this.setState({ firstName, lastName, avatar, username, dataSet: true });
   }
 
   render() {
