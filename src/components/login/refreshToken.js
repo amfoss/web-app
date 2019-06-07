@@ -15,7 +15,6 @@ mutation refreshToken($refreshToken: String!){
 
 export async function refresh() {
   const refreshtoken = cookies.get('refreshToken');
-  console.log('hello');
   const variables = { refreshToken: refreshtoken };
   const response = await dataFetch({ query, variables });
   if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
