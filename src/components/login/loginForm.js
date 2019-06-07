@@ -1,10 +1,10 @@
 import React from 'react';
 import { Tooltip, Button, Card, FormGroup, InputGroup, Callout } from '@blueprintjs/core';
-import { Row , Col } from 'react-grid';
 
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 
+import {refresh} from './refreshToken';
 import dataFetch from '../../utils/dataFetch';
 
 const cookies = new Cookies();
@@ -49,6 +49,7 @@ class LoginForm extends React.Component {
       cookies.set('refreshToken', response.data.tokenAuth.refreshToken, { path: '/' });
       cookies.set('username', this.state.username, { path: '/' });
       this.setState({ cookieSet: true });
+      refresh()
     } else {
       this.setState({ authFail: true });
     }
