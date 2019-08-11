@@ -12,7 +12,7 @@ import fetch from 'isomorphic-fetch';
   })
  */
 
-const API_URL = 'http://127.0.0.1:3200/graphql/';
+const API_URL = 'https://api.amfoss.in/';
 
 type dataFetchOptions = {
   query?: Object,

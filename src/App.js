@@ -40,13 +40,15 @@ function DashboardPage() {
   return <Dashboard />;
 }
 
-function TasksPage()
-{
+function TasksPage() {
+  const token = cookies.get('token');
+  if (!token) return <Redirect to="/login" />;
   return <Tasks />;
 }
 
-function ProfilePage()
-{
+function ProfilePage() {
+  const token = cookies.get('token');
+  if (!token) return <Redirect to="/login" />;
   return <Profile />;
 }
 
