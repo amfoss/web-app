@@ -6,7 +6,6 @@ import StreamList from '../components/dashboard/StreamList';
 import TitleBar from '../components/titlebar';
 
 class Dashboard extends React.Component {
-
   render() {
     return (
       <React.Fragment>

@@ -1,23 +1,13 @@
 import React from 'react';
-import {Navbar, Menu, MenuItem, Button, Popover, Card} from '@blueprintjs/core';
+import classNames from 'classnames';
+import { Navbar, Menu, MenuItem, Button, Popover, Card } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+
 import dataFetch from '../utils/dataFetch';
-import classNames from 'classnames';
+import { getProfile as query } from '../utils/queries';
 
 const cookies = new Cookies();
-
-const query = `
-query getProfile($username: String!, $token: String!)
-{
-  profile(username: $username, token: $token)
-  {
-    firstName
-    lastName
-    avatar
-  }
-}`;
-
 
 class Topbar extends React.Component {
   constructor(props) {

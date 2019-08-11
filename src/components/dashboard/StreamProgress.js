@@ -1,21 +1,13 @@
 import React from 'react';
-import {ProgressBar} from '@blueprintjs/core';
+import { ProgressBar } from '@blueprintjs/core';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import dataFetch from '../../utils/dataFetch';
+import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
+import dataFetch from '../../utils/dataFetch';
+import { getStreamProgress as query } from '../../utils/queries';
 
-const query = `query getStreamProgress($slug: String!, $username: String!, $token: String!)
-{
-  streamProgress(slug: $slug, username: $username, token: $token)
-  {
-    progress
-    tasksCompleted
-  	tasksPending
-  }
-}`;
+const cookies = new Cookies();
 
 const propTypes = {
   slug: PropTypes.string,

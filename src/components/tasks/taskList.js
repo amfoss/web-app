@@ -2,26 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';
-import TaskCard from '../tasks/taskCard';
+import { getTasks as query } from '../../utils/queries';
 
-const query = `
-query getTasks($stream: String, $maxPoints: Int, $minPoints: Int, $maxDifficulty: Int, $minDifficulty: Int )
-{
-  tasks(
-    stream: $stream,
-    maxPoints: $maxPoints,
-    minPoints: $minPoints, 
-    maxDifficulty: $maxDifficulty, 
-    minDifficulty: $minDifficulty
-  )
-  {
-    id
-    title
-    points
-    difficulty 
-    
-  }
-}`;
+import TaskCard from '../tasks/taskCard';
 
 const propTypes = {
   stream: PropTypes.string,

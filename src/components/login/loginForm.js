@@ -5,16 +5,9 @@ import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 
 import dataFetch from '../../utils/dataFetch';
+import { TokenAuth as query } from '../../utils/mutations';
 
 const cookies = new Cookies();
-
-const query = `
-mutation TokenAuth($username: String!, $password: String!) {
-    tokenAuth(username: $username, password: $password) {
-        token
-        refreshToken
-    }
-}`;
 
 class LoginForm extends React.Component {
   constructor(props) {

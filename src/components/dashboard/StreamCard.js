@@ -1,32 +1,21 @@
 import React from 'react';
-import {Card} from '@blueprintjs/core';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Card } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
 
 import StreamProgress from './StreamProgress';
 
-const propTypes = {
-  name: PropTypes.string,
-  slug: PropTypes.string,
+const StreamCard = ({ name, slug }) => (
+<Link to={`/tasks?stream=${slug}`}>
+  <Card elevation="2" className="stream-card" interactive>
+    <h1>{name}</h1>
+    <StreamProgress slug={slug}/>
+  </Card>
+</Link>);
+
+StreamCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
-
-class StreamCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-
-    return (
-      <Link to={`/tasks?stream=${this.props.slug}`}>
-        <Card elevation="2" className="stream-card" interactive>
-          <h1>{this.props.name}</h1>
-          <StreamProgress slug={this.props.slug} />
-        </Card><br /><br />
-      </Link>
-    );
-  }
-}
-
-StreamCard.props = propTypes;
 
 export default StreamCard;

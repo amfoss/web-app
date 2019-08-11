@@ -4,23 +4,14 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import { Row, Col } from 'react-grid';
+
 import dataFetch from '../../utils/dataFetch';
+import { getTaskProgress as query } from '../../utils/queries';
+
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const query = `query getStreamProgress($id: Int!,$username: String!,$token: String!)
-{
-  taskProgress(id:$id,username:$username,token:$token)
-  {
-    status
-  	start
-    submission
-    isComplete
-    assigner
-    assignTime
-  }
-}`;
 
 const propTypes = {
   title: PropTypes.string,

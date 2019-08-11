@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-fetch';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 /*
  Isomorphic fetch that can be used as in in both the server and the client. Usage:
@@ -14,20 +17,20 @@ import fetch from 'isomorphic-fetch';
 
 const API_URL = 'https://api.amfoss.in/';
 
-type dataFetchOptions = {
-  query?: Object,
-  variables?: Object,
-};
-
-export default function dataFetch({ query, variables }: dataFetchOptions) {
+export default ({ query, variables }) => {
   const body = {
     query,
     variables,
   };
 
+  const token = cookies.get('token');
+
   const apiConfig = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`,
+    },
     body: JSON.stringify(body),
   };
 
@@ -45,4 +48,5 @@ export default function dataFetch({ query, variables }: dataFetchOptions) {
     console.error(`Response status ${response.status} during dataFetch for url ${response.url}.`);
     throw response;
   });
-}
+};
+

@@ -3,22 +3,13 @@ import { Row, Col } from 'react-grid';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';
-import StreamCard from './StreamCard';
+import { getStreams as query } from '../../utils/queries';
 
-const query = `
-query getStreams($type:String,$hasParent:Boolean)
-{
-  streams(streamType: $type, hasParent:$hasParent)
-  {
-    name
-    slug
-    type
-  }
-}`;
+import StreamCard from './StreamCard';
 
 const propTypes = {
   type: PropTypes.string,
-  noParent: PropTypes.bool
+  noParent: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -56,10 +47,11 @@ class StreamList extends React.Component {
         <Row>
         { this.state.streams.map((stream) =>
         <Col md={4} key={stream.slug}>
-        <StreamCard
-          name={stream.name}
-          slug={stream.slug}
-        /></Col>
+          <StreamCard
+            name={stream.name}
+            slug={stream.slug}
+          />
+        </Col>
         )}
         </Row>
         : null
