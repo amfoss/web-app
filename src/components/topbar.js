@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { Navbar, Menu, MenuItem, Button, Popover, Card } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import Avatar from '../images/placeholders/avatar.png';
 
 import dataFetch from '../utils/dataFetch';
 import { getProfile as query } from '../utils/queries';
@@ -88,10 +89,11 @@ class Topbar extends React.Component {
             <Navbar.Group align="right">
               <Popover content={profile_dropdown} position="bottom-left">
                 <div>
-                  <img
-                    src={`http://127.0.0.1:3200/${this.state.avatar}`}
-                    style={{ width: '32px', borderRadius: '100vw' }}
-                  />
+                  {this.state.avatar ?
+                    <img src={`https://api.amfoss.in/${this.state.avatar}`}
+                         style={{width: '32px', borderRadius: '100vw'}}/>:
+                    <img src={Avatar} style={{width: '32px', borderRadius: '100vw'}}/>
+                  }
                 </div>
               </Popover>
             </Navbar.Group>

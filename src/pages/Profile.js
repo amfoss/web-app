@@ -4,6 +4,7 @@ import 'babel-polyfill';
 import { Card } from '@blueprintjs/core';
 import { Container, Row, Col } from 'react-grid';
 import Cookies from 'universal-cookie';
+import Avatar from '../images/placeholders/avatar.png';
 
 import { ResponsiveCalendar } from '@nivo/calendar';
 import { ResponsiveRadar } from '@nivo/radar';
@@ -67,10 +68,10 @@ class Profile extends React.Component {
             <Card elevation="2" style={{ margin: 0 }}>
               <Row>
                 <Col sm={3} md={3}>
-                  <img
-                    src={`http://127.0.0.1:3200/${this.state.avatar}`}
-                    style={{ width: '190px', borderRadius: '100vw' }}
-                  />
+                  {this.state.avatar ?
+                    <img src={`https://api.amfoss.in/${this.state.avatar}`} style={{ width: '190px', borderRadius: '100vw' }} /> :
+                    <img src={Avatar} style={{ width: '190px', borderRadius: '100vw' }} />
+                  }
                 </Col>
                 <Col sm={9} md={9}>
                   <h1>
