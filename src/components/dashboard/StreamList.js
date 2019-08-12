@@ -1,5 +1,4 @@
-import React from 'react';
-import { Row, Col } from 'react-grid';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import dataFetch from '../../utils/dataFetch';
@@ -7,59 +6,45 @@ import { getStreams as query } from '../../utils/queries';
 
 import StreamCard from './StreamCard';
 
-const propTypes = {
-  type: PropTypes.string,
-  noParent: PropTypes.bool,
-};
+const StreamList = ({ hasParent, type }) => {
+  const [streams, setStreams] = useState('');
+  const [isLoaded, setLoaded] = useState(false);
 
-const defaultProps = {
-  type: '',
-  hasParent: null,
-};
-
-class StreamList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      streams: '',
-      setStreams: false
-    };
-  }
-
-  componentDidMount() {
-      this.getStreams();
-  }
-
-  getStreams = async () => {
-    let variables = { "type": this.props.type };
-    this.props.hasParent != null ? variables["hasParent"] = this.props.hasParent : null;
+  const getStreams = async () => {
+    const variables = { type };
+    if (hasParent != null) variables.hasParent = hasParent;
     const response = await dataFetch({ query, variables });
     if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-          this.setState({streams: response.data.streams, setStreams: true});
+      setStreams(response.data.streams);
+      setLoaded(true);
     } else {
-        console.log('error');
+      console.log('error');
     }
   };
 
-  render() {
-    return (
-      this.state.setStreams ?
-        <Row>
-        { this.state.streams.map((stream) =>
-        <Col md={4} key={stream.slug}>
-          <StreamCard
-            name={stream.name}
-            slug={stream.slug}
-          />
-        </Col>
-        )}
-        </Row>
-        : null
-    );
-  }
-}
+  useEffect(() => {
+    if (!isLoaded) getStreams();
+  });
 
-StreamList.props = propTypes;
-StreamList.defaultProps = defaultProps;
+  return isLoaded ? (
+    <div className="row mx-0 my-4">
+      {streams.map(stream => (
+        <div className="col-md-6 col-lg-4 col-xl-3 p-2" key={stream.slug}>
+          <StreamCard name={stream.name} slug={stream.slug} />
+        </div>
+      ))}
+    </div>
+  ) : null;
+};
+
+StreamList.propTypes = {
+  type: PropTypes.string,
+  hasParent: PropTypes.bool,
+};
+
+StreamList.defaultProps = {
+  type: '',
+  hasParent: false,
+};
 
 export default StreamList;

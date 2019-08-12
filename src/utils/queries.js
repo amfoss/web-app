@@ -31,7 +31,6 @@ query getStreamProgress($slug: String!, $username: String!, $token: String!)
   }
 }`;
 
-
 export const getTasks = `
 query getTasks($stream: String, $maxPoints: Int, $minPoints: Int, $maxDifficulty: Int, $minDifficulty: Int )
 {

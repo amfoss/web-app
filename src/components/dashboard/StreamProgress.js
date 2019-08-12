@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ProgressBar } from '@blueprintjs/core';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import Cookies from 'universal-cookie';
 
 import dataFetch from '../../utils/dataFetch';
@@ -9,56 +9,51 @@ import { getStreamProgress as query } from '../../utils/queries';
 
 const cookies = new Cookies();
 
-const propTypes = {
-  slug: PropTypes.string,
-};
+const StreamProgress = ({ slug, onLoad }) => {
+  const [isSet, setData] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [tasksCompleted, setTasksCompleted] = useState(0);
+  const [tasksPending, setTasksPending] = useState(0);
 
-class StreamProgress extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      setData: false,
-      progress: 0,
-      tasksCompleted: 0,
-      tasksPending: 0
-    };
-  }
-
-  componentDidMount() {
-      if(!this.state.setData)
-      {
-          this.getProgress();
-      }
-  }
-
-  getProgress = async () => {
+  const getProgress = async () => {
     const token = cookies.get('token');
     const username = cookies.get('username');
-    let variables = { "slug": this.props.slug, "username": username, "token": token };
+    const variables = { slug, username, token };
     const response = await dataFetch({ query, variables });
     if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-      this.setState({
-            progress: response.data.streamProgress.progress,
-            tasksCompleted: response.data.streamProgress.tasksCompleted,
-            tasksPending: response.data.streamProgress.tasksPending,
-            setData: true
-      });
+      setTasksPending(response.data.streamProgress.tasksPending);
+      setTasksCompleted(response.data.streamProgress.tasksCompleted);
+      setProgress(response.data.streamProgress.progress);
+      setData(true);
+      onLoad();
     } else {
       console.log('error');
     }
   };
 
-  render() {
+  useEffect(() => {
+    if (!isSet) getProgress();
+  });
 
-    return (
-      <Link to={`/progress?stream=${this.props.slug}`}>
-          {this.state.tasksCompleted} Completed out of {this.state.tasksPending + this.state.tasksCompleted}
-          <ProgressBar value={this.state.progress} animate={false} stripes={false} intent="success" />
-      </Link>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <div className={classNames({ 'bp3-skeleton': !isSet }, 'mb-2')}>
+        {`${tasksCompleted} completed out of ${tasksPending + tasksCompleted}`}
+      </div>
+      <ProgressBar
+        className={classNames({ 'bp3-skeleton': !isSet })}
+        value={progress > 0 ? progress : 0.05}
+        animate={false}
+        stripes={false}
+        intent="success"
+      />
+    </React.Fragment>
+  );
+};
 
-StreamProgress.props = propTypes;
+StreamProgress.propTypes = {
+  slug: PropTypes.string.isRequired,
+  onLoad: PropTypes.func.isRequired,
+};
 
 export default StreamProgress;

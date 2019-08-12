@@ -20,25 +20,30 @@ class Topbar extends React.Component {
       avatar: '',
       profileSet: false,
       dataSet: false,
-      isLoggedIn: false
+      isLoggedIn: false,
     };
   }
 
   componentDidMount() {
     const firstName = localStorage.getItem('first_name');
     const token = cookies.get('token');
-    if(token)
-    {
+    if (token) {
       if (firstName == null) {
         const username = cookies.get('username');
         this.setState({ token, username, isLoggedIn: true });
-      } else { this.setState({ profileSet: true }); }
+      } else {
+        this.setState({ profileSet: true });
+      }
     }
   }
 
   componentDidUpdate() {
-    if(!this.state.profileSet && this.state.isLoggedIn)  { this.setProfile(); }
-    if (!this.state.dataSet && this.state.profileSet) { this.setData(); }
+    if (!this.state.profileSet && this.state.isLoggedIn) {
+      this.setProfile();
+    }
+    if (!this.state.dataSet && this.state.profileSet) {
+      this.setData();
+    }
   }
 
   setProfile = async () => {
@@ -63,31 +68,34 @@ class Topbar extends React.Component {
   render() {
     const profile_dropdown = (
       <Menu>
-        <MenuItem text="Settings" icon="settings"/>
+        <MenuItem text="Settings" icon="settings" />
         <Link to="/profile">
-          <MenuItem text="Profile" icon="person"/>
+          <MenuItem text="Profile" icon="person" />
         </Link>
         <Link to="/logout">
-          <MenuItem text="Logout" icon="log-out"/>
+          <MenuItem text="Logout" icon="log-out" />
         </Link>
       </Menu>
     );
 
     return (
       <React.Fragment>
-        <Navbar fixedToTop className={classNames('bp3-dark','top-bar')}>
+        <Navbar fixedToTop className={classNames('bp3-dark', 'top-bar')}>
           <Navbar.Group>
             <Navbar.Heading>amFOSS App</Navbar.Heading>
           </Navbar.Group>
-          {this.state.dataSet ?
+          {this.state.dataSet ? (
             <Navbar.Group align="right">
               <Popover content={profile_dropdown} position="bottom-left">
                 <div>
-                  <img src={`http://127.0.0.1:3200/${this.state.avatar}`} style={{ width: '32px', borderRadius: '100vw' }} />
+                  <img
+                    src={`http://127.0.0.1:3200/${this.state.avatar}`}
+                    style={{ width: '32px', borderRadius: '100vw' }}
+                  />
                 </div>
               </Popover>
-            </Navbar.Group> : null
-          }
+            </Navbar.Group>
+          ) : null}
         </Navbar>
       </React.Fragment>
     );

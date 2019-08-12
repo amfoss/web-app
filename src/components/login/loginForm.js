@@ -82,7 +82,12 @@ class LoginForm extends React.Component {
       <Card elevation="2" className="login-card">
         <h1>Login</h1>
         {this.state.authFail ? errorMessage : null}
-        <form onSubmit={(e) => {this.login(); e.preventDefault();}}>
+        <form
+          onSubmit={e => {
+            this.login();
+            e.preventDefault();
+          }}
+        >
           <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
             <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
           </FormGroup>

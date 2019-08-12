@@ -1,8 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Container, Row, Col } from 'react-grid';
-import {RangeSlider, Label, Checkbox, IBreadcrumbProps} from '@blueprintjs/core';
-import TaskList from '../components/tasks/taskList'
+import { RangeSlider, Label, Checkbox, IBreadcrumbProps } from '@blueprintjs/core';
+import TaskList from '../components/tasks/taskList';
 
 import TopBar from '../components/topbar';
 import TitleBar from '../components/titlebar';
@@ -30,49 +30,56 @@ class Tasks extends React.Component {
       setParams: false,
       subStreams: null,
       title: '',
-      pointRange: [0,10],
+      pointRange: [0, 10],
     };
   }
 
   componentDidMount() {
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
+    const { search } = window.location;
+    const params = new URLSearchParams(search);
     this.setState({
       stream: params.get('stream'),
-      minPoints: params.get('minPoints')||0,
-      maxPoints: params.get('maxPoints')||10,
-      minDifficulty: params.get('minDifficulty')||1,
-      maxDifficulty: params.get('maxDifficulty')||4,
+      minPoints: params.get('minPoints') || 0,
+      maxPoints: params.get('maxPoints') || 10,
+      minDifficulty: params.get('minDifficulty') || 1,
+      maxDifficulty: params.get('maxDifficulty') || 4,
       setParams: true,
     });
   }
 
   componentDidUpdate() {
-      if(this.state.setParams && this.state.subStreams == null)
-      { this.getSubStreams()  }
+    if (this.state.setParams && this.state.subStreams == null) {
+      this.getSubStreams();
+    }
   }
 
   getSubStreams = async () => {
-    let variables = { "slug": this.state.stream };
+    const variables = { slug: this.state.stream };
     const response = await dataFetch({ query, variables });
     if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-      this.setState({title: response.data.stream.name, description: response.data.stream.description, subStreams: response.data.stream.streamSet});
+      this.setState({
+        title: response.data.stream.name,
+        description: response.data.stream.description,
+        subStreams: response.data.stream.streamSet,
+      });
     } else {
       console.log('error');
     }
   };
 
-  setRange = (values) => {
-    this.setState({ 
-      pointRange: values 
+  setRange = values => {
+    this.setState({
+      pointRange: values,
     });
-    { this.getSubStreams()  }
-  }
+    {
+      this.getSubStreams();
+    }
+  };
 
   render() {
     const breadcrumbs: IBreadcrumbProps[] = [
-      { href: "/", icon: "home", text: "Home" },
-      { href: "/tasks", icon: "home", text: "Tasks" },
+      { href: '/', icon: 'home', text: 'Home' },
+      { href: '/tasks', icon: 'home', text: 'Tasks' },
     ];
 
     return (
@@ -82,29 +89,38 @@ class Tasks extends React.Component {
         </Helmet>
         <TopBar />
         <div className="page-container">
-          <TitleBar title={this.state.title + ' Tasks'} description={this.state.description} breadcrumbs={breadcrumbs} />
+          <TitleBar
+            title={`${this.state.title} Tasks`}
+            description={this.state.description}
+            breadcrumbs={breadcrumbs}
+          />
           <Container>
             <Row>
-              <Col md={3} order={{md:"last"}}>
+              <Col md={3} order={{ md: 'last' }}>
                 <h3>Filters</h3>
                 <Label>Points Range</Label>
-                <RangeSlider min={0} max={10} onChange={this.setRange} value={this.state.pointRange} />
+                <RangeSlider
+                  min={0}
+                  max={10}
+                  onChange={this.setRange}
+                  value={this.state.pointRange}
+                />
                 <Label>Difficulty </Label>
-                <Checkbox label="Easy"  />
+                <Checkbox label="Easy" />
                 <Checkbox label="Medium" />
                 <Checkbox label="Tough" />
                 <Checkbox label="Hard" />
               </Col>
-              <Col md={9} order={{md:"first"}}>
-                {this.state.setParams ?
+              <Col md={9} order={{ md: 'first' }}>
+                {this.state.setParams ? (
                   <TaskList
                     stream={this.state.stream}
                     minPoints={this.state.minPoints}
                     maxPoints={this.state.maxPoints}
                     minDifficulty={this.state.minDifficulty}
                     maxDifficulty={this.state.maxDifficulty}
-                  /> : null
-                }
+                  />
+                ) : null}
               </Col>
             </Row>
           </Container>
