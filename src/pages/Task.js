@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { IBreadcrumbProps, Card } from '@blueprintjs/core';
 import { Container, Row, Col } from 'react-grid';
 import { Redirect } from 'react-router';
@@ -8,6 +7,7 @@ import { Navbar } from '@blueprintjs/core/lib/esnext';
 import dataFetch from '../utils/dataFetch';
 import TitleBar from '../components/titlebar';
 import Topbar from '../components/topbar';
+import SEO from "../components/Seo";
 
 const query = `query getTask($id: String!)
 {
@@ -108,12 +108,9 @@ class Task extends React.Component {
         {this.getPoints()} | {this.getDifficulty()}
       </div>
     ) : null;
-
     return (
       <React.Fragment>
-        <Helmet>
-          <title>{`${this.state.title} | Tasks | amFOSS App1`}</title>
-        </Helmet>
+        <SEO title={`${this.state.title} | Tasks `} />
         <Topbar />
         {this.state.error ? <Redirect to="/tasks" /> : null}
         {this.state.setData ? (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import 'babel-polyfill';
 import { Card } from '@blueprintjs/core';
 import { Container, Row, Col } from 'react-grid';
@@ -11,6 +10,7 @@ import { ResponsiveRadar } from '@nivo/radar';
 import { data } from './data';
 import Topbar from '../components/topbar.js';
 import { radardata } from './radardata';
+import SEO from "../components/Seo";
 
 const cookies = new Cookies();
 
@@ -59,9 +59,7 @@ class Profile extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Helmet>
-          <title>Profile</title>
-        </Helmet>
+        <SEO title="Profile"/>
         <Topbar />
         <div className="page-container">
           <Container>

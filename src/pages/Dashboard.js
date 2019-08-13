@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import SEO from '../components/Seo';
 import { Container } from 'react-grid';
 import Topbar from '../components/topbar';
 import StreamList from '../components/dashboard/StreamList';
@@ -9,9 +9,7 @@ const Dashboard = () => {
   const firstName = localStorage.getItem('first_name');
   return (
     <React.Fragment>
-      <Helmet>
-        <title>User Dashboard</title>
-      </Helmet>
+      <SEO title="Dashboard"/>
       <Topbar />
       <div className="page-container">
         <TitleBar

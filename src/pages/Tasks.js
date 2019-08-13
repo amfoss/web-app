@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Container, Row, Col } from 'react-grid';
 import { RangeSlider, Label, Checkbox, IBreadcrumbProps } from '@blueprintjs/core';
 import TaskList from '../components/tasks/taskList';
@@ -7,6 +6,7 @@ import TaskList from '../components/tasks/taskList';
 import TopBar from '../components/topbar';
 import TitleBar from '../components/titlebar';
 import dataFetch from '../utils/dataFetch';
+import SEO from "../components/Seo";
 
 const query = `
 query getSubStreams($slug:String!)
@@ -84,9 +84,7 @@ class Tasks extends React.Component {
 
     return (
       <React.Fragment>
-        <Helmet>
-          <title>Tasks Page</title>
-        </Helmet>
+        <SEO title="Tasks"/>
         <TopBar />
         <div className="page-container">
           <TitleBar
