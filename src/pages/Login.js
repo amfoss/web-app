@@ -1,6 +1,5 @@
 import React from 'react';
 import 'babel-polyfill';
-import { Container, Row, Col } from 'react-grid';
 import LoginForm from '../components/login/loginForm';
 import Topbar from '../components/topbar.js';
 import SEO from '../components/Seo';
@@ -12,14 +11,14 @@ class Login extends React.Component {
         <SEO title="Login"/>
         <Topbar />
         <div className="page-container">
-          <Container>
-            <Row>
-              <Col md={4} lg={4}/>
-              <Col md={6} lg={4} style={{ top: 150 }}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4 col-lg-4"/>
+              <div className="col-md-6 col-lg-4" style={{ top: 150 }}>
                 <LoginForm />
-              </Col>
-            </Row>
-          </Container>
+              </div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

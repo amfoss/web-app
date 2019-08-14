@@ -1,7 +1,6 @@
 import React from 'react';
 import 'babel-polyfill';
 import { Card } from '@blueprintjs/core';
-import { Container, Row, Col } from 'react-grid';
 import Cookies from 'universal-cookie';
 import Avatar from '../images/placeholders/avatar.png';
 
@@ -62,25 +61,25 @@ class Profile extends React.Component {
         <SEO title="Profile"/>
         <Topbar />
         <div className="page-container">
-          <Container>
+          <div className="container">
             <Card elevation="2" style={{ margin: 0 }}>
-              <Row>
-                <Col sm={3} md={3}>
+              <div className="row">
+                <div className="col-sm-3 col-md-3">
                   {this.state.avatar ?
                     <img src={`https://api.amfoss.in/${this.state.avatar}`} style={{ width: '190px', borderRadius: '100vw' }} /> :
                     <img src={Avatar} style={{ width: '190px', borderRadius: '100vw' }} />
                   }
-                </Col>
-                <Col sm={9} md={9}>
+                </div>
+                <div className="col-sm-9 col-md-9">
                   <h1>
                     {this.state.firstName} {this.state.lastName}
                   </h1>
                   <h5>@{this.state.username}</h5>
-                </Col>
-              </Row>
+                </div>
+              </div>
             </Card>
-            <Row>
-              <Col md={8}>
+            <div className="row">
+              <div className="col-md-8">
                 <Card elevation="2" style={{ margin: 0 }}>
                   <h1>Activity Heatmap</h1>
                   <div className="Calendar" style={{ height: 300 }}>
@@ -115,8 +114,8 @@ class Profile extends React.Component {
                     />
                   </div>
                 </Card>
-              </Col>
-              <Col md={4}>
+              </div>
+              <div className="col-md-4">
                 <Card elevation="2" style={{ margin: 0 }}>
                   <h1>Activity Overview</h1>
                   <div className="spider-chart" style={{ height: 300 }}>
@@ -184,9 +183,9 @@ class Profile extends React.Component {
                     />
                   </div>
                 </Card>
-              </Col>
-            </Row>
-          </Container>
+              </div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

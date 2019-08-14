@@ -1,6 +1,5 @@
 import React from 'react';
 import { IBreadcrumbProps, Card } from '@blueprintjs/core';
-import { Container, Row, Col } from 'react-grid';
 import { Redirect } from 'react-router';
 import parse from 'html-react-parser';
 import { Navbar } from '@blueprintjs/core/lib/esnext';
@@ -129,13 +128,13 @@ class Task extends React.Component {
                   <Navbar.Heading>View Submissions</Navbar.Heading>
                 </Navbar.Group>
               </Navbar>
-              <Container>
-                <Row>
-                  <Col lg={8}>
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-8">
                     <Card>{this.getDescription()}</Card>
-                  </Col>
-                </Row>
-              </Container>
+                  </div>
+                </div>
+              </div>
             </div>
           </React.Fragment>
         ) : null}

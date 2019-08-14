@@ -3,7 +3,6 @@ import { Card, Button, Icon } from '@blueprintjs/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Row, Col } from 'react-grid';
 
 import Cookies from 'universal-cookie';
 import dataFetch from '../../utils/dataFetch';
@@ -78,8 +77,8 @@ class TaskCard extends React.Component {
     return (
       <Link to={`/tasks/${this.props.id}`}>
         <Card elevation="2" className={classNames('task-card', this.props.classNames)} interactive>
-          <Row>
-            <Col sm={6} md={7} lg={8}>
+          <div className="row">
+            <div className="col-sm-6 col-md-7 col-lg-8">
               <h2>
                 {this.state.isComplete ? <Icon icon="tick-circle" intent="success" /> : null}
                 {this.props.title}
@@ -87,12 +86,12 @@ class TaskCard extends React.Component {
               <div className="task-info">
                 {this.getPoints()} | {this.getDifficulty()}
               </div>
-            </Col>
-            <Col sm={6} md={5} lg={4} style={{ display: 'flex', alignItems: 'center' }}>
+            </div>
+            <div className="col-sm-6 col-md-5 col-lg-4" style={{ display: 'flex', alignItems: 'center' }}>
               <Icon icon="star-empty" iconSize="24" style={{ padding: '0 1rem' }} />
               <Button text="Take up Task" large />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Card>
       </Link>
     );

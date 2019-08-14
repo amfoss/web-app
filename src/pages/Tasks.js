@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid';
 import { RangeSlider, Label, Checkbox, IBreadcrumbProps } from '@blueprintjs/core';
 import TaskList from '../components/tasks/taskList';
 
@@ -92,9 +91,9 @@ class Tasks extends React.Component {
             description={this.state.description}
             breadcrumbs={breadcrumbs}
           />
-          <Container>
-            <Row>
-              <Col md={3} order={{ md: 'last' }}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-3 order-md-3">
                 <h3>Filters</h3>
                 <Label>Points Range</Label>
                 <RangeSlider
@@ -108,8 +107,8 @@ class Tasks extends React.Component {
                 <Checkbox label="Medium" />
                 <Checkbox label="Tough" />
                 <Checkbox label="Hard" />
-              </Col>
-              <Col md={9} order={{ md: 'first' }}>
+              </div>
+              <div className="col-md-9 order-md-1">
                 {this.state.setParams ? (
                   <TaskList
                     stream={this.state.stream}
@@ -119,9 +118,9 @@ class Tasks extends React.Component {
                     maxDifficulty={this.state.maxDifficulty}
                   />
                 ) : null}
-              </Col>
-            </Row>
-          </Container>
+              </div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );
