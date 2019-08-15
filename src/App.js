@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@blueprintjs/core/lib/css/blueprint';
+import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
 import './styles/styles.sass';
 
 import Cookies from 'universal-cookie';
@@ -13,6 +14,7 @@ import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Task from './pages/Task';
 import Profile from './pages/Profile';
+import Edit from "./pages/Edit";
 
 const cookies = new Cookies();
 
@@ -36,6 +38,7 @@ const AppRoutes = () => {
       <Route exact path="/tasks" component={() => <Tasks />} />
       <Route exact path="/tasks/:id" component={Task} />
       <Route exact path="/profile" component={() => <Profile />} />
+      <Route exact path="/update-profile" component={() => <Edit/>} />
     </Switch>
   );
 };
