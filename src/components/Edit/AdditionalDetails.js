@@ -30,11 +30,11 @@ class AdditionalDetails extends React.Component{
                 <InputGroup placeholder="Enter your Location" />
               </FormGroup>
             </div>
-            <div className="col-md-3 p-4">
+            <div className="col-md-3">
               <FormGroup label="Birthday" labelFor="text-input" labelInfo="(required)">
                 <DateInput
                   inputProps={{ leftIcon: "calendar" }}
-                  formatDate={date => date.toLocaleString()}
+                  formatDate={date => date.toLocaleDateString()}
                   parseDate={str => new Date(str)}
                   placeholder={"DD/MM/YYYY"}
                 />

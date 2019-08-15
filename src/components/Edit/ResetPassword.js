@@ -43,7 +43,7 @@ class ResetPassword extends React.Component{
               />
             </FormGroup>
           </div>
-          <Button type="submit" intent="primary" text="Login" />
+          <Button type="submit" intent="primary" text="Reset Your Password"/>
         </form>
       </Card>
     )
