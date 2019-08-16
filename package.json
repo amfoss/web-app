@@ -23,6 +23,7 @@
     "@blueprintjs/core": "^3.15.1",
     "@blueprintjs/datetime": "^3.9.2",
     "@nivo/calendar": "^0.56.2",
+    "@nivo/line": "^0.59.3",
     "@nivo/radar": "^0.56.2",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
