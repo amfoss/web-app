@@ -7,6 +7,7 @@ class TasksStatus extends React.Component{
   render() {
     return (
       <Card elevation="2" style={{ margin: 0 }}>
+        <h1>Bucket List</h1>
         <div className="row">
           <div className="col-md-4">
             <div className="spider-chart" style={{ height: 300 }}>
@@ -78,11 +79,9 @@ class TasksStatus extends React.Component{
               <h3>5 Social</h3>
             </div>
           </div>
-          <div className="col-md-8">
+          <div className="col-md-2" />
+          <div className="col-md-6">
             <div className="row">
-              <div className="col-md-6">
-                <h1>Bucket List</h1>
-              </div>
               <div className="col-md-4 pt-2">
                 <select style={{padding: '1vh'}}>
                   <option>This Semester</option>
@@ -92,7 +91,7 @@ class TasksStatus extends React.Component{
                 <h4 className="p-3"><span className="square">100</span> Self Chosen Tasks</h4>
                 <h4 className="p-3"><span className="square">45</span> Assigned Tasks</h4>
                 <h4 className="p-3"><span className="square">80</span> Tasks Completed</h4>
-                <h4 className="p-3"><span className="square">5</span> Tasks under review</h4>
+                <h4 className="p-3"><span className="square">05</span> Tasks under review</h4>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ class HeatMap extends React.Component{
             from="2015-03-01"
             to="2015-07-12"
             emptyColor="#eeeeee"
-            colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+            colors={['#c6e48b','#7bc96f','#239a3b', '#196127']}
             margin={{
               top: 0,
               right: 30,

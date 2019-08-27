@@ -65,11 +65,11 @@ class Profile extends React.Component {
         <div className="page-container">
           <div className="container">
             <Card elevation ="2" style={{margin: 0}}>
-              <img src={Cover} alt="coverimg" className="image-cover"/>
+              <div className="row"/>
               <div className="row">
                 <div className="col-md-1" />
                 <div className="col-md-3">
-                    { this.state.avatar ? <img src= {this.state.avatar}  className="profile-img" alt="profile" />: <img src={Avatar} className="profile-img" alt="profile" />}
+                    { this.state.avatar ? <img src={`https://api.amfoss.in/${this.state.avatar}`}  className="profile-img" alt="profile" />: <img src={Avatar} className="profile-img" alt="profile" />}
                 </div>
                 <div className="col-md-6 profile-text">
                   <h1>{this.state.firstName} {this.state.lastName}</h1>

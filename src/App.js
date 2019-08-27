@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import '@blueprintjs/core/lib/css/blueprint';
 import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
+import 'react-quill/dist/quill.snow.css';
+import 'react-dropzone-component/styles/filepicker.css';
 import './styles/styles.sass';
 
 import Cookies from 'universal-cookie';
