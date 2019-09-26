@@ -23,7 +23,7 @@ class Profile extends React.Component {
       token: '',
       firstName: '',
       lastName: '',
-      avatar: '',
+      gravatar: '',
       profileSet: false,
       dataSet: false,
       isLoggedIn: false,
@@ -52,9 +52,9 @@ class Profile extends React.Component {
   setData() {
     const firstName = localStorage.getItem('first_name');
     const lastName = localStorage.getItem('last_name');
-    const avatar = localStorage.getItem('avatar');
+    const gravatar = localStorage.getItem('gravatar');
     const username = cookies.get('username');
-    this.setState({ firstName, lastName, avatar, username, dataSet: true });
+    this.setState({ firstName, lastName, gravatar, username, dataSet: true });
   }
 
   render() {
@@ -69,7 +69,7 @@ class Profile extends React.Component {
               <div className="row">
                 <div className="col-md-1" />
                 <div className="col-md-3">
-                    { this.state.avatar ? <img src={`https://api.amfoss.in/${this.state.avatar}`}  className="profile-img" alt="profile" />: <img src={Avatar} className="profile-img" alt="profile" />}
+                    { this.state.gravatar ? <img src={this.state.gravatar}  className="profile-img" alt="profile" />: <img src={Avatar} className="profile-img" alt="profile" />}
                 </div>
                 <div className="col-md-6 profile-text">
                   <h1>{this.state.firstName} {this.state.lastName}</h1>

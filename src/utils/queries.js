@@ -1,11 +1,9 @@
 export const getProfile = `
-query getProfile($username: String!, $token: String!)
-{
-  profile(username: $username, token: $token)
-  {
+query getProfile($username: String!){
+  profile(username: $username){
     firstName
     lastName
-    avatar
+    gravatar
   }
 }`;
 

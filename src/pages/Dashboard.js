@@ -8,12 +8,10 @@ const Dashboard = () => {
   const firstName = localStorage.getItem('first_name');
   return (
     <React.Fragment>
-      <SEO title="Dashboard"/>
+      <SEO title="Dashboard" />
       <Topbar />
       <div className="page-container">
-        <TitleBar
-          title={`Hello ${firstName}!`}
-        />
+        <TitleBar title={`Hello ${firstName}!`} />
         <div className="container">
           <h3>Technical</h3>
           <StreamList type="T" hasParent={false} />

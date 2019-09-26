@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Navbar, Menu, MenuItem, Button, Popover, Card } from '@blueprintjs/core';
+import { Navbar, Menu, MenuItem, Popover } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Avatar from '../images/placeholders/avatar.png';
@@ -18,7 +18,7 @@ class Topbar extends React.Component {
       token: '',
       firstName: '',
       lastName: '',
-      avatar: '',
+      gravatar: '',
       profileSet: false,
       dataSet: false,
       isLoggedIn: false,
@@ -48,12 +48,12 @@ class Topbar extends React.Component {
   }
 
   setProfile = async () => {
-    const variables = { username: this.state.username, token: this.state.token };
+    const variables = { username: this.state.username};
     const response = await dataFetch({ query, variables });
     if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
       localStorage.setItem('first_name', response.data.profile.firstName);
       localStorage.setItem('last_name', response.data.profile.lastName);
-      localStorage.setItem('avatar', response.data.profile.avatar);
+      localStorage.setItem('gravatar', response.data.profile.gravatar);
       this.setState({ profileSet: true });
     }
   };
@@ -61,13 +61,13 @@ class Topbar extends React.Component {
   setData() {
     const firstName = localStorage.getItem('first_name');
     const lastName = localStorage.getItem('last_name');
-    const avatar = localStorage.getItem('avatar');
+    const gravatar = localStorage.getItem('gravatar');
     const username = cookies.get('username');
-    this.setState({ firstName, lastName, avatar, username, dataSet: true });
+    this.setState({ firstName, lastName, gravatar, username, dataSet: true });
   }
 
   render() {
-    const profile_dropdown = (
+    const profileDropdown = (
       <Menu>
         <MenuItem text="Settings" icon="settings" />
         <Link to="/profile">
@@ -87,13 +87,16 @@ class Topbar extends React.Component {
           </Navbar.Group>
           {this.state.dataSet ? (
             <Navbar.Group align="right">
-              <Popover content={profile_dropdown} position="bottom-left">
+              <Popover content={profileDropdown} position="bottom-left">
                 <div>
-                  {this.state.avatar ?
-                    <img src={`https://api.amfoss.in/${this.state.avatar}`}
-                         style={{width: '32px', borderRadius: '100vw'}}/>:
-                    <img src={Avatar} style={{width: '32px', borderRadius: '100vw'}}/>
-                  }
+                  {this.state.gravatar ? (
+                    <img
+                      src={this.state.gravatar}
+                      style={{ width: '32px', borderRadius: '100vw' }}
+                    />
+                  ) : (
+                    <img src={Avatar} style={{ width: '32px', borderRadius: '100vw' }} />
+                  )}
                 </div>
               </Popover>
             </Navbar.Group>
