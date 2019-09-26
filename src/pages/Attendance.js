@@ -6,10 +6,10 @@ import TitleBar from '../components/titlebar';
 import dataFetch from '../utils/dataFetch';
 import {clubAttendance as query} from '../utils/queries'
 import {Card} from "@blueprintjs/core";
+import classNames from "classnames";
 
 const Attendance = () => {
   const [response, setResponse] = useState('');
-  const [date, setDate] = useState('');
   const [isLoaded, setLoaded] = useState(false);
 
   const clubAttendance = async() => {
@@ -51,8 +51,8 @@ const Attendance = () => {
           {response.members.map(member => (
             <div className="col-md-4 col-lg-4 col-xl-3 p-3" key={member.user.username}>
               <Card elevation="1" className="stream-card">
-                <h3>{member.user.firstName} {member.user.lastName}</h3>
-                <h6>Duration: {member.duration}</h6>
+                <h3 className={classNames({ 'bp3-skeleton': !isLoaded }, 'mb-3')}>{member.user.firstName} {member.user.lastName}</h3>
+                <h6 className={classNames({ 'bp3-skeleton': !isLoaded }, 'mb-3')}>Duration: {member.duration}</h6>
               </Card>
             </div>
           ))}

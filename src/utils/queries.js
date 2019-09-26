@@ -82,3 +82,16 @@ query{
     }
   }
 }`;
+
+export const userAttendance = `
+query getUserAttendance($username: String!){
+  user(username:$username){
+    attendance{
+      dailyLog{
+        date
+        duration
+      }
+    }
+  }
+}
+`;
