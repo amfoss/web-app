@@ -62,25 +62,22 @@ query getTaskProgress($id: Int!,$username: String!,$token: String!)
   }
 }`;
 
-export const getAttendance = `
+export const clubAttendance = `
 query{
-  users{
-    username
-    firstName
-    lastName
-    attendance{
-      daysPresent
+  clubAttendance{
+    dailyLog{
       avgDuration
-      dailyLog{
-        date
+      date
+      membersPresent
+      members{
+        user{
+          username
+          firstName
+          lastName
+        }
+        duration
         start
         end
-        duration
-        sessions{
-          start
-          end
-          duration
-        }
       }
     }
   }
