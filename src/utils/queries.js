@@ -61,3 +61,27 @@ query getTaskProgress($id: Int!,$username: String!,$token: String!)
     assignTime
   }
 }`;
+
+export const getAttendance = `
+query{
+  users{
+    username
+    firstName
+    lastName
+    attendance{
+      daysPresent
+      avgDuration
+      dailyLog{
+        date
+        start
+        end
+        duration
+        sessions{
+          start
+          end
+          duration
+        }
+      }
+    }
+  }
+}`;
