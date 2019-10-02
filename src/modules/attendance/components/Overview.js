@@ -21,7 +21,6 @@ const Overview = () => {
   const [data, setData] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [range, setRange] = useState([]);
 
   const [rangeLoaded, setRangeLoaded] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
