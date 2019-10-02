@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Navbar, Menu, MenuItem, Popover } from '@blueprintjs/core';
+import { Navbar, Menu, MenuItem, Popover, Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Avatar from '../images/placeholders/avatar.png';
@@ -83,24 +83,24 @@ class Topbar extends React.Component {
       <React.Fragment>
         <Navbar fixedToTop className={classNames('bp3-dark', 'top-bar')}>
           <Navbar.Group>
-            <Navbar.Heading>amFOSS App</Navbar.Heading>
+            <Navbar.Heading>amFOSS WebApp</Navbar.Heading>
           </Navbar.Group>
-          {this.state.dataSet ? (
-            <Navbar.Group align="right">
-              <Popover content={profileDropdown} position="bottom-left">
-                <div>
-                  {this.state.gravatar ? (
-                    <img
-                      src={this.state.gravatar}
-                      style={{ width: '32px', borderRadius: '100vw' }}
-                    />
-                  ) : (
-                    <img src={Avatar} style={{ width: '32px', borderRadius: '100vw' }} />
-                  )}
-                </div>
-              </Popover>
+          <Navbar.Group align="right">
+            <Link to="/">
+              <Button minimal text="Home" />
+            </Link>
+            <Link to="/attendance">
+              <Button minimal text="Attendance" />
+            </Link>
+            <Navbar.Divider />
+            <Navbar.Group>
+              {this.state.dataSet ? (
+                <Popover content={profileDropdown} position="bottom-left">
+                  <Button minimal icon="user" large />
+                </Popover>
+              ) : null}
             </Navbar.Group>
-          ) : null}
+          </Navbar.Group>
         </Navbar>
       </React.Fragment>
     );
