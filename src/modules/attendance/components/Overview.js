@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import classnames from 'classnames';
 import {
   Card,
   Popover,
@@ -50,8 +51,6 @@ const Overview = () => {
       setRangeLoaded(true);
     }
     if (!isLoaded && rangeLoaded) {
-      console.log('loaded');
-      setLoaded(true);
       const variables = {
         startDate: moment(startDate).format('YYYY-MM-DD'),
         endDate: moment(endDate).format('YYYY-MM-DD'),
@@ -61,8 +60,8 @@ const Overview = () => {
           x: r.date,
           y: r.membersPresent,
         }));
-
         setData(respData);
+        setLoaded(true);
       });
     }
   });
@@ -77,54 +76,56 @@ const Overview = () => {
 
   return (
     <Card elevation={Elevation.TWO}>
-      {isLoaded ? (
-        <React.Fragment>
-          <h2>Attendance Overview</h2>
-          <Popover
-            interactionKind={PopoverInteractionKind.CLICK}
-            position={Position.BOTTOM_RIGHT}
-            usePortal={false}
-            content={
-              <DateRangePicker
-                defaultValue={[
-                  new Date(
-                    moment()
-                      .subtract('weeks', 1)
-                      .format('YYYY-MM-DD'),
-                  ),
-                  new Date(),
-                ]}
-                onChange={obj => handleRangeChange(obj)}
-                maxDate={new Date()}
-              />
-            }
-            target={
-              <Tag
-                rightIcon={IconNames.CALENDAR}
-                minimal={true}
-                round={true}
-                large={true}
-              >
-                <div>
-                  {moment(startDate).format('DD-MM-YYYY')} -{' '}
-                  {moment(endDate).format('DD-MM-YYYY')}
-                </div>
-              </Tag>
-            }
+      <h2 className={classnames(!isLoaded ? 'bp3-skeleton' : null)}>
+        Attendance Overview
+      </h2>
+      <Popover
+        className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
+        interactionKind={PopoverInteractionKind.CLICK}
+        position={Position.BOTTOM_RIGHT}
+        usePortal={false}
+        content={
+          <DateRangePicker
+            defaultValue={[
+              new Date(
+                moment()
+                  .subtract('weeks', 1)
+                  .format('YYYY-MM-DD'),
+              ),
+              new Date(),
+            ]}
+            onChange={obj => handleRangeChange(obj)}
+            maxDate={new Date()}
           />
-          <div style={{ width: '100%', height: '25vh', padding: '5px' }}>
-            <ResponsiveLine
-              data={[
-                {
-                  id: 'attendanceOverview',
-                  data,
-                },
-              ]}
-              margin={{ top: 20, right: 20, bottom: 20, left: 30 }}
-            />
-          </div>
-        </React.Fragment>
-      ) : null}
+        }
+        target={
+          <Tag
+            rightIcon={IconNames.CALENDAR}
+            minimal={true}
+            round={true}
+            large={true}
+          >
+            <div>
+              {moment(startDate).format('DD-MM-YYYY')} -{' '}
+              {moment(endDate).format('DD-MM-YYYY')}
+            </div>
+          </Tag>
+        }
+      />
+      <div
+        className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
+        style={{ width: '100%', height: '25vh', padding: '5px' }}
+      >
+        <ResponsiveLine
+          data={[
+            {
+              id: 'attendanceOverview',
+              data,
+            },
+          ]}
+          margin={{ top: 20, right: 20, bottom: 20, left: 30 }}
+        />
+      </div>
     </Card>
   );
 };
