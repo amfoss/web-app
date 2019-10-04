@@ -81,33 +81,37 @@ const Overview = () => {
   return (
     <div className="p-4">
       <div className="mx-2">
-        <h2>Attendance Report</h2>
-        <Popover
-          className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
-          interactionKind={PopoverInteractionKind.CLICK}
-          position={Position.BOTTOM_RIGHT}
-          usePortal={false}
-          content={
-            <DateRangePicker
-              defaultValue={[
-                new Date(
-                  moment()
-                    .subtract('weeks', 1)
-                    .format('YYYY-MM-DD'),
-                ),
-                new Date(),
-              ]}
-              onChange={obj => handleRangeChange(obj)}
-              maxDate={new Date()}
-            />
-          }
-          target={
-            <Button icon={IconNames.CALENDAR} round large>
-              {moment(startDate).format('DD-MM-YYYY')} -{' '}
-              {moment(endDate).format('DD-MM-YYYY')}
-            </Button>
-          }
-        />
+        <div className="row m-0">
+          <div className="col-md-8"><h2>Attendance Report</h2></div>
+          <div className="col text-right">
+            <Popover
+            className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
+            interactionKind={PopoverInteractionKind.CLICK}
+            position={Position.BOTTOM_RIGHT}
+            usePortal={false}
+            content={
+              <DateRangePicker
+                defaultValue={[
+                  new Date(
+                    moment()
+                      .subtract('weeks', 1)
+                      .format('YYYY-MM-DD'),
+                  ),
+                  new Date(),
+                ]}
+                onChange={obj => handleRangeChange(obj)}
+                maxDate={new Date()}
+              />
+            }
+            target={
+              <Button icon={IconNames.CALENDAR} round minimal large>
+                {moment(startDate).format('DD-MM-YYYY')} -{' '}
+                {moment(endDate).format('DD-MM-YYYY')}
+              </Button>
+            }
+          />
+        </div>
+      </div>
       </div>
       <div className="row m-0 py-4">
         <div className="col-md-8">

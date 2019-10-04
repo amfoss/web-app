@@ -4,7 +4,7 @@
   "description": "webapp for FOSS@Amrita",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build ./public/index.html --detailed-report; cp ./dist/index.html ./dist/200.html;",
+    "build": "./build.sh & parcel build ./public/index.html --detailed-report; cp ./dist/index.html ./dist/200.html;",
     "serve": "parcel ./public/index.html -p 5000",
     "start": "npm run serve",
     "precommit": "lint-staged",
