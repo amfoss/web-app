@@ -68,7 +68,7 @@ class Topbar extends React.Component {
 
   render() {
     const profileDropdown = (
-      <Menu>
+      <Menu className={classNames(this.state.darkThemeEnabled ? 'bp3-dark' : null)}>
         <MenuItem text="Settings" icon="settings" />
         <Link to="/profile">
           <MenuItem text="Profile" icon="person" />
@@ -81,9 +81,14 @@ class Topbar extends React.Component {
 
     return (
       <React.Fragment>
-        <Navbar fixedToTop className={classNames('bp3-dark', 'top-bar')}>
+        <Navbar
+          fixedToTop
+          className={classNames('top-bar', this.props.dark ? 'bp3-dark' : null)}
+        >
           <Navbar.Group>
-            <Navbar.Heading>amFOSS WebApp</Navbar.Heading>
+            <Navbar.Heading>
+              <h3 className={classNames(this.props.dark ? 'bp3-dark' : null)}>CMS</h3>
+            </Navbar.Heading>
           </Navbar.Group>
           <Navbar.Group align="right">
             <Link to="/">
@@ -93,13 +98,19 @@ class Topbar extends React.Component {
               <Button minimal text="Attendance" />
             </Link>
             <Navbar.Divider />
-            <Navbar.Group>
               {this.state.dataSet ? (
-                <Popover content={profileDropdown} position="bottom-left">
-                  <Button minimal icon="user" large />
-                </Popover>
+                <Navbar.Group>
+                  <Popover content={profileDropdown} position="bottom-left">
+                    <Button minimal icon="user" large />
+                  </Popover>
+                  <Button
+                    minimal
+                    icon={this.props.dark ? "flash" : "moon"}
+                    large
+                    onClick={this.props.onChangeTheme}
+                  />
+                </Navbar.Group>
               ) : null}
-            </Navbar.Group>
           </Navbar.Group>
         </Navbar>
       </React.Fragment>

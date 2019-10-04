@@ -3,10 +3,15 @@ import classnames from 'classnames';
 import {
   Card,
   Popover,
+  Colors,
   Tag,
   Elevation,
   PopoverInteractionKind,
   Position,
+  Tabs,
+  Tab,
+  ButtonGroup,
+  Button,
 } from '@blueprintjs/core';
 import { DateRangePicker } from '@blueprintjs/datetime';
 import { IconNames } from '@blueprintjs/icons';
@@ -16,6 +21,9 @@ import { extendMoment } from 'moment-range';
 
 import dataFetch from '../../../utils/dataFetch';
 const moment = extendMoment(Moment);
+
+import Rankings from './Rankings';
+import TrendGraph from './TrendGraph';
 
 const Overview = () => {
   const [data, setData] = useState([]);
@@ -32,6 +40,7 @@ const Overview = () => {
       {
         date
         membersPresent
+        avgDuration
       }
     }
   }`;
@@ -55,11 +64,7 @@ const Overview = () => {
         endDate: moment(endDate).format('YYYY-MM-DD'),
       };
       fetchData(variables).then(r => {
-        const respData = r.data.clubAttendance.dailyLog.map(r => ({
-          x: r.date,
-          y: r.membersPresent,
-        }));
-        setData(respData);
+        setData(r.data.clubAttendance.dailyLog);
         setLoaded(true);
       });
     }
@@ -74,58 +79,49 @@ const Overview = () => {
   };
 
   return (
-    <Card elevation={Elevation.TWO}>
-      <h2 className={classnames(!isLoaded ? 'bp3-skeleton' : null)}>
-        Attendance Overview
-      </h2>
-      <Popover
-        className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
-        interactionKind={PopoverInteractionKind.CLICK}
-        position={Position.BOTTOM_RIGHT}
-        usePortal={false}
-        content={
-          <DateRangePicker
-            defaultValue={[
-              new Date(
-                moment()
-                  .subtract('weeks', 1)
-                  .format('YYYY-MM-DD'),
-              ),
-              new Date(),
-            ]}
-            onChange={obj => handleRangeChange(obj)}
-            maxDate={new Date()}
-          />
-        }
-        target={
-          <Tag
-            rightIcon={IconNames.CALENDAR}
-            minimal={true}
-            round={true}
-            large={true}
-          >
-            <div>
+    <div className="p-4">
+      <div className="mx-2">
+        <h2>Attendance Report</h2>
+        <Popover
+          className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
+          interactionKind={PopoverInteractionKind.CLICK}
+          position={Position.BOTTOM_RIGHT}
+          usePortal={false}
+          content={
+            <DateRangePicker
+              defaultValue={[
+                new Date(
+                  moment()
+                    .subtract('weeks', 1)
+                    .format('YYYY-MM-DD'),
+                ),
+                new Date(),
+              ]}
+              onChange={obj => handleRangeChange(obj)}
+              maxDate={new Date()}
+            />
+          }
+          target={
+            <Button icon={IconNames.CALENDAR} round large>
               {moment(startDate).format('DD-MM-YYYY')} -{' '}
               {moment(endDate).format('DD-MM-YYYY')}
-            </div>
-          </Tag>
-        }
-      />
-      <div
-        className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
-        style={{ width: '100%', height: '25vh', padding: '5px' }}
-      >
-        <ResponsiveLine
-          data={[
-            {
-              id: 'attendanceOverview',
-              data,
-            },
-          ]}
-          margin={{ top: 20, right: 20, bottom: 20, left: 30 }}
+            </Button>
+          }
         />
       </div>
-    </Card>
+      <div className="row m-0 py-4">
+        <div className="col-md-8">
+            <TrendGraph data={data} isLoaded={isLoaded} />
+        </div>
+        <div className="col">
+          <Rankings
+            isRangeSet={rangeLoaded}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

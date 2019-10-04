@@ -25,6 +25,7 @@
     "@nivo/calendar": "^0.56.2",
     "@nivo/line": "^0.56.2",
     "@nivo/radar": "^0.56.2",
+    "antd": "^3.23.5",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "html-react-parser": "^0.7.0",
