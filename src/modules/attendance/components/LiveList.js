@@ -24,21 +24,7 @@ const LiveList = () => {
           lastName
           username
           firstSeenToday
-          avatar {
-            githubUsername
-          }
-        }
-      }
-      membersAbsent
-      {
-        count
-        members
-        {
-          firstName
-          lastName
-          username
-          lastSeen
-          firstSeenToday
+          duration
           avatar {
             githubUsername
           }
@@ -79,7 +65,10 @@ const LiveList = () => {
               </a>
             }
             description={
-              <div>{member.firstSeenToday ? moment(member.firstSeenToday).format('HH:MM') : 'NST'}</div>
+              <div>
+                <b>Since</b> {moment(member.firstSeenToday).format('HH:mm')} <br/>
+                <b>For</b> {member.duration}
+              </div>
             }
           />
         </List.Item>
@@ -87,28 +76,9 @@ const LiveList = () => {
     />
   );
 
-  const lateMembers = isLoaded ? data.membersPresent.members.filter(m => {
-    if(moment(m.firstSeenToday) > moment().set('hour', 17).set('minute', 15))
-      return m;
-  }) : null;
-
-  const absentMembers = isLoaded ? data.membersAbsent.members.filter(m => {
-    if(m.lastSeen == null || moment(m.lastSeen) < moment().set('hour', 14).set('minute', 0))
-      return m;
-  }) : null;
-
-  const absentOnlyNow = isLoaded ? data.membersAbsent.members.filter(m => {
-    if(m.lastSeen != null && moment(m.lastSeen) > moment().set('hour', 14).set('minute', 0))
-      return m;
-  }) : null;
-
-  const presentToday = isLoaded ? [...data.membersPresent.members, ...absentOnlyNow] : null;
-  console.log(presentToday);
-
-
   return (
     <div className="p-4">
-      <h2>Daily Report</h2>
+      <h2>Live</h2>
       <Card elevation={Elevation.TWO}>
         <Tabs id="LiveAttendanceTab">
           <Tab
@@ -117,55 +87,12 @@ const LiveList = () => {
               <h6 className="p-2 m-0">
                 Present Now
                 <Tag className="mx-2 my-1" minimal large>
-                  {isLoaded ? data.membersPresent.count : null}
+                  {isLoaded && data.membersPresent ? data.membersPresent.count : null}
                 </Tag>
               </h6>
             }
             panel={
               isLoaded ? membersCard(data.membersPresent.members) : null
-            }
-          />
-          <Tab
-            id="absent"
-            title={
-              <h6 className="p-2 m-0">
-                Present Today
-                <Tag className="mx-2 my-1" minimal={true} large={true}>
-                  {isLoaded ? presentToday.length : null}
-                </Tag>
-              </h6>
-            }
-            panel={
-              isLoaded ? membersCard(presentToday) : null
-            }
-          />
-          <Tab
-            id="absentToday"
-            title={
-              <h6 className="p-2 m-0">
-                Absent Today
-                <Tag className="mx-2 my-1" minimal={true} large={true}>
-                  {isLoaded ? absentMembers.length : null}
-                </Tag>
-              </h6>
-            }
-            panel={
-              isLoaded ? membersCard(absentMembers) : null
-            }
-          />
-          <Tab
-            id="late"
-            title={
-              <h6 className="p-2 m-0">
-                Late To Lab
-                <Tag className="mx-2 my-1" minimal={true} large={true}>
-                  {isLoaded ? lateMembers.length :
-                    null}
-                </Tag>
-              </h6>
-            }
-            panel={
-              isLoaded ? membersCard(lateMembers) : null
             }
           />
           <Tabs.Expander />
