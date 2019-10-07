@@ -18,6 +18,7 @@ import Task from './pages/Task';
 import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 import Attendance from "./pages/Attendance";
+import CheckIn from "./pages/Check-in";
 
 const cookies = new Cookies();
 
@@ -43,6 +44,7 @@ const AppRoutes = () => {
       <Route exact path="/profile" component={() => <Profile />} />
       <Route exact path="/update-profile" component={() => <Edit />} />
       <Route exact path="/attendance" component={() => <Attendance />} />
+      <Route exact path="/events/check-in" component={() => <CheckIn/>} />
     </Switch>
   );
 };

@@ -95,3 +95,16 @@ query getUserAttendance($username: String!){
   }
 }
 `;
+
+export const getApplicant = `
+query getApplicant($hash: String!){
+  getApplicant(hash: $hash){
+    id
+    name
+    formData{
+      key
+      value
+    }
+  }
+}
+`;

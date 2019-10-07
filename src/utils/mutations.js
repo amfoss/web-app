@@ -5,3 +5,11 @@ mutation TokenAuth($username: String!, $password: String!) {
         refreshToken
     }
 }`;
+
+export const CheckIn = `
+mutation CheckIn($appID: Int!){
+  checkIn(appID: $appID){
+    status
+  }
+}
+`;
