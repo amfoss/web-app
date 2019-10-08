@@ -8,12 +8,12 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SEO title="Login"/>
+        <SEO title="Login" />
         <Topbar />
         <div className="page-container">
           <div className="container">
             <div className="row">
-              <div className="col-md-4 col-lg-4"/>
+              <div className="col-md-4 col-lg-4" />
               <div className="col-md-6 col-lg-4" style={{ top: 150 }}>
                 <LoginForm />
               </div>

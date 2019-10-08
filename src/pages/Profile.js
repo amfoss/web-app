@@ -11,7 +11,6 @@ import StatusUpdateSummary from "../components/profile/StatusUpdateSummary";
 import LeaveRecord from "../components/profile/LeaveRecord";
 import TasksStatus from "../components/profile/TasksStatus";
 import Avatar from '../images/placeholders/avatar.png';
-import Cover from '../images/placeholders/cover.jpg';
 
 const cookies = new Cookies();
 

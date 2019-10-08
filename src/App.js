@@ -30,21 +30,28 @@ const LogoutPage = () => {
   return <Redirect to="/login" />;
 };
 
+const LoginPage = () => {
+  return <Login />;
+};
+
 const AppRoutes = () => {
   const token = cookies.get('token');
-  if (!token) return <Login />;
+
+  const PrivateRoute = ({ ...props }) =>
+    token ? <Route exact {...props} /> : <Redirect to="/login" />;
+
   return (
     <Switch>
-      <Route exact path="/" component={() => <Dashboard />} />
-      <Route exact path="/login" component={() => <Login />} />
-      <Route exact path="/logout" component={LogoutPage} />
-      <Route exact path="/dashboard" component={() => <Dashboard />} />
-      <Route exact path="/tasks" component={() => <Tasks />} />
-      <Route exact path="/tasks/:id" component={Task} />
-      <Route exact path="/profile" component={() => <Profile />} />
-      <Route exact path="/update-profile" component={() => <Edit />} />
-      <Route exact path="/attendance" component={() => <Attendance />} />
-      <Route exact path="/events/check-in" component={() => <CheckIn/>} />
+      <PrivateRoute exact path="/" component={() => <Dashboard />} />
+      <Route path="/login" component={LoginPage} />
+      <PrivateRoute exact path="/logout" component={LogoutPage} />
+      <PrivateRoute exact path="/dashboard" component={() => <Dashboard />} />
+      <PrivateRoute exact path="/tasks" component={() => <Tasks />} />
+      <PrivateRoute exact path="/tasks/:id" component={Task} />
+      <PrivateRoute exact path="/profile" component={() => <Profile />} />
+      <PrivateRoute exact path="/update-profile" component={() => <Edit />} />
+      <PrivateRoute exact path="/attendance" component={() => <Attendance />} />
+      <PrivateRoute exact path="/events/check-in" component={() => <CheckIn />} />
     </Switch>
   );
 };

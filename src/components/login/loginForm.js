@@ -59,7 +59,10 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    if (this.state.cookieSet) return <Redirect to="/" />;
+    const token = cookies.get('token');
+    if (token) {
+      return <Redirect to="/" />;
+    }
 
     const lockButton = (
       <Tooltip content={`${this.state.showPassword ? 'Hide' : 'Show'} Password`}>
