@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
 import dataFetch from "../utils/dataFetch";
-import {Button} from "@blueprintjs/core";
+import {Card , Button} from "@blueprintjs/core";
 
 import { getApplicant as query } from '../utils/queries.js';
 import {CheckIn as Mutation} from "../utils/mutations";
@@ -67,27 +67,30 @@ class CheckIn extends Component {
           <QrReader
             delay={this.state.delay}
             onScan={this.handleScan}
-            style={{ width: '100%' }}
+            style={{ width: '100%'}}
           />
-          <div className="row" />
           {this.state.status === "success" ?
-            <div className="alert alert-success m-4">Check In</div>: null
+            <div className="alert alert-success m-4">Successfully Checked In</div>: null
           }
           {this.state.submitError !== '' ?<div className="alert alert-danger m-4">{this.state.submitError}</div>: null}
           {this.state.status === '' && this.state.submitError === '' ?
             this.state.name !== '' ?
-                <div className="col-sm-12 col-md-4 p-4">
-                  <li>ID: {this.state.id}</li>
-                  <li>Name: {this.state.name}</li>
-                  <li>Roll No: {this.state.rollNo}</li>
-                  <li>Gender: {this.state.gender}</li>
-                  <div className="">
+                <div className="col-sm-12 col-md-4 pt-4">
+                  <Card elevation={2} className="card">
+                    <h4 className="text-center">Details</h4>
+                    <h6>{this.state.id}</h6>
+                    <h6>{this.state.name}</h6>
+                    <h6>{this.state.rollNo}</h6>
+                    <h6>{this.state.gender}</h6>
+                  </Card>
+                  <div className="p-4">
                     <Button
-                      className="d-block"
+                      className="col-sm-12 p-3 text-center"
                       type="submit"
                       intent="primary"
                       text="Check In"
-                      style={{height: '10%',width:'100%', fontSize: '3vh'}} />
+                      style={{fontSize: '3vh'}}
+                    />
                   </div>
                 </div>
               : null
