@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { Redirect, Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -19,6 +19,7 @@ import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 import Attendance from "./pages/Attendance";
 import CheckIn from "./pages/Check-in";
+import PrivateRoute from './components/PrivateRoute';
 
 const cookies = new Cookies();
 
@@ -34,28 +35,6 @@ const LoginPage = () => {
   return <Login />;
 };
 
-const AppRoutes = () => {
-  const token = cookies.get('token');
-
-  const PrivateRoute = ({ ...props }) =>
-    token ? <Route exact {...props} /> : <Redirect to="/login" />;
-
-  return (
-    <Switch>
-      <PrivateRoute exact path="/" component={() => <Dashboard />} />
-      <Route path="/login" component={LoginPage} />
-      <PrivateRoute exact path="/logout" component={LogoutPage} />
-      <PrivateRoute exact path="/dashboard" component={() => <Dashboard />} />
-      <PrivateRoute exact path="/tasks" component={() => <Tasks />} />
-      <PrivateRoute exact path="/tasks/:id" component={Task} />
-      <PrivateRoute exact path="/profile" component={() => <Profile />} />
-      <PrivateRoute exact path="/update-profile" component={() => <Edit />} />
-      <PrivateRoute exact path="/attendance" component={() => <Attendance />} />
-      <PrivateRoute exact path="/events/check-in" component={() => <CheckIn />} />
-    </Switch>
-  );
-};
-
 export default class App extends Component {
   render() {
     return (
@@ -64,7 +43,18 @@ export default class App extends Component {
           <title>amFOSS App</title>
         </Helmet>
         <BrowserRouter>
-          <AppRoutes />
+          <Switch>
+            <PrivateRoute exact path="/" component={Dashboard}/>
+            <Route path="/login" component={LoginPage}/>
+            <PrivateRoute exact path="/logout" component={LogoutPage}/>
+            <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+            <PrivateRoute exact path="/tasks" component={Tasks}/>
+            <PrivateRoute exact path="/tasks/:id" component={Task}/>
+            <PrivateRoute exact path="/profile" component={Profile}/>
+            <PrivateRoute exact path="/update-profile" component={Edit}/>
+            <PrivateRoute exact path="/attendance" component={Attendance}/>
+            <PrivateRoute exact path="/events/check-in" component={CheckIn}/>
+          </Switch>
         </BrowserRouter>
       </React.Fragment>
     );
