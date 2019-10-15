@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import classnames from 'classnames';
+import React, { useEffect, useState } from 'react';
+
+import 'antd/dist/antd.css';
+import '../styles/styles.sass';
 import SEO from '../components/Seo';
-import Topbar from '../components/topbar';
-import Cookies from 'universal-cookie';
+import Sidebar from '../components/sidebar';
 
-const cookies = new Cookies();
-
-const Base = ({children}) => {
+const Base = ({ children, location }) => {
   const [darkTheme, setDarkTheme] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
 
@@ -20,17 +19,15 @@ const Base = ({children}) => {
 
   const switchTheme = () => {
     setDarkTheme(!darkTheme);
-    if(darkTheme)
-      localStorage.setItem('darkMode', '0');
-    else
-      localStorage.setItem('darkMode', '1');
+    if(darkTheme) localStorage.setItem('darkMode', '0');
+    else localStorage.setItem('darkMode', '1');
   };
+
 
   return (
     <React.Fragment>
       <SEO title="Attendance" />
-      <Topbar dark={darkTheme} onChangeTheme={() => switchTheme()} />
-      <div className={classnames('page-container', darkTheme ? 'bp3-dark' : null)}>{children}</div>
+      <Sidebar selected={location.pathname}>{children}</Sidebar>
     </React.Fragment>
   );
 };

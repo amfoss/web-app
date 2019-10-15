@@ -1,7 +1,5 @@
 import React from 'react';
-import 'babel-polyfill';
 import LoginForm from '../components/login/loginForm';
-import Topbar from '../components/topbar.js';
 import SEO from '../components/Seo';
 
 class Login extends React.Component {
@@ -9,10 +7,9 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         <SEO title="Login" />
-        <Topbar />
         <div className="page-container">
           <div className="container">
-            <div className="row">
+            <div className="row m-0">
               <div className="col-md-4 col-lg-4" />
               <div className="col-md-6 col-lg-4" style={{ top: 150 }}>
                 <LoginForm />

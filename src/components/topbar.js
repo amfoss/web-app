@@ -1,9 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Navbar, Menu, MenuItem, Popover, Button } from '@blueprintjs/core';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Avatar from '../images/placeholders/avatar.png';
+
 
 import dataFetch from '../utils/dataFetch';
 import { getProfile as query } from '../utils/queries';
@@ -67,53 +65,8 @@ class Topbar extends React.Component {
   }
 
   render() {
-    const profileDropdown = (
-      <Menu className={classNames(this.state.darkThemeEnabled ? 'bp3-dark' : null)}>
-        <MenuItem text="Settings" icon="settings" />
-        <Link to="/profile">
-          <MenuItem text="Profile" icon="person" />
-        </Link>
-        <Link to="/logout">
-          <MenuItem text="Logout" icon="log-out" />
-        </Link>
-      </Menu>
-    );
-
     return (
-      <React.Fragment>
-        <Navbar
-          fixedToTop
-          className={classNames('top-bar', this.props.dark ? 'bp3-dark' : null)}
-        >
-          <Navbar.Group>
-            <Navbar.Heading>
-              <h3 className={classNames(this.props.dark ? 'bp3-dark' : null)}>CMS</h3>
-            </Navbar.Heading>
-          </Navbar.Group>
-          <Navbar.Group align="right">
-            <Link to="/">
-              <Button minimal text="Home" />
-            </Link>
-            <Link to="/attendance">
-              <Button minimal text="Attendance" />
-            </Link>
-            <Navbar.Divider />
-              {this.state.dataSet ? (
-                <Navbar.Group>
-                  <Popover content={profileDropdown} position="bottom-left">
-                    <Button minimal icon="user" large />
-                  </Popover>
-                  <Button
-                    minimal
-                    icon={this.props.dark ? "flash" : "moon"}
-                    large
-                    onClick={this.props.onChangeTheme}
-                  />
-                </Navbar.Group>
-              ) : null}
-          </Navbar.Group>
-        </Navbar>
-      </React.Fragment>
+      <div />
     );
   }
 }
