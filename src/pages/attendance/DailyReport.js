@@ -83,7 +83,7 @@ const DailyReport = props => {
   ];
 
   return (
-    <Base {...props}>
+    <Base title="Daily Report | Attendance" {...props}>
       <TitleBar routes={routes} title="Daily Report" subTitle="View daily attendance report of club members" />
       <div className="row m-0">
         <div className="col-md-6 p-2">

@@ -56,7 +56,7 @@ const AttendanceDashboard = (props) => {
   ];
 
   return (
-    <Base {...props}>
+    <Base title="Attendance Dashboard" {...props}>
       <TitleBar routes={routes} title="Dashboard" />
       <div className="p-2">
         <ActiveStatusBar

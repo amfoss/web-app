@@ -5,7 +5,7 @@ import '../styles/styles.sass';
 import SEO from '../components/Seo';
 import Sidebar from '../components/sidebar';
 
-const Base = ({ children, location }) => {
+const Base = ({ children, title, location }) => {
   const [darkTheme, setDarkTheme] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
 
@@ -26,7 +26,7 @@ const Base = ({ children, location }) => {
 
   return (
     <React.Fragment>
-      <SEO title="Attendance" />
+      <SEO title={title} />
       <Sidebar selected={location.pathname}>{children}</Sidebar>
     </React.Fragment>
   );

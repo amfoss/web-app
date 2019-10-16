@@ -57,7 +57,7 @@ const LiveReport = (props) => {
 
 
   return (
-    <Base {...props}>
+    <Base title="Live Report | Attendance" {...props}>
       <TitleBar routes={routes} title="Live Report" subTitle="View attendance at this moment" />
       <LiveReportCard data={data} isLoaded={isLoaded} />
     </Base>

@@ -28,6 +28,7 @@ import PrivateRoute from './components/PrivateRoute';
 import DailyReport from './pages/attendance/DailyReport';
 import LiveReport from './pages/attendance/LiveReport';
 import AttendanceDashboard from './pages/attendance/Dashboard';
+import TasksDashboard from './pages/tasks/Dashboard';
 
 const cookies = new Cookies();
 
@@ -37,6 +38,10 @@ const LogoutPage = () => {
   cookies.remove('username');
   localStorage.clear();
   return <Redirect to="/login" />;
+};
+
+const redirectToTasksDashboard = () => {
+  return <Redirect to="/tasks/dashboard" />;
 };
 
 const redirectToAttendanceDashboard = () => {
@@ -56,11 +61,20 @@ export default class App extends Component {
             <Route path="/login" component={Login} />
             <PrivateRoute exact path="/logout" component={LogoutPage} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/tasks" component={Tasks} />
-            <PrivateRoute exact path="/tasks/:id" component={Task} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <PrivateRoute exact path="/update-profile" component={Edit} />
             <PrivateRoute exact path="/events/check-in" component={CheckIn} />
+
+            <PrivateRoute
+              exact
+              path="/tasks"
+              component={redirectToTasksDashboard}
+            />
+            <PrivateRoute
+              exact
+              path="/tasks/dashboard"
+              component={TasksDashboard}
+            />
 
             <PrivateRoute
               exact
@@ -82,6 +96,7 @@ export default class App extends Component {
               path="/attendance/live-report"
               component={LiveReport}
             />
+
             <PrivateRoute component={NotFound} />
           </Switch>
         </BrowserRouter>

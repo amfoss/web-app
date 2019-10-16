@@ -4,7 +4,7 @@ import { Result, Button } from 'antd';
 
 import Base from './Base';
 
-export default props => <Base {...props}>
+export default props => <Base title="Page Not Found" {...props}>
   <Result
     status="404"
     title=""

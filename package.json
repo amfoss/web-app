@@ -1,6 +1,6 @@
 {
-  "name": "iamfoss",
-  "version": "0.0.1",
+  "name": "cms-webapp",
+  "version": "0.1.0",
   "description": "webapp for FOSS@Amrita",
   "main": "index.js",
   "scripts": {
