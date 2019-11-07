@@ -1,0 +1,113 @@
+[
+  {
+    "title": "Dashboard",
+    "key": "/",
+    "icon": "dashboard"
+  },
+  {
+    "title": "Attendance",
+    "key": "attendance",
+    "clubExclusive": true,
+    "icon": "deployment-unit",
+    "items": [
+      {
+        "key": "dashboard",
+        "title": "Dashboard"
+      },
+      {
+        "key": "live-report",
+        "title": "Live Attendance"
+      },
+      {
+        "key": "individual-report",
+        "title": "Individual Report"
+      },
+      {
+        "key": "daily-report",
+        "title": "Daily Report"
+      },
+      {
+        "key": "attendance-stats",
+        "title": "Attendance Stats"
+      }
+    ]
+  },
+  {
+    "title": "Status Updates",
+    "key": "status-updates",
+    "clubExclusive": true,
+    "icon": "schedule",
+    "items": [
+      {
+        "key": "dashboard",
+        "title": "Dashboard"
+      },
+      {
+        "key": "individual-report",
+        "title": "Individual Report"
+      },
+      {
+        "key": "daily-report",
+        "title": "Daily Report"
+      }
+    ]
+  },
+  {
+    "title": "Forms",
+    "key": "form",
+    "icon": "form",
+    "items": [
+      {
+        "key": "create-forms",
+        "title": "Create Forms"
+      },
+      {
+        "key": "view-forms",
+        "title": "View Forms"
+      }
+    ] 
+  },
+  {
+    "title": "Settings",
+    "key": "settings",
+    "icon": "setting",
+    "items": [
+      {
+        "key": "general",
+        "title": "General Settings"
+      },
+      {
+        "key": "privacy",
+        "title": "Privacy"
+      },
+      {
+        "key": "appearance",
+        "title": "Appearance"
+      },
+      {
+        "key": "notifications",
+        "title": "Notifications"
+      }
+    ]
+  },
+  {
+    "title": "Account",
+    "key": "account",
+    "icon": "user",
+    "items": [
+      {
+        "key": "profile",
+        "title": "My Profile"
+      },
+      {
+        "key": "change-password",
+        "title": "Change Password"
+      }
+    ]
+  },
+  {
+    "title": "Logout",
+    "key": "logout/",
+    "icon": "logout"
+  }
+]

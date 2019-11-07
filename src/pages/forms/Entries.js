@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon } from 'antd';
+import {Table, Icon, Button} from 'antd';
+import {CSVDownload, CSVLink} from 'react-csv';
 import dataFetch from '../../utils/dataFetch';
 import Base from '../Base';
 import TitleBar from '../../components/titlebar';
@@ -116,9 +117,37 @@ const Entries = props => {
           : null;
   }) : null;
 
+
+  const getExportData = isLoaded
+    ? data.map(e => {
+        const obj = {
+          name: e.name,
+          submissionTime: e.submissionTime,
+          email: e.email,
+          phone: e.phone,
+        };
+        fields.map(f => {
+          obj[f.question] = e.formData.find(d => d.key === f.key).value;
+          return null;
+        });
+        return obj;
+      })
+    : null;
+
   return (
     <Base title="View Forms | Forms" {...props}>
-      <TitleBar routes={routes} title="View Entries" subTitle="View & manage entries to this form" />
+      <TitleBar
+        routes={routes}
+        title="View Entries"
+        subTitle="View & manage entries to this form"
+      />
+      <div className="d-flex px-4 justify-content-end">
+      {isLoaded ? (
+        <CSVLink data={getExportData}>
+          <Button type="primary">Export Data</Button>
+        </CSVLink>
+      ) : null}
+      </div>
       <div className="p-4">
         <Table
           loading={!isLoaded}

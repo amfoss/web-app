@@ -108,7 +108,7 @@ export default class App extends Component {
             />
             <PrivateRoute
               exact
-              path="/form/:formId"
+              path="/form/:formId(\d+)"
               component={Form}
             />
             <PrivateRoute
