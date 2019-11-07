@@ -119,6 +119,22 @@ const Sidebar = ({ selected, children }) => {
       </Menu.ItemGroup>
       <Menu.Divider />
       <Menu.ItemGroup>
+
+      <SubMenu
+        key="form"
+        title={
+          <span>
+            <Icon type="form" /> <span>Forms</span>
+          </span>
+        }
+      >
+        <Menu.Item key="form-view-forms">
+          <Link to="/form/view-forms">View Forms</Link>
+        </Menu.Item>
+      </SubMenu>
+      </Menu.ItemGroup>
+      <Menu.Divider />
+      <Menu.ItemGroup>
         <SubMenu
           key="settings"
           title={

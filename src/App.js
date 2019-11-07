@@ -29,6 +29,9 @@ import DailyReport from './pages/attendance/DailyReport';
 import LiveReport from './pages/attendance/LiveReport';
 import AttendanceDashboard from './pages/attendance/Dashboard';
 import TasksDashboard from './pages/tasks/Dashboard';
+import ViewForms from './pages/forms/ViewForms';
+import Entries from './pages/forms/Entries';
+import Form from './pages/forms/Form';
 
 const cookies = new Cookies();
 
@@ -95,6 +98,23 @@ export default class App extends Component {
               exact
               path="/attendance/live-report"
               component={LiveReport}
+            />
+
+
+            <PrivateRoute
+              exact
+              path="/form/view-forms"
+              component={ViewForms}
+            />
+            <PrivateRoute
+              exact
+              path="/form/:formId"
+              component={Form}
+            />
+            <PrivateRoute
+              exact
+              path="/form/:formId/entries"
+              component={Entries}
             />
 
             <PrivateRoute component={NotFound} />

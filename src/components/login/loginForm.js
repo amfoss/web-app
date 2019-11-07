@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tooltip, Button, Card, FormGroup, InputGroup, Callout } from '@blueprintjs/core';
+import React, { useState } from 'react';
+import { Card, Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
@@ -13,15 +13,9 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      showPassword: false,
       cookieSet: false,
       authFail: false,
     };
-    this.passwordEntry = this.passwordEntry.bind(this);
-    this.usernameEntry = this.usernameEntry.bind(this);
-    this.handleLockClick = this.handleLockClick.bind(this);
   }
 
   componentDidMount() {
@@ -33,80 +27,77 @@ class LoginForm extends React.Component {
     }
   }
 
-  login = async () => {
-    const variables = { username: this.state.username, password: this.state.password };
-    const response = await dataFetch({ query, variables });
-    if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-      cookies.set('token', response.data.tokenAuth.token, { path: '/' });
-      cookies.set('refreshToken', response.data.tokenAuth.refreshToken, { path: '/' });
-      cookies.set('username', this.state.username, { path: '/' });
-      this.setState({ cookieSet: true });
-    } else {
-      this.setState({ authFail: true });
-    }
-  };
+  login = async (variables) => await dataFetch({ query, variables });
 
-  passwordEntry(event) {
-    this.setState({ password: event.target.value });
-  }
-
-  usernameEntry(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  handleLockClick() {
-    this.setState(prevState => ({ showPassword: !prevState.showPassword }));
-  }
 
   render() {
     const token = cookies.get('token');
-    if (token) {
-      return <Redirect to="/" />;
-    }
+    if (token) return <Redirect to="/" />;
 
-    const lockButton = (
-      <Tooltip content={`${this.state.showPassword ? 'Hide' : 'Show'} Password`}>
-        <Button
-          icon={this.state.showPassword ? 'unlock' : 'lock'}
-          intent="warning"
-          minimal
-          onClick={this.handleLockClick}
-        />
-      </Tooltip>
-    );
+    const { getFieldDecorator } = this.props.form;
 
-    const errorMessage = (
-      <div style={{ padding: '1rem 0rem' }}>
-        <Callout intent="danger">Please provide a valid username and password.</Callout>
-      </div>
-    );
+    const handleSubmit = e => {
+      e.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          this.login(values).then( response => {
+          if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
+            cookies.set('token', response.data.tokenAuth.token, { path: '/' });
+            cookies.set('refreshToken', response.data.tokenAuth.refreshToken, { path: '/' });
+            cookies.set('username', values.username, { path: '/' });
+            this.setState({ cookieSet: true });
+          } else {
+            this.setState({ authFail: true });
+          }
+        });
+        }
+      });
+    };
+
+    const errorMessage = (<h1>Login Failed</h1>);
 
     return (
-      <Card elevation="2" className="login-card">
+      <Card className="login-card">
         <h1>Login</h1>
         {this.state.authFail ? errorMessage : null}
-        <form
-          onSubmit={e => {
-            this.login();
-            e.preventDefault();
-          }}
-        >
-          <FormGroup label="Username" labelFor="text-input" labelInfo="(required)">
-            <InputGroup onChange={this.usernameEntry} placeholder="Enter your username" />
-          </FormGroup>
-          <FormGroup label="Password" labelFor="text-input" labelInfo="(required)">
-            <InputGroup
-              placeholder="Enter your password"
-              onChange={this.passwordEntry}
-              rightElement={lockButton}
-              type={this.state.showPassword ? 'text' : 'password'}
-            />
-          </FormGroup>
-          <Button type="submit" intent="primary" text="Login" />
-        </form>
+        <Form className="login-form" onSubmit={handleSubmit}>
+          <Form.Item >
+            {getFieldDecorator('username', {
+              rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Username"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: 'Please input your Password!' }],
+            })(
+              <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="password"
+                placeholder="Password"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true,
+            })(<Checkbox>Remember me</Checkbox>)}
+            <a className="login-form-forgot" href="">
+              Forgot password
+            </a>
+            <Button type="primary" htmlType="submit" className="login-form-button">
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
       </Card>
     );
   }
 }
 
-export default LoginForm;
+export default Form.create({ name: 'normal_login' })(LoginForm);
