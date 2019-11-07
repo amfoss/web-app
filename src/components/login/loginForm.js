@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import Cookies from 'universal-cookie';
@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 
 import dataFetch from '../../utils/dataFetch';
 import { TokenAuth as query } from '../../utils/mutations';
+import cmsLogo from "../../images/cms_logo.png";
 
 const cookies = new Cookies();
 
@@ -15,6 +16,7 @@ class LoginForm extends React.Component {
     this.state = {
       cookieSet: false,
       authFail: false,
+      loading: false
     };
   }
 
@@ -47,18 +49,18 @@ class LoginForm extends React.Component {
             cookies.set('username', values.username, { path: '/' });
             this.setState({ cookieSet: true });
           } else {
-            this.setState({ authFail: true });
+            this.setState({ authFail: true, loading: false });
           }
         });
         }
       });
     };
 
-    const errorMessage = (<h1>Login Failed</h1>);
+    const errorMessage = (<div className="alert alert-danger">Login Failed</div>);
 
-    return (
+    return !this.state.loading ? (
       <Card className="login-card">
-        <h1>Login</h1>
+        <img src={cmsLogo} className="w-100 my-4" />
         {this.state.authFail ? errorMessage : null}
         <Form className="login-form" onSubmit={handleSubmit}>
           <Form.Item >
@@ -87,16 +89,15 @@ class LoginForm extends React.Component {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" className="btn-block login-form-button">
               Log in
             </Button>
           </Form.Item>
         </Form>
       </Card>
-    );
+    ) : <h1>Loading</h1>;
   }
 }
 

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, Menu, Drawer } from 'antd';
+import {Icon, Menu, Drawer, Card} from 'antd';
 import { Link } from 'react-router-dom';
+
+import list from '../pages/links';
+import cmsLogo from '../images/cms_logo.png';
 
 const { SubMenu } = Menu;
 
@@ -29,7 +32,7 @@ function useWindowDimensions() {
   return windowDimensions;
 }
 
-const Sidebar = ({ selected, children }) => {
+const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -43,6 +46,15 @@ const Sidebar = ({ selected, children }) => {
       }))
     : [];
 
+  const getMenuItem = ( link, label, icon, key) => (
+    <Menu.Item key={key}>
+      <Link to={link}>
+        <Icon type={icon}/>
+        {label}
+      </Link>
+    </Menu.Item>
+  );
+
   const menu = (
     <Menu
       mode="inline"
@@ -50,138 +62,34 @@ const Sidebar = ({ selected, children }) => {
       defaultOpenKeys={selectedKeys}
       style={{ minHeight: '100vh' }}
     >
-      <Menu.Item key="dashboard">
-        <span>
-          <Link to="/">
-            <Icon type="dashboard" />
-            Dashboard
-          </Link>
-        </span>
-      </Menu.Item>
-      <SubMenu
-        key="tasks"
-        title={
-          <span>
-            <Icon type="experiment" />
-            <span>Tasks</span>
-          </span>
-        }
-      >
-        <Menu.Item key="tasks-dashboard">
-          <Link to="/tasks/">Dashboard</Link>
-        </Menu.Item>
-        <Menu.Item key="tasks-progress">
-          <Link to="/tasks/progress/">My Progress</Link>
-        </Menu.Item>
-      </SubMenu>
-      <Menu.Divider/>
-      <Menu.ItemGroup>
-      <SubMenu
-        key="attendance"
-        title={
-          <span>
-            <Icon type="deployment-unit" />
-            <span>Attendance</span>
-          </span>
-        }
-      >
-        <Menu.Item key="attendance-dashboard">
-          <Link to="/attendance/">Dashboard</Link>
-        </Menu.Item>
-        <Menu.Item key="attendance-live-report">
-          <Link to="/attendance/live-report">Live Attendance</Link>
-        </Menu.Item>
-        <Menu.Item key="attendance-individual-report">
-          <Link to="/attendance/individual-report">Individual Report</Link>
-        </Menu.Item>
-        <Menu.Item key="daily-report">
-          <Link to="/attendance/daily-report">Daily Report</Link>
-        </Menu.Item>
-        <Menu.Item key="attendance-stats">
-          <Link to="/attendance/stats">Attendance Stats</Link>
-        </Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key="status-updates"
-        title={
-          <span>
-            <Icon type="schedule" /> <span>Status Updates</span>
-          </span>
-        }
-      >
-        <Menu.Item key="status-updates-dashboard">
-          <Link to="/status-updates/">Dashboard</Link>
-        </Menu.Item>
-        <Menu.Item key="status-updates-daily-report">
-          <Link to="/status-updates/daily-report/">Daily Report</Link>
-        </Menu.Item>
-      </SubMenu>
-      </Menu.ItemGroup>
-      <Menu.Divider />
-      <Menu.ItemGroup>
-
-      <SubMenu
-        key="form"
-        title={
-          <span>
-            <Icon type="form" /> <span>Forms</span>
-          </span>
-        }
-      >
-        <Menu.Item key="form-view-forms">
-          <Link to="/form/view-forms">View Forms</Link>
-        </Menu.Item>
-      </SubMenu>
-      </Menu.ItemGroup>
-      <Menu.Divider />
-      <Menu.ItemGroup>
-        <SubMenu
-          key="settings"
-          title={
-            <span>
-            <Icon type="setting" />
-            <span>Settings</span>
-          </span>
-          }
-        >
-          <Menu.Item key="settings-general">
-            <Link to="/settings/general">General</Link>
-          </Menu.Item>
-          <Menu.Item key="settings-preferences">
-            <Link to="/settings/preferences">Appearance</Link>
-          </Menu.Item>
-          <Menu.Item key="settings-privacy">
-            <Link to="/settings/privacy">Privacy</Link>
-          </Menu.Item>
-          <Menu.Item key="settings-notifications">
-            <Link to="/settings/notifications">Notifications</Link>
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu
-          key="account"
-          title={
-            <span>
-            <Icon type="user" /> <span>Account</span>
-          </span>
-          }
-        >
-          <Menu.Item key="account-profile">
-            <Link to="/account/profile/">Profile</Link>
-          </Menu.Item>
-          <Menu.Item key="change-password">
-            <Link to="/account/change-password">Change Password</Link>
-          </Menu.Item>
-          <Menu.Item key="account-logout">
-            <Link to="/logout">Logout</Link>
-          </Menu.Item>
-        </SubMenu>
-      </Menu.ItemGroup>
+      <div className="text-center my-4">
+        <img src={cmsLogo} style={{ width: "80%"}} />
+      </div>
+      {
+        list.map(i =>
+          (isClubMember || i.clubExclusive === undefined) ?
+            i.items ?
+              <SubMenu
+                key={i.key}
+                title={
+                  <div><Icon type={i.icon} />{i.title}</div>
+                }
+              >
+                { i.items.map(e =>
+                    getMenuItem(`/${i.key}/${e.key}`, e.title, e.icon,`${i.key}-${e.key}`, )
+                  )
+                }
+              </SubMenu>
+              : getMenuItem(`/${i.key}`, i.title, i.icon,`${i.key}`, )
+            : null
+        )
+      }
     </Menu>
   );
 
   return width > 600 ? (
     <div className="row m-0">
-      <div className="col-sm-4 col-md-3 col-lg-2">{menu}</div>
+      <div className="col-sm-4 col-md-3 col-lg-2 p-0">{menu}</div>
       <div className="col-sm-8 col-md-9 col-lg-10 page-container">
         {children}
       </div>
@@ -198,11 +106,12 @@ const Sidebar = ({ selected, children }) => {
               onClick={() => setSidebarVisible(true)}
             />
           </div>
-          <div className="col d-flex align-items-center">CMS</div>
+          <div className="col d-flex align-items-center">
+            <img src={cmsLogo} style={{ height: "5vh"}} />
+          </div>
         </div>
       </div>
       <Drawer
-        title="CMS"
         placement="left"
         closable
         onClose={() => setSidebarVisible(false)}

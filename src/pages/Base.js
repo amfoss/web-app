@@ -4,16 +4,25 @@ import 'antd/dist/antd.css';
 import '../styles/styles.sass';
 import SEO from '../components/Seo';
 import Sidebar from '../components/sidebar';
+import dataFetch from '../utils/dataFetch';
 
 const Base = ({ children, title, location }) => {
   const [darkTheme, setDarkTheme] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
+  const [isClubMember, setMember] = useState(false);
+
+
+  const fetchMemberStatus = async () => dataFetch({ query: `{ isClubMember }` });
+
 
   useEffect(() => {
     if (!isLoaded) {
       const darkThemeEnabled = localStorage.getItem('darkMode');
       setDarkTheme(darkThemeEnabled === '1');
-      setLoaded(true);
+      fetchMemberStatus().then( r => {
+        setLoaded(true);
+        setMember(r.data.isClubMember);
+      });
     }
   });
 
@@ -27,7 +36,10 @@ const Base = ({ children, title, location }) => {
   return (
     <React.Fragment>
       <SEO title={title} />
-      <Sidebar selected={location.pathname}>{children}</Sidebar>
+      <Sidebar isLoaded={isLoaded} isClubMember={isClubMember} selected={location.pathname}>{children}</Sidebar>
+      <div id="bottom-bar">
+         Powered by amFOSS CMS
+      </div>
     </React.Fragment>
   );
 };

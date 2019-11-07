@@ -9,7 +9,7 @@ function SEO ({lang , title ,description }){
         lang,
       }}
       title={title}
-      titleTemplate={`%s | amFOSS WebApp`}
+      titleTemplate={`%s | amFOSS CMS `}
       meta={[
         {
           name: `description`,

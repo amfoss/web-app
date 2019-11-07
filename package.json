@@ -36,6 +36,7 @@
     "pages": "0.0.16",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
+    "react-csv": "^1.1.2",
     "react-dom": "^16.10.2",
     "react-dropzone-component": "^3.2.0",
     "react-helmet": "^5.2.0",

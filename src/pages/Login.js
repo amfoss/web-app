@@ -7,10 +7,10 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         <SEO title="Login" />
-        <div className="page-container">
+        <div className="page-container" style={{ background: "#eee" }}>
           <div className="container">
             <div className="row m-0">
-              <div className="col-md-4 col-lg-4" />
+              <div className="col-md-6 col-lg-8" />
               <div className="col-md-6 col-lg-4" style={{ top: 150 }}>
                 <LoginForm />
               </div>
