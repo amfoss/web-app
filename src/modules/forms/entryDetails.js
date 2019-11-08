@@ -1,5 +1,4 @@
 import React from 'react';
-import { Descriptions } from 'antd';
 
 const EntryDetails = ({ fields, data }) => {
 

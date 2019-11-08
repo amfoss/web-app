@@ -34,7 +34,7 @@ const Entries = props => {
     {
       question
       key
-      isImportant
+      important
     }
   }`;
 
@@ -107,7 +107,7 @@ const Entries = props => {
   ];
 
   isLoaded && fields.length > 0 ? fields.map( f => {
-    f.isImportant ? columns.push({
+    f.important ? columns.push({
               title: f.question,
               dataIndex: f.key,
               key: f.key,
@@ -148,11 +148,12 @@ const Entries = props => {
         </CSVLink>
       ) : null}
       </div>
-      <div className="p-4">
+      <div className="my-4 p-4">
         <Table
           loading={!isLoaded}
           dataSource={data}
           columns={columns}
+          bodyStyle={{ overflow: 'auto', maxHeight: '80vh' }}
           expandedRowRender={e => <EntryDetails fields={fields} data={e} />}
         />
       </div>
