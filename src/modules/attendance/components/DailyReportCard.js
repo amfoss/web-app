@@ -19,7 +19,7 @@ const DailyReportCard = ({data, isLoaded}) => {
             <List.Item.Meta
               avatar={
                 <Avatar
-                  src={`https://avatars.githubusercontent.com/${m.member.avatar.githubUsername}`}
+                  icon="user"
                 />
               }
               title={

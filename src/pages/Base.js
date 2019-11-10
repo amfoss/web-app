@@ -36,10 +36,9 @@ const Base = ({ children, title, location }) => {
   return (
     <React.Fragment>
       <SEO title={title} />
-      <Sidebar isLoaded={isLoaded} isClubMember={isClubMember} selected={location.pathname}>{children}</Sidebar>
-      <div id="bottom-bar">
-         Powered by amFOSS CMS
-      </div>
+      <Sidebar isLoaded={isLoaded} isClubMember={isClubMember} selected={location.pathname}>
+        {children}
+      </Sidebar>
     </React.Fragment>
   );
 };

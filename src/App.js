@@ -32,6 +32,7 @@ import TasksDashboard from './pages/tasks/Dashboard';
 import ViewForms from './pages/forms/ViewForms';
 import Entries from './pages/forms/Entries';
 import Form from './pages/forms/Form';
+import ViewCalendar from './pages/calendar/ViewCalendar';
 
 const cookies = new Cookies();
 
@@ -101,21 +102,11 @@ export default class App extends Component {
             />
 
 
-            <PrivateRoute
-              exact
-              path="/form/view-forms"
-              component={ViewForms}
-            />
-            <PrivateRoute
-              exact
-              path="/form/:formId(\d+)"
-              component={Form}
-            />
-            <PrivateRoute
-              exact
-              path="/form/:formId/entries"
-              component={Entries}
-            />
+            <PrivateRoute exact path="/calendar/view-calendar" component={ViewCalendar} />
+
+            <PrivateRoute exact path="/form/view-forms" component={ViewForms} />
+            <PrivateRoute exact path="/form/:formId(\d+)" component={Form} />
+            <PrivateRoute exact path="/form/:formId/entries" component={Entries} />
 
             <PrivateRoute component={NotFound} />
           </Switch>

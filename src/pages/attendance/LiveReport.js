@@ -21,9 +21,6 @@ const LiveReport = (props) => {
           username
           firstSeenToday
           duration
-          avatar {
-            githubUsername
-          }
         }
       }
     }

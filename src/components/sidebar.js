@@ -80,24 +80,17 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
                   )
                 }
               </SubMenu>
-              : getMenuItem(`/${i.key}`, i.title, i.icon,`${i.key}`, )
+              : getMenuItem(i.key !== '/' ? `/${i.key}` : '/', i.title, i.icon,`${i.key}`, )
             : null
         )
       }
     </Menu>
   );
 
-  return width > 600 ? (
-    <div className="row m-0">
-      <div className="col-sm-4 col-md-3 col-lg-2 p-0">{menu}</div>
-      <div className="col-sm-8 col-md-9 col-lg-10 page-container">
-        {children}
-      </div>
-    </div>
-  ) : (
-    <div>
-      <div className="navbar navbar-light bg-light p-2">
-        <div className="row m-0 w-100 p-2">
+  const navbar = (<div className="navbar navbar-light bg-light p-2">
+    <div className="row m-0 w-100 p-2">
+      { width < 600 ?
+        <React.Fragment>
           <div className="col-2 d-flex align-items-center">
             <Icon
               type="menu"
@@ -109,17 +102,31 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
           <div className="col d-flex align-items-center">
             <img src={cmsLogo} style={{ height: "5vh"}} />
           </div>
-        </div>
+        </React.Fragment> : null
+      }
+    </div>
+    <Drawer
+      placement="left"
+      closable
+      onClose={() => setSidebarVisible(false)}
+      visible={sidebarVisible}
+      bodyStyle={{ padding: 0 }}
+    >
+      {menu}
+    </Drawer>
+  </div>);
+
+  return width > 600 ? (
+    <div className="row m-0">
+      <div className="col-sm-4 col-md-4 col-lg-3 col-xl-2 p-0">{menu}</div>
+      <div className="col-sm-8 col-md-8 col-lg-9 col-xl-10 p-0 page-container">
+        {navbar}
+        {children}
       </div>
-      <Drawer
-        placement="left"
-        closable
-        onClose={() => setSidebarVisible(false)}
-        visible={sidebarVisible}
-        bodyStyle={{ padding: 0 }}
-      >
-        {menu}
-      </Drawer>
+    </div>
+  ) : (
+    <div>
+      {navbar}
       <div className="page-container">{children}</div>
     </div>
   );

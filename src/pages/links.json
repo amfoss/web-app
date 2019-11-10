@@ -53,6 +53,21 @@
     ]
   },
   {
+    "title": "Calendar",
+    "key": "calendar",
+    "icon": "calendar",
+    "items": [
+      {
+        "key": "create-event",
+        "title": "Create Event"
+      },
+      {
+        "key": "view-calendar",
+        "title": "View Calendar"
+      }
+    ]
+  },
+  {
     "title": "Forms",
     "key": "form",
     "icon": "form",

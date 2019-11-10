@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {Table, Icon, Button, Badge} from 'antd';
+import { Table, Icon, Button, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import dataFetch from '../../utils/dataFetch';
 import Base from '../Base';
 import TitleBar from '../../components/titlebar';
-
 
 const ViewForms = props => {
   const [data, setData] = useState('');
@@ -142,9 +141,14 @@ const ViewForms = props => {
 
   return (
     <Base title="View Forms | Forms" {...props}>
-      <TitleBar routes={routes} title="View Forms" subTitle="View and manage forms and entries received for which you have access to." />
+      <TitleBar
+        routes={routes}
+        title="View Forms"
+        subTitle="View and manage forms and entries received for which you have access to."
+      />
       <div className="p-4">
         <Table
+          bodyStyle={{ overflow: 'auto', maxHeight: '80vh' }}
           loading={!isLoaded}
           dataSource={data}
           columns={columns}
@@ -152,7 +156,6 @@ const ViewForms = props => {
       </div>
     </Base>
   );
-
 };
 
 export default ViewForms;

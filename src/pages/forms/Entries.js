@@ -142,11 +142,11 @@ const Entries = props => {
         subTitle="View & manage entries to this form"
       />
       <div className="d-flex px-4 justify-content-end">
-      {isLoaded ? (
-        <CSVLink data={getExportData}>
-          <Button type="primary">Export Data</Button>
-        </CSVLink>
-      ) : null}
+        {isLoaded ? (
+          <CSVLink data={getExportData}>
+            <Button type="primary">Export Data</Button>
+          </CSVLink>
+        ) : null}
       </div>
       <div className="my-4 p-4">
         <Table

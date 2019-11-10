@@ -30,10 +30,6 @@ const DailyReport = props => {
           username
           firstName
           lastName
-          avatar
-          {
-             githubUsername
-          }
         }
         lastSeen
         firstSeen
@@ -46,10 +42,6 @@ const DailyReport = props => {
           username
           firstName
           lastName
-          avatar
-          {
-             githubUsername
-          }
         }
         lastSeen
       }

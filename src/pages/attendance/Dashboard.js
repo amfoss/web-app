@@ -6,7 +6,6 @@ import Base from '../Base';
 
 import ActiveStatusBar from '../../modules/attendance/components/ActiveStatusBar';
 import dataFetch from '../../utils/dataFetch';
-import {PageHeader} from 'antd';
 
 const AttendanceDashboard = (props) => {
   const [isInLab, setIsInLab] = useState(false);

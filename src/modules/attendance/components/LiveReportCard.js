@@ -20,7 +20,7 @@ const LiveReportCard = ({ data, isLoaded }) => {
           <List.Item.Meta
             avatar={
               <Avatar
-                src={`https://avatars.githubusercontent.com/${member.avatar.githubUsername}`}
+                icon="user"
               />
             }
             title={
