@@ -63,16 +63,16 @@ const ViewCalendar = props => {
     },
     {
       path: '/calendar',
-      name: 'Forms',
+      name: 'Calendar',
     },
     {
-      path: '/forms/view-calendar',
+      path: '/calendar/view-calendar',
       name: 'View Calendar',
     },
   ];
 
   return (
-    <Base title="View Forms | Forms" {...props}>
+    <Base title="View Calendar | Calendar" {...props}>
       <TitleBar routes={routes} title="My Calendar" subTitle="View calendar" />
       <div className="p-4">
         {isLoaded ? (

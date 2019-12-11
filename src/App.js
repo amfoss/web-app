@@ -33,6 +33,7 @@ import ViewForms from './pages/forms/ViewForms';
 import Entries from './pages/forms/Entries';
 import Form from './pages/forms/Form';
 import ViewCalendar from './pages/calendar/ViewCalendar';
+import CreateEvent from "./pages/calendar/CreateEvent";
 
 const cookies = new Cookies();
 
@@ -103,6 +104,7 @@ export default class App extends Component {
 
 
             <PrivateRoute exact path="/calendar/view-calendar" component={ViewCalendar} />
+            <PrivateRoute exact path="/calendar/create-event" component={CreateEvent} />
 
             <PrivateRoute exact path="/form/view-forms" component={ViewForms} />
             <PrivateRoute exact path="/form/:formId(\d+)" component={Form} />
