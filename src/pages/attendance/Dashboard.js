@@ -6,6 +6,9 @@ import Base from '../Base';
 
 import ActiveStatusBar from '../../modules/attendance/components/ActiveStatusBar';
 import dataFetch from '../../utils/dataFetch';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const AttendanceDashboard = (props) => {
   const [isInLab, setIsInLab] = useState(false);
@@ -13,6 +16,7 @@ const AttendanceDashboard = (props) => {
   const [membersPresentCount, setMembersPresentCount] = useState(0);
 
   const [isLoaded, setLoaded] = useState(false);
+  const username = cookies.get('username');
 
   const query = `
   query($username: String!){
@@ -33,8 +37,9 @@ const AttendanceDashboard = (props) => {
   const fetchData = async variables => dataFetch({ query, variables });
 
   useEffect(() => {
+
     if (!isLoaded) {
-      fetchData({ username: 'aswinshenoy' }).then(r => {
+      fetchData({ username }).then(r => {
         setIsInLab(r.data.user.isInLab);
         setLastSeen(r.data.user.lastSeenInLab);
         setMembersPresentCount(r.data.liveAttendance.membersPresent.count);
