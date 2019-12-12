@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import '../../styles/calendar.sass';
 import moment from 'moment';
@@ -11,14 +11,12 @@ const localizer = momentLocalizer(moment);
 
 const ViewCalendar = props => {
   const start = new moment().startOf('month');
-  const end = new moment().endOf('month');
   const [data, setData] = useState('');
   const [isLoaded, setLoaded] = useState(false);
   const [startDate, setStartDate] = useState(start);
-  const [endDate, setEndDate] = useState(end);
 
-  const query = `query getEvent($startDate: Date!, $endDate: Date!){
-    viewEvents(startDate: $startDate, endDate: $endDate)
+  const query = `query getEvent($startDate: Date!){
+    viewEvents(startDate: $startDate)
     {
       name
       startTimestamp
@@ -31,8 +29,7 @@ const ViewCalendar = props => {
 
   const loadData = () => {
     const variables = {
-      startDate: startDate.format('YYYY-MM-DD'),
-      endDate: endDate.format('YYYY-MM-DD'),
+      startDate: startDate.format('YYYY-MM-DD')
     };
     fetchData(variables).then(r => {
       setData(r.data.viewEvents);
