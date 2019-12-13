@@ -20,6 +20,7 @@ import Task from './pages/Task';
 import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 import CheckIn from './pages/Check-in';
+import Messages from "./modules/statusUpdates/Messages";
 
 import NotFound from './pages/404';
 
@@ -34,6 +35,7 @@ import Entries from './pages/forms/Entries';
 import Form from './pages/forms/Form';
 import ViewCalendar from './pages/calendar/ViewCalendar';
 import CreateEvent from "./pages/calendar/CreateEvent";
+import {message} from "antd";
 
 const cookies = new Cookies();
 
@@ -100,6 +102,11 @@ export default class App extends Component {
               exact
               path="/attendance/live-report"
               component={LiveReport}
+            />
+            <PrivateRoute
+              exact
+              path="/status-updates/dashboard"
+              component={Messages}
             />
 
 
