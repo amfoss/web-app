@@ -54,7 +54,7 @@ const Messages = props => {
 
 
   return(
-    <Base title="Messages | Status Updates " {...props}>
+    <Base title="Daily Report | Status Updates " {...props}>
       <TitleBar routes={routes} title="Status Update" subTitle="View daily status update of club members" />
       <DatePicker
         className="mx-4"

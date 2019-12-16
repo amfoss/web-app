@@ -2,7 +2,7 @@ import React from "react";
 import TitleBar from "../components/titlebar";
 import SEO from "../components/Seo";
 import Topbar from "../components/topbar";
-import DailyOverview from "../modules/statusUpdates/DailyOverview";
+import IndividualReport from "../modules/statusUpdates/IndividualReport";
 
 
 const StatusUpdate = () => {
@@ -11,7 +11,7 @@ const StatusUpdate = () => {
       <SEO title="Status Update"/>
       <Topbar/>
       <TitleBar title="Status Update"/>
-      <DailyOverview/>
+      <IndividualReport/>
     </div>
   )
 };

@@ -36,6 +36,7 @@ import Form from './pages/forms/Form';
 import ViewCalendar from './pages/calendar/ViewCalendar';
 import CreateEvent from "./pages/calendar/CreateEvent";
 import {message} from "antd";
+import IndividualReport from "./modules/statusUpdates/IndividualReport";
 
 const cookies = new Cookies();
 
@@ -105,10 +106,14 @@ export default class App extends Component {
             />
             <PrivateRoute
               exact
-              path="/status-updates/dashboard"
+              path="/status-updates/daily-report"
               component={Messages}
             />
-
+            <PrivateRoute
+              exact
+              path="/status-updates/individual-report"
+              component={IndividualReport}
+            />
 
             <PrivateRoute exact path="/calendar/view-calendar" component={ViewCalendar} />
             <PrivateRoute exact path="/calendar/create-event" component={CreateEvent} />
