@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import {
-  Card,
   Popover,
-  Colors,
-  Tag,
-  Elevation,
   PopoverInteractionKind,
   Position,
-  Tabs,
-  Tab,
-  ButtonGroup,
   Button,
 } from '@blueprintjs/core';
 import { DateRangePicker } from '@blueprintjs/datetime';
@@ -82,7 +75,6 @@ const Overview = () => {
     <div className="p-4">
       <div className="mx-2">
         <div className="row m-0">
-          <div className="col-md-8"><h2>Attendance Report</h2></div>
           <div className="col text-right">
             <Popover
             className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
@@ -113,11 +105,11 @@ const Overview = () => {
         </div>
       </div>
       </div>
-      <div className="row m-0 py-4">
-        <div className="col-md-8">
+      <div className="row m-0 p-4">
+        <div className="col-md-7">
             <TrendGraph data={data} isLoaded={isLoaded} />
         </div>
-        <div className="col">
+        <div className="col-md-5">
           <Rankings
             isRangeSet={rangeLoaded}
             startDate={startDate}

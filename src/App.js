@@ -37,6 +37,7 @@ import ViewCalendar from './pages/calendar/ViewCalendar';
 import CreateEvent from "./pages/calendar/CreateEvent";
 import {message} from "antd";
 import IndividualReport from "./modules/statusUpdates/IndividualReport";
+import Stats from "./pages/attendance/Stats";
 
 const cookies = new Cookies();
 
@@ -103,6 +104,11 @@ export default class App extends Component {
               exact
               path="/attendance/live-report"
               component={LiveReport}
+            />
+            <PrivateRoute
+              exact
+              path="/attendance/attendance-stats"
+              component={Stats}
             />
             <PrivateRoute
               exact
