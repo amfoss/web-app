@@ -106,10 +106,10 @@ const Overview = () => {
       </div>
       </div>
       <div className="row m-0 p-4">
-        <div className="col-md-7">
+        <div className="col-md-8">
             <TrendGraph data={data} isLoaded={isLoaded} />
         </div>
-        <div className="col-md-5">
+        <div className="col">
           <Rankings
             isRangeSet={rangeLoaded}
             startDate={startDate}
