@@ -43,7 +43,7 @@ const DailyStatusReportCard = ({data, isLoaded}) => {
           key={1}
           tab={
             <h6 className="p-2 m-0">
-              Members Sent
+              Sent
               <Badge
                 count={isLoaded ? data.membersSent.length : null}
                 style={{ margin: "0.5rem", backgroundColor: "green"}}
@@ -57,7 +57,7 @@ const DailyStatusReportCard = ({data, isLoaded}) => {
           id="absentToday"
           tab={
             <h6 className="p-2 m-0">
-              Members Did Not Send
+              Did Not Send
               <Badge
                 count={isLoaded ? data.memberDidNotSend.length : null}
                 style={{ margin: "0.5rem", backgroundColor: "red"}}

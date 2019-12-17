@@ -69,7 +69,7 @@ const DailyReportCard = ({data, isLoaded}) => {
           key={1}
           tab={
             <h6 className="p-2 m-0">
-              Members Present
+              Present
               <Badge
                 count={isLoaded ? data.membersPresent.length : null}
                 style={{ margin: "0.5rem", backgroundColor: "green"}}
@@ -83,7 +83,7 @@ const DailyReportCard = ({data, isLoaded}) => {
           id="absentToday"
           tab={
             <h6 className="p-2 m-0">
-              Members Absent
+              Absent
               <Badge
                 count={isLoaded ? data.membersAbsent.length : null}
                 style={{ margin: "0.5rem", backgroundColor: "red"}}

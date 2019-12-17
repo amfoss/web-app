@@ -53,6 +53,10 @@
       {
         "key": "messages",
         "title": "Messages"
+      },
+      {
+        "key": "status-stats",
+        "title": "Status Update Stats"
       }
     ]
   },

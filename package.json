@@ -22,6 +22,7 @@
   "dependencies": {
     "@blueprintjs/core": "^3.15.1",
     "@blueprintjs/datetime": "^3.9.2",
+    "@nivo/bar": "^0.60.1",
     "@nivo/calendar": "^0.56.2",
     "@nivo/line": "^0.56.2",
     "@nivo/radar": "^0.56.2",

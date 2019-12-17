@@ -11,11 +11,10 @@ import { IconNames } from '@blueprintjs/icons';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
-import dataFetch from '../../../utils/dataFetch';
+import dataFetch from '../../utils/dataFetch';
 const moment = extendMoment(Moment);
 
-import Rankings from './Rankings';
-import TrendGraph from './TrendGraph';
+import Rankings from './Ranking';
 
 const Overview = () => {
   const [data, setData] = useState([]);
@@ -76,38 +75,36 @@ const Overview = () => {
         <div className="row m-0">
           <div className="col text-right">
             <Popover
-            className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
-            interactionKind={PopoverInteractionKind.CLICK}
-            position={Position.BOTTOM_RIGHT}
-            usePortal={false}
-            content={
-              <DateRangePicker
-                defaultValue={[
-                  new Date(
-                    moment()
-                      .subtract('weeks', 1)
-                      .format('YYYY-MM-DD'),
-                  ),
-                  new Date(),
-                ]}
-                onChange={obj => handleRangeChange(obj)}
-                maxDate={new Date()}
-              />
-            }
-            target={
-              <Button icon={IconNames.CALENDAR} round minimal large>
-                {moment(startDate).format('DD-MM-YYYY')} -{' '}
-                {moment(endDate).format('DD-MM-YYYY')}
-              </Button>
-            }
-          />
+              className={classnames(!isLoaded ? 'bp3-skeleton' : null)}
+              interactionKind={PopoverInteractionKind.CLICK}
+              position={Position.BOTTOM_RIGHT}
+              usePortal={false}
+              content={
+                <DateRangePicker
+                  defaultValue={[
+                    new Date(
+                      moment()
+                        .subtract('weeks', 1)
+                        .format('YYYY-MM-DD'),
+                    ),
+                    new Date(),
+                  ]}
+                  onChange={obj => handleRangeChange(obj)}
+                  maxDate={new Date()}
+                />
+              }
+              target={
+                <Button icon={IconNames.CALENDAR} round minimal large>
+                  {moment(startDate).format('DD-MM-YYYY')} -{' '}
+                  {moment(endDate).format('DD-MM-YYYY')}
+                </Button>
+              }
+            />
+          </div>
         </div>
-      </div>
       </div>
       <div className="row m-0 p-4">
-        <div className="col-md-8">
-            <TrendGraph data={data} isLoaded={isLoaded} />
-        </div>
+        <div className="col-md-8" />
         <div className="col">
           <Rankings
             isRangeSet={rangeLoaded}
