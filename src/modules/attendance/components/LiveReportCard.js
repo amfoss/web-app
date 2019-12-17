@@ -11,7 +11,7 @@ const moment = extendMoment(Moment);
 const LiveReportCard = ({ data, isLoaded }) => {
   const membersCard = members => (
     <List
-      grid={{ gutter: 16, column: 4, xl: 6 }}
+      grid={{ gutter: 16, column: 1, sm: 2, md: 3, lg: 4 }}
       dataSource={members}
       locale={{ 'emptyText': "No one is identified in FOSSLab right now."}}
       renderItem={member => (
@@ -57,7 +57,7 @@ const LiveReportCard = ({ data, isLoaded }) => {
               Present Now
               <Badge
                 count={isLoaded && data.membersPresent ? data.membersPresent.count : null}
-                style={{ margin: "0.5rem", backgroundColor: "red"}}
+                style={{ margin: "0.5rem", backgroundColor: "green"}}
               />
             </h6>
           }>
