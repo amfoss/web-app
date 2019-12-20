@@ -16,10 +16,9 @@ const ViewForms = props => {
       name
       isActive
       allowMultiple
-      hasSlots
       entriesCount
       submissionDeadline
-      admissionLimit
+      applicationLimit
     }
   }`;
 
@@ -97,18 +96,6 @@ const ViewForms = props => {
       ),
     },
     {
-      title: 'Slot System',
-      dataIndex: 'hasSlots',
-      key: 'hasSlots',
-      render: status => (
-        <Icon
-          type={`${status ? 'check' : 'close'}-circle`}
-          theme="twoTone"
-          twoToneColor={`#${status ? '52c41a' : 'eb2f96'}`}
-        />
-      ),
-    },
-    {
       title: 'Submission Deadline',
       dataIndex: 'submissionDeadline',
       key: 'submissionDeadline',
@@ -121,8 +108,8 @@ const ViewForms = props => {
     },
     {
       title: 'Admission Limit',
-      dataIndex: 'admissionLimit',
-      key: 'admissionLimit',
+      dataIndex: 'applicationLimit',
+      key: 'applicationLimit',
     },
     {
       title: 'Actions',

@@ -17,30 +17,10 @@ const Form = props => {
     getForm(formID: $formID)
     {
       name
-      creator
-      {
-        username
-        firstName
-        lastName
-      }
-      lastEditor
-      {
-        username
-        firstName
-        lastName
-      }
-      creationTime
-      lastEditTime
       isActive
       allowMultiple
       submissionDeadline
-      admissionLimit
-      hasSlots
-      slots
-      {
-        name
-        availableCount
-      }
+      applicationLimit
       entriesCount
       fields
       {
