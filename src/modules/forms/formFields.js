@@ -1,7 +1,6 @@
 import React from 'react';
 import { Collapse, Tag } from 'antd';
 import FieldEditor from './fieldEditor';
-import ListSlotDetails from './listSlotDetails';
 
 const FormFields = ({ data }) => {
 
@@ -23,13 +22,6 @@ const FormFields = ({ data }) => {
         <Collapse.Panel key="email" header={<h6 className="m-0">Email <Tag color="magenta">Inbuilt</Tag></h6>}>
           <h6>Inbuilt Field</h6>
         </Collapse.Panel>
-        {
-          data.hasSlots ?
-            <Collapse.Panel key="special" header={<h6 className="m-0">Slots <Tag color="green">Special</Tag></h6>}>
-              <ListSlotDetails slots={data.slots} />
-            </Collapse.Panel>
-            : null
-        }
         {data.fields.map(f => renderField(f))}
       </Collapse>
     </div>

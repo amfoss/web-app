@@ -21,6 +21,7 @@ const Entries = props => {
       submissionTime
       phone
       email
+      details
       formData
       {
         key
@@ -103,6 +104,17 @@ const Entries = props => {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
+    },
+    {
+      title: 'Details',
+      dataIndex: 'details',
+      key: 'details',
+      render: details =>
+        details ? (
+          <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a" />
+        ) : (
+          <Icon type="close-circle" theme="twoTone" twoToneColor="#eb2f96" />
+        ),
     },
   ];
 

@@ -39,6 +39,9 @@ const EntryDetails = ({ fields, data }) => {
             <li>
               <b>Phone Number</b>: {data.phone}
             </li>
+            <li>
+              <b>Details</b>: {data.details}
+            </li>
           </ul>
         </div>
       </div>
