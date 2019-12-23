@@ -61,6 +61,7 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
       selectedKeys={selectedKeys}
       defaultOpenKeys={selectedKeys}
       style={{ minHeight: '100vh' }}
+      theme="dark"
     >
       <div className="text-center my-4">
         <img src={cmsLogo} style={{ width: "80%"}} />

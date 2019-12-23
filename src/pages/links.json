@@ -125,12 +125,16 @@
       {
         "key": "change-password",
         "title": "Change Password"
+      },
+      {
+        "key": "passwords",
+        "title": "Password Manager"
       }
     ]
   },
   {
     "title": "Logout",
-    "key": "logout/",
+    "key": "logout",
     "icon": "logout"
   }
 ]

@@ -40,6 +40,7 @@ import IndividualReport from "./modules/statusUpdates/IndividualReport";
 import Stats from "./pages/attendance/Stats";
 import DailyStatusReport from './pages/status/DailyReport';
 import StatusStats from "./pages/status/Stats";
+import Password from "./pages/account/password";
 
 const cookies = new Cookies();
 
@@ -131,6 +132,12 @@ export default class App extends Component {
               exact
               path="/status-updates/status-stats"
               component={StatusStats}
+            />
+
+            <PrivateRoute
+              exact
+              path="/account/passwords"
+              component={Password}
             />
 
             <PrivateRoute exact path="/calendar/view-calendar" component={ViewCalendar} />
