@@ -7,7 +7,6 @@
   {
     "title": "Attendance",
     "key": "attendance",
-    "clubExclusive": true,
     "icon": "deployment-unit",
     "items": [
       {
@@ -35,7 +34,6 @@
   {
     "title": "Status Updates",
     "key": "status-updates",
-    "clubExclusive": true,
     "icon": "schedule",
     "items": [
       {

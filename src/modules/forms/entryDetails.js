@@ -1,4 +1,7 @@
 import React from 'react';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+const moment = extendMoment(Moment);
 
 const EntryDetails = ({ fields, data }) => {
 
@@ -31,7 +34,7 @@ const EntryDetails = ({ fields, data }) => {
           <h4 className="px-4">{data.name}</h4>
           <ul>
             <li>
-              <b>Submission Time</b>: {data.submissionTime.toLocaleString()}
+              <b>Submission Time</b>: {new Date(data.submissionTime).toLocaleString()}
             </li>
             <li>
               <b>Email</b>: {data.email}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Table, Icon, Button} from 'antd';
-import {CSVDownload, CSVLink} from 'react-csv';
+import {CSVLink} from 'react-csv';
 import dataFetch from '../../utils/dataFetch';
 import Base from '../Base';
 import TitleBar from '../../components/titlebar';
