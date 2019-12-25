@@ -119,7 +119,9 @@ const EventForm = () => {
             title="Successfully added the event!"
             extra={<Link to="/"><Button type="primary">Back Home</Button></Link>}
           />
-      ) :
+        )
+      : error!== '' ?
+      <div className="alert alert-danger m-4">{error}</div>:
       <div className="alert alert-warning m-4">Submitting. Please Wait</div>
     }
   </div>
