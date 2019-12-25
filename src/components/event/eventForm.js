@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import {DatePicker} from "antd";
+import {DatePicker, Result, Button} from "antd";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
 import dataFetch from "../../utils/dataFetch";
+import {Link} from "react-router-dom";
 
 const EventForm = () => {
   const moment = extendMoment(Moment);
@@ -113,9 +114,11 @@ const EventForm = () => {
   <div>
     {
       success!== '' ? (
-        <div className="alert alert-success m-4">
-        Successfully added the event
-        </div>
+          <Result
+            status="success"
+            title="Successfully added the event!"
+            extra={<Link to="/"><Button type="primary">Back Home</Button></Link>}
+          />
       ) :
       <div className="alert alert-warning m-4">Submitting. Please Wait</div>
     }

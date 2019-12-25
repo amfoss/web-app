@@ -88,47 +88,16 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
     </Menu>
   );
 
-  const navbar = (<div className="navbar navbar-light bg-light p-2">
-    <div className="row m-0 w-100 p-2">
-      { width < 600 ?
-        <React.Fragment>
-          <div className="col-2 d-flex align-items-center">
-            <Icon
-              type="menu"
-              theme="outlined"
-              style={{ fontSize: '1.5rem' }}
-              onClick={() => setSidebarVisible(true)}
-            />
-          </div>
-          <div className="col d-flex align-items-center">
-            <img src={cmsLogo} style={{ height: "5vh"}} />
-          </div>
-        </React.Fragment> : null
-      }
-    </div>
-    <Drawer
-      placement="left"
-      closable
-      onClose={() => setSidebarVisible(false)}
-      visible={sidebarVisible}
-      bodyStyle={{ padding: 0 }}
-    >
-      {menu}
-    </Drawer>
-  </div>);
-
   return width > 600 ? (
     <div className="row m-0">
       <div className="col-sm-4 col-md-4 col-lg-3 col-xl-2 p-0">{menu}</div>
       <div className="col-sm-8 col-md-8 col-lg-9 col-xl-10 p-0 page-container">
-        {navbar}
         {children}
       </div>
     </div>
   ) : (
     <div>
-      {navbar}
-      <div className="page-container">{children}</div>
+      <div>{children}</div>
     </div>
   );
 };

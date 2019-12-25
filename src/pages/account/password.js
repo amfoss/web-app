@@ -92,6 +92,7 @@ const Password =  props => {
       <div className="p-4">
         <Table
           bodyStyle={{ overflow: 'auto', maxHeight: '80vh' }}
+          loading={!isLoaded}
           dataSource={data}
           columns={columns}
         />
