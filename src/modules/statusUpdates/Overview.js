@@ -15,26 +15,33 @@ import dataFetch from '../../utils/dataFetch';
 const moment = extendMoment(Moment);
 
 import Rankings from './Ranking';
+import TrendStatusGraph from "./TrendStatusGraph";
+import StatusGraph from "./StatusGraph";
 
 const Overview = () => {
   const [data, setData] = useState([]);
+  const [dailyLogData, setDailyLogData ] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const [rangeLoaded, setRangeLoaded] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
 
-  const query = `query($startDate: Date!, $endDate: Date){
-    clubAttendance(startDate: $startDate, endDate: $endDate)
-    {
-      dailyLog
-      {
-        date
-        membersPresent
-        avgDuration
-      }
+  const query = `query ($startDate: Date!, $endDate: Date){
+  clubStatusUpdate(startDate: $startDate, endDate: $endDate){
+    dailyLog{
+      date
+      membersSentCount
     }
-  }`;
+    memberStats{
+      user{
+        username
+        admissionYear
+      }
+      statusCount
+    }
+  }
+}`;
 
   const fetchData = async variables => dataFetch({ query, variables });
 
@@ -55,7 +62,8 @@ const Overview = () => {
         endDate: moment(endDate).format('YYYY-MM-DD'),
       };
       fetchData(variables).then(r => {
-        setData(r.data.clubAttendance.dailyLog);
+        setData(r.data.clubStatusUpdate.memberStats);
+        setDailyLogData(r.data.clubStatusUpdate.dailyLog);
         setLoaded(true);
       });
     }
@@ -104,14 +112,19 @@ const Overview = () => {
         </div>
       </div>
       <div className="row m-0 p-4">
-        <div className="col-md-8" />
-        <div className="col">
+        <div className="col-sm-8 p-2">
+          <StatusGraph dailyLogData={dailyLogData} isLoaded={isLoaded} />
+        </div>
+        <div className="col-sm-4 p-2">
           <Rankings
             isRangeSet={rangeLoaded}
             startDate={startDate}
             endDate={endDate}
           />
         </div>
+      </div>
+      <div className="row m-0 p-4">
+        <TrendStatusGraph data={data} isLoaded={isLoaded}/>
       </div>
     </div>
   );
