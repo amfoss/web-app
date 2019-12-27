@@ -29,7 +29,7 @@ export default ({ query, variables }) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `JWT ${token}`,
+      Authorization: token ? `JWT ${token}` : null,
     },
     body: JSON.stringify(body),
   };

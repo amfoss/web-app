@@ -42,6 +42,7 @@ import DailyStatusReport from './pages/status/DailyReport';
 import StatusStats from "./pages/status/Stats";
 import Password from "./pages/account/password";
 import ChangePassword from "./pages/account/ChangePassword";
+import Webspace from "./pages/Upload";
 
 const cookies = new Cookies();
 
@@ -144,6 +145,11 @@ export default class App extends Component {
               exact
               path="/account/change-password"
               component={ChangePassword}
+            />
+            <PrivateRoute
+              exact
+              path="/webspace/upload"
+              component={Webspace}
             />
 
             <PrivateRoute exact path="/calendar/view-calendar" component={ViewCalendar} />
