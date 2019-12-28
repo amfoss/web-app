@@ -19,7 +19,7 @@ import Tasks from './pages/Tasks';
 import Task from './pages/Task';
 import Profile from './pages/Profile';
 import Edit from './pages/Edit';
-import CheckIn from './pages/Check-in';
+import CheckIn from './pages/events/Check-in';
 import Messages from "./modules/statusUpdates/Messages";
 
 import NotFound from './pages/404';
@@ -159,7 +159,7 @@ export default class App extends Component {
             <PrivateRoute exact path="/form/:formId(\d+)" component={Form} />
             <PrivateRoute exact path="/form/:formId/entries" component={Entries} />
 
-            <PrivateRoute component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </BrowserRouter>
       </HttpsRedirect>

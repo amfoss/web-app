@@ -89,6 +89,17 @@
     ] 
   },
   {
+    "title": "Events",
+    "key": "events",
+    "icon": "global",
+    "items": [
+      {
+        "key": "check-in",
+        "title": "QR Scanner"
+      }
+    ]
+  },
+  {
     "title": "Web Space",
     "key": "webspace",
     "icon": "cloud-server",

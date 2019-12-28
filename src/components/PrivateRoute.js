@@ -1,6 +1,7 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import Login from "../pages/Login";
 
 const cookies = new Cookies();
 
@@ -12,12 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         cookies.get('token') ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
+          <Login lastLocation={props.location} />
         )
       }
     />

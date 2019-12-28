@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
 
   render() {
     const token = cookies.get('token');
-    if (token) return <Redirect to="/" />;
+    if (token) return <Redirect to={this.props.lastLocation} />;
 
     const { getFieldDecorator } = this.props.form;
 
