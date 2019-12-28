@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import {Card, Colors, Elevation, HTMLSelect, Icon} from '@blueprintjs/core';
-import { ResponsiveLine } from '@nivo/line';
+import {
+  Chart,
+  Geom,
+  Axis,
+  Tooltip
+} from "bizcharts";
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
@@ -62,10 +67,26 @@ const TrendGraph = ({ isLoaded, data }) => {
         style={{ width: '100%', height: '50vh', padding: '5px' }}
       >
         {isLoaded ? (
-          <ResponsiveLine
-            data={[type === 'attendee' ? attPoints : durPoints]}
-            margin={{ top: 20, right: 20, bottom: 20, left: 30 }}
-          />
+          <Chart height={400} data={type === 'attendee' ? attPoints.data: durPoints.data} forceFit>
+            <Axis name="x" />
+            <Axis name="y" />
+            <Tooltip
+              crosshairs={{
+                type: "y"
+              }}
+            />
+            <Geom type="line" position="x*y" size={2} />
+            <Geom
+              type="point"
+              position="x*y"
+              size={4}
+              shape={"circle"}
+              style={{
+                stroke: "#fff",
+                lineWidth: 1
+              }}
+            />
+          </Chart>
         ) : null}
       </div>
     </Card>

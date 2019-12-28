@@ -122,9 +122,9 @@ const Overview = () => {
             endDate={endDate}
           />
         </div>
-      </div>
-      <div className="row m-0 p-4">
-        <TrendStatusGraph data={data} isLoaded={isLoaded}/>
+        <div className="col-sm-12 p-3">
+          <TrendStatusGraph data={data} isLoaded={isLoaded}/>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import {Card, Colors, Elevation, Icon} from '@blueprintjs/core';
-import { ResponsiveLine } from '@nivo/line';
+import {
+  Chart,
+  Geom,
+  Axis,
+  Tooltip
+} from "bizcharts";
 
 const StatusGraph = ({ isLoaded, dailyLogData }) => {
   const points = {
@@ -31,10 +36,26 @@ const StatusGraph = ({ isLoaded, dailyLogData }) => {
         style={{ width: '100%', height: '50vh', padding: '5px' }}
       >
         {isLoaded ? (
-          <ResponsiveLine
-            data={[points]}
-            margin={{ top: 20, right: 30, bottom: 30, left: 30 }}
-          />
+          <Chart height={400} data={points.data} forceFit>
+            <Axis name="x" />
+            <Axis name="y" />
+            <Tooltip
+              crosshairs={{
+                type: "y"
+              }}
+            />
+            <Geom type="line" position="x*y" size={2} />
+            <Geom
+              type="point"
+              position="x*y"
+              size={4}
+              shape={"circle"}
+              style={{
+                stroke: "#fff",
+                lineWidth: 1
+              }}
+            />
+          </Chart>
         ) : null}
       </div>
     </Card>

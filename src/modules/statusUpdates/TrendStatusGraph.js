@@ -1,7 +1,12 @@
 import React, {useState} from "react";
-import { Bar } from "@nivo/bar";
 import {Card, Colors, Elevation, HTMLSelect, Icon} from "@blueprintjs/core";
 import classnames from "classnames";
+import {
+  Chart,
+  Geom,
+  Axis,
+  Tooltip
+} from "bizcharts";
 
 const TrendStatusGraph = ({ isLoaded, data }) => {
   const data2019 = [];
@@ -47,10 +52,15 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
     })),
   };
   const [year, setYear] = useState("2019");
+  const cols = {
+    statusCount: {
+      tickInterval: 1
+    }
+  };
   return (
-    <Card elevation={Elevation.TWO} style={{overflow: 'auto'}}>
+    <Card elevation={Elevation.TWO}>
       <div className="row m-0">
-        <div className="col-md-8">
+        <div className="col-md-10">
           <h5
             className="mb-4 bp3-heading"
             style={{ color: Colors.BLUE3 }}
@@ -86,17 +96,21 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
         style={{ padding: '5px' }}
       >
         {isLoaded ? (
-          <Bar
-            width={900}
-            height={400}
-            padding={0.3}
-            margin={{top: 10, right: 0, bottom: 25, left: 0}}
-            data={year === '2019' ? graph2019.data: year === '2018' ? graph2018.data: year === '2017' ? graph2017.data: graph2016.data}
-            indexBy="username"
-            keys={["statusCount"]}
-            animate={true}
-            enableGridX={true}
-          />
+          <Chart
+            height={450}
+            width={950}
+            data={year === '2019' ? graph2019.data.reverse(): year === '2018' ? graph2018.data.reverse(): year === '2017' ? graph2017.data.reverse(): graph2016.data.reverse()}
+            scale={cols}
+          >
+            <Axis name="statusCount" />
+            <Axis name="username" />
+            <Tooltip
+              crosshairs={{
+                type: "y"
+              }}
+            />
+            <Geom type="interval" position="username*statusCount" />
+          </Chart>
         ) : null}
       </div>
     </Card>
