@@ -42,7 +42,7 @@ import DailyStatusReport from './pages/status/DailyReport';
 import StatusStats from "./pages/status/Stats";
 import Password from "./pages/account/password";
 import ChangePassword from "./pages/account/ChangePassword";
-import Webspace from "./pages/Upload";
+import Webspace from "./pages/webspace/Upload";
 
 const cookies = new Cookies();
 

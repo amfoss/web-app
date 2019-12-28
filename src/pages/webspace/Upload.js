@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Base from "./Base";
-import TitleBar from "../components/titlebar";
-import fileUpload from "../utils/fileUpload";
-import {Upload, Icon, Result, Button} from 'antd';
+import Base from "../Base";
+import TitleBar from "../../components/titlebar";
+import fileUpload from "../../utils/fileUpload";
+import {Upload, Icon} from 'antd';
 
 const { Dragger } = Upload;
 
@@ -40,9 +40,9 @@ const Webspace = props => {
     }`;
       data.append('query', query);
       setLoaded(true);
-      uploadFile({data}).then((response) => {
-        setLink(response);
-      });
+      uploadFile({data}).then((response) => (
+        setLink(response.data.UploadFiles.fileName)
+      ));
     }
   };
 
@@ -56,9 +56,11 @@ const Webspace = props => {
           : link === undefined ?
             <div className="alert alert-warning text-center">Submitting. Please Wait</div>
               :
-            (<div className="alert alert-success text-center">
-              Successfully uploaded
-            </div>)
+            (
+                <div className="alert alert-success text-center">
+                Successfully uploaded https://api.amfoss.in/{link}
+                </div>
+            )
         }
         <Dragger {...draggerProps}>
           <p className="ant-upload-drag-icon">
