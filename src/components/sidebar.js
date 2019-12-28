@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {Icon, Menu, Drawer, Card} from 'antd';
+import {Icon, Menu, Drawer, Card, Layout} from 'antd';
 import { Link } from 'react-router-dom';
 
 import list from '../pages/links';
 import cmsLogo from '../images/cms_logo.png';
 
 const { SubMenu } = Menu;
+const {Sider, Footer} = Layout;
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -118,12 +119,22 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
   </div>);
 
   return width > 600 ? (
-    <div className="row m-0">
-      <div className="col-sm-4 col-md-4 col-lg-3 col-xl-2 p-0">{menu}</div>
-      <div className="col-sm-8 col-md-8 col-lg-9 col-xl-10 p-0 page-container">
+    <Layout>
+      <Sider
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+        }}
+        width={230}
+      >
+        {menu}
+      </Sider>
+      <Layout style={{ marginLeft: 230, backgroundColor: 'white' }}>
         {children}
-      </div>
-    </div>
+      </Layout>
+    </Layout>
   ) : (
     <div>
       {navbar}

@@ -15,8 +15,6 @@ import Cookies from 'universal-cookie';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Tasks from './pages/Tasks';
-import Task from './pages/Task';
 import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 import CheckIn from './pages/events/Check-in';
@@ -35,7 +33,6 @@ import Entries from './pages/forms/Entries';
 import Form from './pages/forms/Form';
 import ViewCalendar from './pages/calendar/ViewCalendar';
 import CreateEvent from "./pages/calendar/CreateEvent";
-import {message} from "antd";
 import IndividualReport from "./modules/statusUpdates/IndividualReport";
 import Stats from "./pages/attendance/Stats";
 import DailyStatusReport from './pages/status/DailyReport';
