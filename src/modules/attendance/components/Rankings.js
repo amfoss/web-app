@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
-import { Card, Elevation, Colors, Tab, Tabs, Icon } from '@blueprintjs/core';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Card, Tabs } from 'antd';
 import 'antd/dist/antd.css';
 import dataFetch from '../../../utils/dataFetch';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 const moment = extendMoment(Moment);
+const { TabPane } = Tabs;
+
 
 const Rankings = ({ isRangeSet, startDate, endDate }) => {
   const [memberData, setMemberData] = useState([]);
@@ -144,31 +145,25 @@ const Rankings = ({ isRangeSet, startDate, endDate }) => {
   );
 
   return (
-    <Card elevation={Elevation.TWO}>
+    <Card>
       <h5
         className="mb-4 bp3-heading"
-        style={{ color: Colors.BLUE3 }}
       >
-        <Icon icon="crown" className="mr-2 mb-1" />
         Member Rankings
       </h5>
-      <Tabs id="memberRankTabs">
-        <Tab
-          id="mostInLab"
-          title={<h6>Top 5</h6>}
-          panel={
+      <Tabs id="memberRankTabs" defaultActiveKey="1">
+        <TabPane tab={<h6>Top 5</h6>} key="1">
+          {
             hasLoaded ? memberCard(memberData.slice(0, 5)) : loadingCards()
           }
-        />
-        <Tab
-          id="worstInLab"
-          title={<h6>Worst 5</h6>}
-          panel={
+        </TabPane>
+        <TabPane tab={<h6>Worst 5</h6>} key="2">
+          {
             hasLoaded
               ? memberCard(memberData.slice().reverse().slice(0, 5))
               : loadingCards()
           }
-        />
+        </TabPane>
       </Tabs>
     </Card>
   );

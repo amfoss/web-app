@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
-import {Card, Colors, Elevation, HTMLSelect, Icon} from '@blueprintjs/core';
-import {
-  Chart,
-  Geom,
-  Axis,
-  Tooltip
-} from "bizcharts";
+import {Card} from 'antd';
+import { Line } from "react-chartjs-2";
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
@@ -15,51 +10,128 @@ const moment = extendMoment(Moment);
 const TrendGraph = ({ isLoaded, data }) => {
   const [type, setType] = useState('attendee');
 
-  const attPoints = {
-    key: 0,
-    id: 'attendanceTrend',
-    data: data.map(r => ({
-      x: r.date,
-      y: r.membersPresent,
-    })),
+  const x = [];
+  const y = [];
+  data.map(r => {
+    x.push(r.date);
+    y.push(r.membersPresent)
+  });
+
+  const xdurr = [];
+  const ydurr = [];
+  data.map(r => {
+    xdurr.push(r.date);
+    ydurr.push(moment
+      .duration(r.avgDuration)
+      .asHours()
+      .toFixed(2),)
+  });
+  let options = {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      backgroundColor: "#f5f5f5",
+      titleFontColor: "#333",
+      bodyFontColor: "#666",
+      bodySpacing: 4,
+      xPadding: 12,
+      mode: "nearest",
+      intersect: 0,
+      position: "nearest"
+    },
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: "rgba(29,140,248,0.0)",
+            zeroLineColor: "transparent"
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 5,
+            padding: 20,
+            fontColor: "#9a9a9a"
+          }
+        }
+      ],
+      xAxes: [
+        {
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: "rgba(29,140,248,0.1)",
+            zeroLineColor: "transparent"
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9a9a9a"
+          }
+        }
+      ]
+    }
   };
 
-  const durPoints = {
-    key: 0,
-    id: 'durationTrend',
-    data: data.map(r => ({
-      x: r.date,
-      y: moment
-        .duration(r.avgDuration)
-        .asHours()
-        .toFixed(2),
-    })),
+  let AttendanceGraph = {
+    data: canvas => {
+      let ctx = canvas.getContext("2d");
+
+      let gradientStroke = ctx.createLinearGradient(0, 2300, 0, 50);
+
+      gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+      gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+      gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+      return {
+        labels: type === 'attendee' ? x: xdurr,
+        datasets: [
+          {
+            label: "Attendance Graph",
+            fill: true,
+            backgroundColor: gradientStroke,
+            borderColor: "#1f8ef1",
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: "#1f8ef1",
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: "#1f8ef1",
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: type === 'attendee' ? y: ydurr,
+          },
+
+        ]
+      };
+    }
   };
 
   return (
-    <Card elevation={Elevation.TWO}>
+    <Card>
       <div className="row m-0">
         <div className="col-md-8">
           <h5
             className="mb-4 bp3-heading"
-            style={{ color: Colors.BLUE3 }}
           >
-            <Icon icon="chart" className="mr-2 mb-1" />
             Attendance Trends
           </h5>
         </div>
-        <div className="col text-right">
-          <HTMLSelect
+        <div className="col text-right p-3">
+          <select
+            style={{width: '100%', height: '5vh'}}
             onChange={e => setType(e.currentTarget.value)}
-            iconProps={null}
-            minimal
-            large
           >
             <option value="attendee" selected>
               By Members Present
             </option>
             <option value="duration">By Avg. Duration</option>
-          </HTMLSelect>
+          </select>
         </div>
       </div>
       <div
@@ -67,26 +139,10 @@ const TrendGraph = ({ isLoaded, data }) => {
         style={{ width: '100%', height: '50vh', padding: '5px' }}
       >
         {isLoaded ? (
-          <Chart height={400} data={type === 'attendee' ? attPoints.data: durPoints.data} forceFit>
-            <Axis name="x" />
-            <Axis name="y" />
-            <Tooltip
-              crosshairs={{
-                type: "y"
-              }}
-            />
-            <Geom type="line" position="x*y" size={2} />
-            <Geom
-              type="point"
-              position="x*y"
-              size={4}
-              shape={"circle"}
-              style={{
-                stroke: "#fff",
-                lineWidth: 1
-              }}
-            />
-          </Chart>
+          <Line
+            data={AttendanceGraph.data}
+            options={options}
+          />
         ) : null}
       </div>
     </Card>

@@ -111,19 +111,19 @@ const Overview = () => {
           </div>
         </div>
       </div>
-      <div className="row m-0 p-4">
-        <div className="col-sm-8 p-2">
+      <div className="row m-0">
+        <div className="col-md-12 p-2">
+          <TrendStatusGraph data={data} isLoaded={isLoaded}/>
+        </div>
+        <div className="col-md-8 p-2">
           <StatusGraph dailyLogData={dailyLogData} isLoaded={isLoaded} />
         </div>
-        <div className="col-sm-4 p-2">
+        <div className="col-md-4 p-2">
           <Rankings
             isRangeSet={rangeLoaded}
             startDate={startDate}
             endDate={endDate}
           />
-        </div>
-        <div className="col-sm-12 p-3">
-          <TrendStatusGraph data={data} isLoaded={isLoaded}/>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import {Card} from "antd";
 import classnames from "classnames";
 import { Bar } from "react-chartjs-2";
 
-const TrendStatusGraph = ({ isLoaded, data }) => {
+const TrendAttendanceGraph = ({ isLoaded, data }) => {
   const x2019 = [];
   const y2019 = [];
   const x2018 = [];
@@ -15,18 +15,18 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
 
   data.map(d => {
     if(d.user.admissionYear === 2019){
-      x2019.push(d.statusCount);
+      x2019.push(d.presentCount);
       y2019.push(d.user.username);
     }
     else if(d.user.admissionYear === 2018){
-      x2018.push(d.statusCount);
+      x2018.push(d.presentCount);
       y2018.push(d.user.username);
     }
     else if(d.user.admissionYear === 2017){
-      x2017.push(d.statusCount);
+      x2017.push(d.presentCount);
       y2017.push(d.user.username);
     }else{
-      x2016.push(d.statusCount);
+      x2016.push(d.presentCount);
       y2016.push(d.user.username);
     }
   });
@@ -45,7 +45,7 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
         labels: year === '2019' ? y2019: year === '2018' ? y2018: year === '2017' ? y2017: y2016,
         datasets: [
           {
-            label: "Status Updates Sent",
+            label: "Present Count",
             fill: true,
             backgroundColor: '#1f8ef1',
             hoverBackgroundColor: gradientStroke,
@@ -113,7 +113,7 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
           <h5
             className="mb-4 bp3-heading"
           >
-            Member Status Update Trends
+            Member Attendance Trends
           </h5>
         </div>
         <div className="col text-right p-3">
@@ -150,4 +150,4 @@ const TrendStatusGraph = ({ isLoaded, data }) => {
     </Card>
   )
 };
-export default TrendStatusGraph;
+export default TrendAttendanceGraph;

@@ -16,9 +16,11 @@ const moment = extendMoment(Moment);
 
 import Rankings from './Rankings';
 import TrendGraph from './TrendGraph';
+import TrendAttendanceGraph from "./TrendAttendanceGraph";
 
 const Overview = () => {
   const [data, setData] = useState([]);
+  const [memberStats, setMemberStats] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -34,6 +36,13 @@ const Overview = () => {
         membersPresent
         avgDuration
       }
+      memberStats{
+        user{
+          username
+          admissionYear
+        }
+        presentCount
+      }
     }
   }`;
 
@@ -44,7 +53,7 @@ const Overview = () => {
       setStartDate(
         new Date(
           moment()
-            .subtract('weeks', 1)
+            .subtract('weeks', 2)
             .format('YYYY-MM-DD'),
         ),
       );
@@ -57,6 +66,7 @@ const Overview = () => {
       };
       fetchData(variables).then(r => {
         setData(r.data.clubAttendance.dailyLog);
+        setMemberStats(r.data.clubAttendance.memberStats);
         setLoaded(true);
       });
     }
@@ -85,7 +95,7 @@ const Overview = () => {
                 defaultValue={[
                   new Date(
                     moment()
-                      .subtract('weeks', 1)
+                      .subtract('weeks', 2)
                       .format('YYYY-MM-DD'),
                   ),
                   new Date(),
@@ -104,11 +114,14 @@ const Overview = () => {
         </div>
       </div>
       </div>
-      <div className="row m-0 p-4">
-        <div className="col-md-8">
+      <div className="row m-0">
+        <div className="col-md-12 p-2">
+          <TrendAttendanceGraph data={memberStats} isLoaded={isLoaded}/>
+        </div>
+        <div className="col-md-8 p-2">
             <TrendGraph data={data} isLoaded={isLoaded} />
         </div>
-        <div className="col">
+        <div className="col-md-4 p-2">
           <Rankings
             isRangeSet={rangeLoaded}
             startDate={startDate}
