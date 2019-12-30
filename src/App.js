@@ -10,6 +10,7 @@ import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
 import 'react-quill/dist/quill.snow.css';
 import 'react-dropzone-component/styles/filepicker.css';
 import './styles/styles.sass';
+import 'antd/dist/antd.css';
 
 import Cookies from 'universal-cookie';
 
@@ -38,8 +39,8 @@ import Stats from "./pages/attendance/Stats";
 import DailyStatusReport from './pages/status/DailyReport';
 import StatusStats from "./pages/status/Stats";
 import Password from "./pages/account/password";
-import ChangePassword from "./pages/account/ChangePassword";
 import Webspace from "./pages/webspace/Upload";
+import AccountSettings from "./pages/account/AccountSettings";
 
 const cookies = new Cookies();
 
@@ -140,8 +141,8 @@ export default class App extends Component {
             />
             <PrivateRoute
               exact
-              path="/account/change-password"
-              component={ChangePassword}
+              path="/account/settings"
+              component={AccountSettings}
             />
             <PrivateRoute
               exact

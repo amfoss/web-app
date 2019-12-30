@@ -143,12 +143,12 @@
         "title": "My Profile"
       },
       {
-        "key": "change-password",
-        "title": "Change Password"
-      },
-      {
         "key": "passwords",
         "title": "Password Manager"
+      },
+      {
+        "key": "settings",
+        "title": "Settings"
       }
     ]
   },

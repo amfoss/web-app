@@ -5,7 +5,7 @@ import { Result, Button } from 'antd';
 import Base from './Base';
 
 export default props => <Base title="Page Not Found" {...props}>
-  <div className="h-100 justify-content-center d-flex align-items-center">
+  <div className="h-100 justify-content-center d-flex align-items-center" style={{minHeight: '100vh'}}>
     <Result
       status="warning"
       title=""

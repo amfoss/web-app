@@ -131,7 +131,7 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
       >
         {menu}
       </Sider>
-      <Layout style={{ marginLeft: 230, backgroundColor: 'white' }}>
+      <Layout style={{ marginLeft: 230 }}>
         {children}
       </Layout>
     </Layout>
