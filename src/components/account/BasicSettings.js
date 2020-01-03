@@ -3,6 +3,8 @@ import dataFetch from "../../utils/dataFetch";
 import Cookies from "universal-cookie";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import fileUpload from "../../utils/fileUpload";
+import {Upload, Button, Icon} from "antd";
 
 const cookies = new Cookies();
 
@@ -19,6 +21,7 @@ const BasicSettings = () => {
   const [roll, setRoll] = useState("");
   const [batch, setBatch] = useState(0);
   const [about, setAbout] = useState("");
+  const [profilePic, setProfilePic] = useState("");
   const [error, setErrorText] = useState("");
 
   const query = `
@@ -29,6 +32,7 @@ const BasicSettings = () => {
     lastName
     email
     profile{
+      profilePic
       phone
       telegramID
       about
@@ -54,6 +58,8 @@ const BasicSettings = () => {
   const submitForm = async variables =>
     dataFetch({ query: updateProfileQuery, variables });
 
+  const uploadFile = async data => await fileUpload(data);
+
   useEffect(() => {
     if(!queried){
       const usernameCookie = cookies.get('username');
@@ -70,6 +76,7 @@ const BasicSettings = () => {
           setBatch(r.data.user.profile.batch);
           setAbout(r.data.user.profile.about);
           setGithubUsername(r.data.user.profile.githubUsername);
+          setProfilePic(r.data.user.profile.profilePic);
           setLoaded(true);
         }
       });
@@ -88,9 +95,28 @@ const BasicSettings = () => {
     })
   };
 
+  const uploadProps = {
+    name: "file",
+    multiple: false,
+    showUploadList: false,
+    customRequest: ({file}) => {
+      const data = new FormData();
+      data.append('imageFile', file);
+      const query = `mutation{
+     UpdateProfilePic{
+      fileName
+     } 
+    }`;
+      data.append('query', query);
+      uploadFile({data}).then((response) => (
+        setProfilePic(response.data.UpdateProfilePic.fileName)
+      ));
+    }
+  };
+
   return isLoading ? (
     <React.Fragment>
-      <h5>Basic Settings</h5>
+      <h5>Update Profile</h5>
       <form
         className="form-group"
         onSubmit={e => {
@@ -107,6 +133,14 @@ const BasicSettings = () => {
               onChange={e=> setUsername(e.target.value)}
               className="form-control"
             />
+          </div>
+          <div className="col-md-3">
+            <img alt="profilepic" src={`https://api.amfoss.in/${profilePic}`} style={{height: '30vh'}} className="p-2" />
+            <Upload {...uploadProps} accept="image/*">
+              <Button>
+                <Icon type="upload" /> Select File
+              </Button>
+            </Upload>
           </div>
         </div>
         <div className="row mt-4">

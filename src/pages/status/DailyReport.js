@@ -5,7 +5,7 @@ import { extendMoment } from 'moment-range';
 
 import Base from '../Base';
 
-import DailyStatusReportCard from '../../modules/statusUpdates/DailyStatusReportCard';
+import DailyStatusReportCard from '../../modules/statusUpdates/components/DailyStatusReportCard';
 
 import dataFetch from '../../utils/dataFetch';
 import TitleBar from '../../components/titlebar';

@@ -11,7 +11,7 @@ import { IconNames } from '@blueprintjs/icons';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
-import dataFetch from '../../utils/dataFetch';
+import dataFetch from '../../../utils/dataFetch';
 const moment = extendMoment(Moment);
 
 import Rankings from './Ranking';

@@ -17,7 +17,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 import CheckIn from './pages/events/Check-in';
-import Messages from "./modules/statusUpdates/Messages";
+import Messages from "./modules/statusUpdates/components/Messages";
 
 import NotFound from './pages/404';
 
@@ -32,7 +32,7 @@ import Entries from './pages/forms/Entries';
 import Form from './pages/forms/Form';
 import ViewCalendar from './pages/calendar/ViewCalendar';
 import CreateEvent from "./pages/calendar/CreateEvent";
-import IndividualReport from "./modules/statusUpdates/IndividualReport";
+import IndividualReport from "./modules/statusUpdates/components/IndividualReport";
 import Stats from "./pages/attendance/Stats";
 import DailyStatusReport from './pages/status/DailyReport';
 import StatusStats from "./pages/status/Stats";
@@ -138,7 +138,7 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path="/account/settings"
+            path="/account/update-profile"
             component={AccountSettings}
           />
           <PrivateRoute

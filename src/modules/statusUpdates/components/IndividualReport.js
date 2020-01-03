@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 
-import dataFetch from '../../utils/dataFetch';
-import Base from "../../pages/Base";
-import TitleBar from "../../components/titlebar";
+import dataFetch from '../../../utils/dataFetch';
+import Base from "../../../pages/Base";
+import TitleBar from "../../../components/titlebar";
 import {Avatar, Card} from "antd";
 import Meta from "antd/es/card/Meta";
 import { Input } from 'antd';

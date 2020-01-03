@@ -1,6 +1,6 @@
 import React from "react";
 import Base from "../Base";
-import Overview from "../../modules/statusUpdates/Overview";
+import Overview from "../../modules/statusUpdates/components/Overview";
 import TitleBar from "../../components/titlebar";
 
 const StatusStats = props => {

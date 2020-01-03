@@ -16,8 +16,8 @@ const routes = [
     name: 'Account',
   },
   {
-    path: '/account/settings',
-    name: 'Settings',
+    path: '/account/update-profile',
+    name: 'Update Profile',
   }
 ];
 const AccountSettings = props => {
@@ -33,7 +33,7 @@ const AccountSettings = props => {
                 onClick={e => setCurrent(e.key)}
                 selectedKeys={[current]}
               >
-                <Menu.Item key="basic">Basic Settings</Menu.Item>
+                <Menu.Item key="basic">Update Profile</Menu.Item>
                 <Menu.Item key="change-password">Change Password</Menu.Item>
               </Menu>
             </div>

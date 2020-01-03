@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Card, Avatar, DatePicker} from 'antd';
-import Base from "../../pages/Base";
-import dataFetch from "../../utils/dataFetch";
+import Base from "../../../pages/Base";
+import dataFetch from "../../../utils/dataFetch";
 import Meta from "antd/es/card/Meta";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
-import TitleBar from "../../components/titlebar";
+import TitleBar from "../../../components/titlebar";
 
 const moment = extendMoment(Moment);
 
