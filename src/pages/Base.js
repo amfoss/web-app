@@ -49,7 +49,7 @@ const Base = ({ children, title, location }) => {
     </React.Fragment>
   ):
     <div className="loading">
-      <ReactLoading type={"bars"} color={"#001529"} height={'18%'} width={'18%'} />
+      <ReactLoading type={"bars"} color={"#001529"} height={'10%'} width={'10%'} />
     </div>
     ;
 };
