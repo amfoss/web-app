@@ -1,0 +1,15 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+pages:
+  script:
+    - npm build
+
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
