@@ -6,10 +6,11 @@ cache:
 
 pages:
   script:
-    - npm build
+    - npm install --progress=false
+    - npm run build
 
   artifacts:
     paths:
-      - public
+      - dist
   only:
     - master
