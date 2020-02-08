@@ -5,12 +5,15 @@ cache:
     - node_modules/
 
 pages:
+  stage: deploy
   script:
-    - npm install --progress=false
-    - npm run build
+    - npm install
+    - npm run gitlab-build
+    - rm -rf public
+    - mv dist public
 
   artifacts:
     paths:
-      - dist
+      - public # mandatory, other folder won't work
   only:
     - master
