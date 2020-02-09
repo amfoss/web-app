@@ -6,7 +6,7 @@
   "scripts": {
     "build": "./build.sh & parcel build ./public/index.html --detailed-report; cp ./dist/index.html ./dist/200.html;",
     "travis-build": "parcel build ./public/index.html --detailed-report",
-    "gitlab-build": "./build.sh & parcel build ./public/index.html --out-dir dist --public-url ./",
+    "gitlab-build": "./build.sh & parcel build ./public/index.html --out-dir dist",
     "serve": "parcel ./public/index.html -p 5000",
     "start": "npm run serve",
     "precommit": "lint-staged",

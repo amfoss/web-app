@@ -11,6 +11,7 @@ pages:
     - npm run gitlab-build
     - rm -rf public
     - mv dist public
+    - cp public/index.html public/404.html
 
   artifacts:
     paths:
