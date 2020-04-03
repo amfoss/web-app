@@ -12,6 +12,7 @@ const cookies = new Cookies();
 
 const Base = ({ children, title, location }) => {
   const [isLoading, setLoaded] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
 
   const query = `
   mutation verifyToken($token: String!){
@@ -21,27 +22,35 @@ const Base = ({ children, title, location }) => {
 }
 `;
   const fetchData = async variables => dataFetch({ query, variables });
+  const fetchAdminStatus = async () => dataFetch({ query: `{ isAdmin }` });
+
 
   useEffect(() => {
-    const token = cookies.get('token');
-    if(token){
-      const variables = { token };
-      fetchData(variables).then(r => {
-        if(r.errors){
-          cookies.remove('token');
-          cookies.remove('refreshToken');
-          cookies.remove('username');
-          localStorage.clear();
-        }
-        setLoaded(true);
-      })
+    if(!isLoading){
+      const token = cookies.get('token');
+      if(token){
+        const variables = { token };
+        fetchData(variables).then(r => {
+          if(r.errors){
+            cookies.remove('token');
+            cookies.remove('refreshToken');
+            cookies.remove('username');
+            localStorage.clear();
+          }
+          setLoaded(true);
+        });
+        fetchAdminStatus().then(r => {
+          setLoaded(true);
+          setAdmin(r.data.isAdmin);
+        })
+      }
     }
   });
 
   return isLoading ? (
     <React.Fragment>
       <SEO title={title} />
-      <Sidebar selected={location.pathname}>
+      <Sidebar isAdmin={isAdmin} selected={location.pathname}>
         <div style={{minHeight: '100vh'}}>
           {children}
         </div>

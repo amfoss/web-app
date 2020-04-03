@@ -39,6 +39,7 @@ import StatusStats from "./pages/status/Stats";
 import Password from "./pages/account/password";
 import Webspace from "./pages/webspace/Upload";
 import AccountSettings from "./pages/account/AccountSettings";
+import ManageUsers from "./pages/admin/ManageUsers";
 
 const cookies = new Cookies();
 
@@ -153,6 +154,8 @@ const App = () => {
           <PrivateRoute exact path="/form/view-forms" component={ViewForms} />
           <PrivateRoute exact path="/form/:formId(\d+)" component={Form} />
           <PrivateRoute exact path="/form/:formId/entries" component={Entries} />
+
+          <PrivateRoute exact path="/admin/manage-users" component={ManageUsers} />
 
           <Route component={NotFound} />
         </Switch>

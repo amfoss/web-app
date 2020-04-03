@@ -111,6 +111,37 @@
     ]
   },
   {
+    "title": "Account",
+    "key": "account",
+    "icon": "user",
+    "items": [
+      {
+        "key": "profile",
+        "title": "My Profile"
+      },
+      {
+        "key": "passwords",
+        "title": "Password Manager"
+      },
+      {
+        "key": "update-profile",
+        "title": "Update Profile"
+      }
+    ]
+  },
+  {
+    "title": "Admin",
+    "key": "admin",
+    "icon": "user",
+    "isAdmin": true,
+    "items": [
+      {
+        "key": "manage-users",
+        "title": "Manage Users"
+      }
+    ]
+  },
+  {
     "title": "Settings",
     "key": "settings",
     "icon": "setting",
@@ -130,25 +161,6 @@
       {
         "key": "notifications",
         "title": "Notifications"
-      }
-    ]
-  },
-  {
-    "title": "Account",
-    "key": "account",
-    "icon": "user",
-    "items": [
-      {
-        "key": "profile",
-        "title": "My Profile"
-      },
-      {
-        "key": "passwords",
-        "title": "Password Manager"
-      },
-      {
-        "key": "update-profile",
-        "title": "Update Profile"
       }
     ]
   },

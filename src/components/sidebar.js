@@ -33,7 +33,7 @@ function useWindowDimensions() {
   return windowDimensions;
 }
 
-const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
+const Sidebar = ({ selected, children, isAdmin }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -69,7 +69,7 @@ const Sidebar = ({ selected, children, isClubMember, isLoaded }) => {
       </div>
       {
         list.map(i =>
-          (isClubMember || i.clubExclusive === undefined) ?
+          (isAdmin || i.isAdmin === undefined) ?
             i.items ?
               <SubMenu
                 key={i.key}
