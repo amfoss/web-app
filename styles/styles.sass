@@ -1,0 +1,75 @@
+body
+  margin: 0
+  a:hover
+    text-decoration: none
+
+.page-container
+  min-height: 100vh
+
+select
+  background: white
+
+.menu-card
+  background: linear-gradient(to bottom, #8e2de2, #4a00e0)
+  box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.3)
+  padding: 3rem
+  display: block
+  text-align: center
+  font-size: calc(1.2rem + 0.8vw)
+  line-height: 1.2
+  color: white
+
+.menu-card:hover
+  color: white
+
+.ant-table-body
+  min-height: 73vh!important
+  cursor: pointer
+  overflow: auto
+
+.loading
+  background-color: #eeeeee
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.confirm-modal-overlay
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1050
+  width: 100vw
+  height: 100vh
+  background-color: #000
+  opacity: .5
+
+.confirm-modal-wrapper
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1050
+  width: 100%
+  height: 100%
+  overflow-x: hidden
+  overflow-y: auto
+  outline: 0
+
+.confirm-modal
+  z-index: 1050
+  background: white
+  position: relative
+  margin: 18.75rem auto
+  border-radius: 3px
+  max-width: 500px
+  padding: 2.5rem
+  display: block
+
+.confirm-modal-header
+  display: flex
+
+.confirm-modal-header-button
+  display: flex
+  justify-content: flex-end
+

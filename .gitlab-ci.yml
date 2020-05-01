@@ -1,17 +1,18 @@
-image: node:latest
+image: registry.gitlab.com/harshithpabbati/webapp:latest
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - .next/cache/
 
 pages:
   stage: deploy
   script:
     - npm install
-    - npm run gitlab-build
+    - npm run export
     - rm -rf public
-    - mv dist public
-    - cp public/index.html public/404.html
+    - mv out public
 
   artifacts:
     paths:
