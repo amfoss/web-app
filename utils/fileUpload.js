@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-const API_URL = 'https://api.amfoss.in/';
+const API_URL = 'http://127.0.0.1:8000/';
 
 export default ({ data }) => {
   const token = cookies.get('token');

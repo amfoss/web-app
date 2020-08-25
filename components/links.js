@@ -9,6 +9,7 @@ import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
+  ContainerOutlined
 } from '@ant-design/icons';
 
 export const links = [
@@ -98,6 +99,17 @@ export const links = [
       {
         key: 'view-forms',
         title: 'View Forms',
+      },
+    ],
+  },
+  {
+    title: 'Blog',
+    key: 'blog',
+    icon: <ContainerOutlined />,
+    items: [
+      {
+        key: 'create-blog',
+        title: 'Create Blog',
       },
     ],
   },
