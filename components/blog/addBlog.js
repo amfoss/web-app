@@ -19,6 +19,17 @@ import fileUpload from '../../utils/fileUpload';
 import Link from 'next/link';
 
 const AddBlog = () => {
+  const getDate = (options = 'default') => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+    today = yyyy + '/' + mm + '/' + dd;
+    if(options === 'API') today = yyyy + '-' + mm + '-' + dd;
+    return today
+  };
+  const dateFormat = 'YYYY/MM/DD';
+
   const moment = extendMoment(Moment);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
@@ -26,7 +37,7 @@ const AddBlog = () => {
   const [description, setDescription] = useState('');
   const [draft, setDraft] = useState('');
   const [cover, setCover] = useState('');
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(getDate('API'));
   const [success, setSuccessText] = useState('');
   const [error, setErrorText] = useState('');
   const [value, setValue] = useState('');
@@ -49,25 +60,7 @@ const AddBlog = () => {
     }
   `;
 
-  const dateFormat = 'YYYY/MM/DD';
   const uploadData = async (data) => await fileUpload(data);
-  const uploadProps = {
-    name: 'file',
-    multiple: false,
-    customRequest: ({ file }) => {
-      setCover(file);
-    },
-  };
-
-  const getDate = () => {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-    today = yyyy + '/' + mm + '/' + dd;
-    return today
-  };
-
   const upload = () => {
     const data = new FormData();
     data.append('cover', cover);
@@ -155,11 +148,7 @@ const AddBlog = () => {
           <div className="col-sm-3">
             <label>Cover Image</label>
             <div className="m-2">
-              <Upload {...uploadProps} accept="image/*">
-                <Button>
-                  <UploadOutlined /> Select File
-                </Button>
-              </Upload>
+              <input type="file" onChange={e => setCover(e.target.files[0])} />
             </div>
           </div>
         </div>
