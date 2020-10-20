@@ -33,12 +33,14 @@ const BasicSettings = () => {
   const [batch, setBatch] = useState(0);
   const [about, setAbout] = useState('');
   const [profilePic, setProfilePic] = useState('');
+  const [languages, setLanguages] = useState([]);
+  const [links, setLinks] = useState("");
   const [error, setErrorText] = useState('');
   const [dataLoading, setDataLoading] = useState(false);
   const [success, setSuccess] = useState('');
 
   const query = `
-    query user($username: String!){
+query user($username: String!){
   user(username:$username){
     username
     firstName
@@ -52,14 +54,23 @@ const BasicSettings = () => {
       batch
       githubUsername
       gitlabUsername
+      languages{
+        name
+      }
+      links{
+        link
+        portal{
+          name
+        }
+      }
     }
   }
 }
 `;
 
   const updateProfileQuery = `
-    mutation ($about: String!, $batch: Int!, $email: String!, $firstName: String!, $githubUsername: String!, $lastName: String!, $phoneNo: String!, $roll: String!, $gitlabUsername: String!, $username: String!){
-  UpdateProfile(about: $about, batch: $batch, email: $email, firstName: $firstName, githubUsername: $githubUsername, lastName:$lastName, phoneNo:$phoneNo, roll: $roll, gitlabUsername: $gitlabUsername, username: $username){
+    mutation ($about: String!, $batch: Int!, $email: String!, $firstName: String!, $githubUsername: String!, $lastName: String!, $phoneNo: String!, $roll: String!, $gitlabUsername: String!, $username: String!, $languages: [String]!){
+  UpdateProfile(about: $about, batch: $batch, email: $email, firstName: $firstName, githubUsername: $githubUsername, lastName:$lastName, phoneNo:$phoneNo, roll: $roll, gitlabUsername: $gitlabUsername, username: $username, languages: $languages){
     id
   }
 }
@@ -99,6 +110,7 @@ const BasicSettings = () => {
           setProfilePic(
             r.data.user.profile.profilePic ? r.data.user.profile.profilePic : ''
           );
+          r.data.user.profile.languages.map((language) => setLanguages(languages => [...languages, language.name]));
           setLoaded(true);
         }
       });
@@ -118,6 +130,7 @@ const BasicSettings = () => {
       githubUsername,
       batch,
       phoneNo,
+      languages
     };
     submitForm(variables).then((r) => {
       if (Object.prototype.hasOwnProperty.call(r, 'errors')) {
@@ -147,7 +160,7 @@ const BasicSettings = () => {
       );
     },
   };
-
+  
   return isLoading ? (
     <React.Fragment>
       <h5>Edit Profile</h5>
@@ -271,6 +284,16 @@ const BasicSettings = () => {
                   value={batch}
                   onChange={(e) => setBatch(e.target.value)}
                   className="form-control"
+                />
+              </div>
+              <div className="col-md-6">
+                <label>Languages</label>
+                <input
+                    type="text"
+                    placeholder="Languages"
+                    value={languages}
+                    onChange={(e) => setLanguages(e.target.value.toLowerCase().split(","))}
+                    className="form-control"
                 />
               </div>
             </div>
