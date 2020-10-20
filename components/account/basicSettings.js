@@ -93,7 +93,7 @@ const BasicSettings = () => {
           );
           setGitlabUsername(
             r.data.user.profile.gitlabUsername
-              ? r.data.user.profile.githubUsername
+              ? r.data.user.profile.gitlabUsername
               : ''
           );
           setProfilePic(
