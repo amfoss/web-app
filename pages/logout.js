@@ -14,9 +14,10 @@ const LogoutPage = () => {
     cookies.remove('token');
     cookies.remove('refreshToken');
     cookies.remove('username');
+    cookies.remove('expiry');
     if (!loggedOut) {
       setLoggedOut(true);
-      router.push('/');
+      router.push('/login');
     }
   });
 

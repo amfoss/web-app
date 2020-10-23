@@ -34,11 +34,13 @@ const LoginForm = () => {
   const onFinish = (values) => {
     login(values).then((response) => {
       if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-        cookies.set('token', response.data.tokenAuth.token, { path: '/' });
+        const tokenMaxAge = response.data.tokenAuth.payload.exp - response.data.tokenAuth.payload.origIat;
+        cookies.set('token', response.data.tokenAuth.token, { path: '/', maxAge: tokenMaxAge  });
         cookies.set('refreshToken', response.data.tokenAuth.refreshToken, {
-          path: '/',
+          path: '/', maxAge: response.data.tokenAuth.refreshExpiresIn
         });
         cookies.set('username', values.username, { path: '/' });
+        cookies.set('expiry', response.data.tokenAuth.payload.exp);
         setCookies(true);
         router.push('/');
       } else {
