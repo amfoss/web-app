@@ -135,9 +135,7 @@ const AddRemoveCard = ({ name, username, showCard, toggleCard }) => {
           <div className="confirm-modal-header">
             <h5>{name}</h5>
           </div>
-          <label>
-            Please select the below platforms to add/remove
-          </label>
+          <label>Please select the below platforms to add/remove</label>
           {username ? (
             loadPlatformData ? (
               <div>

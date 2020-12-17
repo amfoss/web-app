@@ -25,8 +25,8 @@ const AddBlog = () => {
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
     today = yyyy + '/' + mm + '/' + dd;
-    if(options === 'API') today = yyyy + '-' + mm + '-' + dd;
-    return today
+    if (options === 'API') today = yyyy + '-' + mm + '-' + dd;
+    return today;
   };
   const dateFormat = 'YYYY/MM/DD';
 
@@ -148,7 +148,7 @@ const AddBlog = () => {
           <div className="col-sm-3">
             <label>Cover Image</label>
             <div className="m-2">
-              <input type="file" onChange={e => setCover(e.target.files[0])} />
+              <input type="file" onChange={(e) => setCover(e.target.files[0])} />
             </div>
           </div>
         </div>

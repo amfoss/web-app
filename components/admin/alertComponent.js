@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {MinusSquareOutlined, PlusSquareOutlined} from "@ant-design/icons";
+import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 
 import dataFetch from '../../utils/dataFetch';
 
@@ -52,15 +52,18 @@ const AlertComponent = ({ changedPlatforms, show, toggle, data }) => {
             You are updating status of <b>{data.user}</b> in the following platforms
           </p>
           {changedPlatforms.map((platform, index) => (
-              <li
-                  key={index}
-                  style={{listStyleType: 'none'}}
-                  className={`platform-${getValue(data, platform)}`}
-              >
-                {getValue(data, platform) ?
-                    <PlusSquareOutlined className="platform-icon" />: <MinusSquareOutlined className="platform-icon" />
-                } {platform}
-              </li>
+            <li
+              key={index}
+              style={{ listStyleType: 'none' }}
+              className={`platform-${getValue(data, platform)}`}
+            >
+              {getValue(data, platform) ? (
+                <PlusSquareOutlined className="platform-icon" />
+              ) : (
+                <MinusSquareOutlined className="platform-icon" />
+              )}{' '}
+              {platform}
+            </li>
           ))}
           <div style={{ float: 'right' }}>
             <button
@@ -90,10 +93,7 @@ const AlertComponent = ({ changedPlatforms, show, toggle, data }) => {
 
 AlertComponent.propTypes = {
   changedPlatforms: PropTypes.array,
-  data: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  data: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   show: PropTypes.bool,
   toggle: PropTypes.func,
 };

@@ -26,7 +26,7 @@ const routes = [
 const AccountSettings = (props) => {
   const [current, setCurrent] = useState('basic');
   return (
-    <Base title="Settings" {...props}>
+    <Base title="Settings" {...props} verificationRequired={false}>
       <TitleBar routes={routes} title="Account Settings" />
       <div className="mx-4 mb-4">
         <Card bordered={false}>

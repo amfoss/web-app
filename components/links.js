@@ -9,7 +9,7 @@ import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
-  ContainerOutlined
+  ContainerOutlined,
 } from '@ant-design/icons';
 
 export const links = [

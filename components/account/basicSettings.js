@@ -34,7 +34,7 @@ const BasicSettings = () => {
   const [about, setAbout] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [languages, setLanguages] = useState([]);
-  const [links, setLinks] = useState("");
+  const [links, setLinks] = useState('');
   const [error, setErrorText] = useState('');
   const [dataLoading, setDataLoading] = useState(false);
   const [success, setSuccess] = useState('');
@@ -110,7 +110,9 @@ query user($username: String!){
           setProfilePic(
             r.data.user.profile.profilePic ? r.data.user.profile.profilePic : ''
           );
-          r.data.user.profile.languages.map((language) => setLanguages(languages => [...languages, language.name]));
+          r.data.user.profile.languages.map((language) =>
+            setLanguages((languages) => [...languages, language.name])
+          );
           setLoaded(true);
         }
       });
@@ -130,7 +132,7 @@ query user($username: String!){
       githubUsername,
       batch,
       phoneNo,
-      languages
+      languages,
     };
     submitForm(variables).then((r) => {
       if (Object.prototype.hasOwnProperty.call(r, 'errors')) {
@@ -160,7 +162,7 @@ query user($username: String!){
       );
     },
   };
-  
+
   return isLoading ? (
     <React.Fragment>
       <h5>Edit Profile</h5>
@@ -289,11 +291,13 @@ query user($username: String!){
               <div className="col-md-6">
                 <label>Languages</label>
                 <input
-                    type="text"
-                    placeholder="Languages"
-                    value={languages}
-                    onChange={(e) => setLanguages(e.target.value.toLowerCase().split(","))}
-                    className="form-control"
+                  type="text"
+                  placeholder="Languages"
+                  value={languages}
+                  onChange={(e) =>
+                    setLanguages(e.target.value.toLowerCase().split(','))
+                  }
+                  className="form-control"
                 />
               </div>
             </div>

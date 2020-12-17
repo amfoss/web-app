@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Cookies from 'universal-cookie';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import Link from 'next/link';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
 // antd components
 import Card from 'antd/lib/card';
 import Button from 'antd/lib/button';
 import Form from 'antd/lib/form';
-import Checkbox from 'antd/lib/checkbox';
 import Input from 'antd/lib/input';
 
 import dataFetch from '../../utils/dataFetch';
-import { TokenAuth as query } from '../../utils/mutations';
+import { TokenAuth as query, Register } from '../../utils/mutations';
+import Link from 'next/link';
 
 const cookies = new Cookies();
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const router = useRouter();
   const [cookiesSet, setCookies] = useState(false);
   const [authFail, setAuthFail] = useState(false);
@@ -31,25 +30,31 @@ const LoginForm = () => {
   });
 
   const login = async (variables) => await dataFetch({ query, variables });
+  const register = async (variables) =>
+    await dataFetch({ query: Register, variables });
 
   const onFinish = (values) => {
-    login(values).then((response) => {
-      if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
-        const tokenMaxAge =
-          response.data.tokenAuth.payload.exp -
-          response.data.tokenAuth.payload.origIat;
-        cookies.set('token', response.data.tokenAuth.token, {
-          path: '/',
-          maxAge: tokenMaxAge,
+    register(values).then((r) => {
+      if (!Object.prototype.hasOwnProperty.call(r, 'errors')) {
+        login(values).then((response) => {
+          if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
+            const tokenMaxAge =
+              response.data.tokenAuth.payload.exp -
+              response.data.tokenAuth.payload.origIat;
+            cookies.set('token', response.data.tokenAuth.token, {
+              path: '/',
+              maxAge: tokenMaxAge,
+            });
+            cookies.set('refreshToken', response.data.tokenAuth.refreshToken, {
+              path: '/',
+              maxAge: response.data.tokenAuth.refreshExpiresIn,
+            });
+            cookies.set('username', values.username, { path: '/' });
+            cookies.set('expiry', response.data.tokenAuth.payload.exp);
+            setCookies(true);
+            router.push('/');
+          }
         });
-        cookies.set('refreshToken', response.data.tokenAuth.refreshToken, {
-          path: '/',
-          maxAge: response.data.tokenAuth.refreshExpiresIn,
-        });
-        cookies.set('username', values.username, { path: '/' });
-        cookies.set('expiry', response.data.tokenAuth.payload.exp);
-        setCookies(true);
-        router.push('/');
       } else {
         setAuthFail(true);
         setLoading(false);
@@ -58,7 +63,10 @@ const LoginForm = () => {
   };
 
   const errorMessage = (
-    <div className="alert alert-danger">Please enter vaild credentials</div>
+    <div className="alert alert-danger">
+      Sorry, we are not able to register your account, please contact any of the
+      administrator.
+    </div>
   );
 
   const onFinishFailed = (errorInfo) => {
@@ -77,6 +85,16 @@ const LoginForm = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
+        <Form.Item
+          name="email"
+          label="Email"
+          rules={[{ required: true, message: 'Please input your email!' }]}
+        >
+          <Input
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="Username"
+          />
+        </Form.Item>
         <Form.Item
           name="username"
           label="Username"
@@ -98,24 +116,21 @@ const LoginForm = () => {
             placeholder="Password"
           />
         </Form.Item>
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
         <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
             className="btn-block login-form-button"
           >
-            Log in
+            Sign Up
           </Button>
         </Form.Item>
       </Form>
-      <Link href="/register">Don't have account? Register</Link>
+      <Link href="/login">Already have an account? Login</Link>
     </Card>
   ) : (
     <h1>Loading</h1>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
