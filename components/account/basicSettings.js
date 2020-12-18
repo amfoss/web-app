@@ -69,7 +69,7 @@ query user($username: String!){
 `;
 
   const updateProfileQuery = `
-    mutation ($about: String, $batch: Int, $email: String, $firstName: String, $githubUsername: String, $lastName: String, $phoneNo: String, $roll: String, $gitlabUsername: String, $username: String, $languages: [String]){
+    mutation ($about: String, $batch: Int, $email: String, $firstName: String!, $githubUsername: String, $lastName: String, $phoneNo: String, $roll: String, $gitlabUsername: String, $username: String, $languages: [String]){
   UpdateProfile(about: $about, batch: $batch, email: $email, firstName: $firstName, githubUsername: $githubUsername, lastName:$lastName, phoneNo:$phoneNo, roll: $roll, gitlabUsername: $gitlabUsername, username: $username, languages: $languages){
     id
   }
@@ -132,7 +132,7 @@ query user($username: String!){
       githubUsername,
       batch,
       phoneNo,
-      languages: languages[0] ? languages: [],
+      languages: languages[0] ? languages : [],
     };
     submitForm(variables).then((r) => {
       if (Object.prototype.hasOwnProperty.call(r, 'errors')) {
@@ -289,7 +289,7 @@ query user($username: String!){
                 />
               </div>
               <div className="col-md-6 mt-3">
-                <label>Languages</label>
+                <label>Languages you can speak</label>
                 <input
                   type="text"
                   placeholder="Languages"

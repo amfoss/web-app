@@ -23,3 +23,9 @@ export const Register = `mutation ($email: String!, $username: String!, $passwor
     }
   }
 }`;
+
+export const verifyUserMutation = `mutation ($usernames: [String]){
+  approveUsers(usernames: $usernames){
+    status
+  }
+}`;

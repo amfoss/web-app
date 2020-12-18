@@ -16,6 +16,7 @@ import TitleBar from '../../components/titlebar';
 import dataFetch from '../../utils/dataFetch';
 import AddRemoveCard from '../../components/admin/addRemoveCard';
 import useModal from '../../components/admin/useModal';
+import { verifyUserMutation } from '../../utils/mutations';
 
 const routes = [
   {
@@ -39,6 +40,7 @@ const Users = (props) => {
   const [searchColumn, setSearchColumn] = useState('');
   const [username, setUsername] = useState('');
   const searchInput = useRef(null);
+  const [selected, setSelected] = useState({});
   const { show, toggle } = useModal();
 
   const getColumnSearchProps = (dataIndex, fullName = null) => ({
@@ -111,6 +113,28 @@ const Users = (props) => {
     setSearchText('');
   };
 
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelected(selectedRows);
+    },
+    getCheckboxProps: (record) => ({
+      disabled: record.username === 'amFOSS-Admin', // Column configuration not to be checked
+      name: record.username,
+    }),
+  };
+
+  const verifyUsersFetch = async (variables) =>
+    dataFetch({ query: verifyUserMutation, variables });
+
+  const verifyUsers = () => {
+    let usernames = [];
+    selected.map((s) => {
+      usernames.push(s.username);
+    });
+    const variables = { usernames };
+    verifyUsersFetch(variables);
+  };
+
   const columns = [
     {
       title: 'S.NO',
@@ -155,8 +179,8 @@ const Users = (props) => {
     },
     {
       title: 'Membership',
-      dataIndex: 'isMembershipActive',
-      key: 'isMembershipActive',
+      dataIndex: 'isVerified',
+      key: 'isVerified',
       render: (record) =>
         record ? (
           <CheckCircleTwoTone twoToneColor="#52c41a" />
@@ -167,7 +191,7 @@ const Users = (props) => {
         { text: 'Active', value: true },
         { text: 'Not Active', value: false },
       ],
-      onFilter: (value, record) => record.isMembershipActive === value,
+      onFilter: (value, record) => record.isVerified === value,
       width: 200,
     },
     {
@@ -194,7 +218,7 @@ const Users = (props) => {
       users{
         username
         email
-        isMembershipActive
+        isVerified
         isAdmin
         profile{
           fullName
@@ -229,7 +253,21 @@ const Users = (props) => {
         subTitle="Select user to remove/add from platforms"
       />
       <div className="mx-4">
+        <div className="float-right px-2 pb-2">
+          <Button
+            onClick={verifyUsers}
+            type="primary"
+            size="large"
+            disabled={Object.keys(selected).length === 0}
+          >
+            Verify
+          </Button>
+        </div>
         <Table
+          rowSelection={{
+            type: 'checkbox',
+            ...rowSelection,
+          }}
           onRow={(record) => {
             return {
               onClick: () => {
