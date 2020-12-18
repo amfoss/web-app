@@ -92,7 +92,7 @@ const RegisterForm = () => {
         >
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
-            placeholder="Username"
+            placeholder="Email ID"
           />
         </Form.Item>
         <Form.Item
