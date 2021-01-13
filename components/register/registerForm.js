@@ -36,6 +36,7 @@ const RegisterForm = () => {
   const onFinish = (values) => {
     register(values).then((r) => {
       if (!Object.prototype.hasOwnProperty.call(r, 'errors')) {
+        delete values.email;
         login(values).then((response) => {
           if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
             const tokenMaxAge =
