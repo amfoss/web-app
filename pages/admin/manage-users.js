@@ -178,7 +178,8 @@ const Users = (props) => {
       title: 'GitLab',
       dataIndex: 'profile.gitlabUsername',
       key: 'profile.gitlabUsername',
-      width: 100,
+      render: (text, record) => (record.profile ? record.profile.gitlabUsername : null),
+      width: 200,
     },
     {
       title: 'Batch',
@@ -193,7 +194,7 @@ const Users = (props) => {
       onFilter: (value, record) =>
         record.profile ? record.profile.batch.indexOf(value) === 0 : null,
       render: (text, record) => (record.profile ? record.profile.batch : null),
-      width: 200,
+      width: 100,
     },
     {
       title: 'Membership',
@@ -210,7 +211,7 @@ const Users = (props) => {
         { text: 'Not Active', value: false },
       ],
       onFilter: (value, record) => record.isVerified === value,
-      width: 200,
+      width: 150,
     },
     {
       title: 'Is Admin',
@@ -227,7 +228,7 @@ const Users = (props) => {
         { text: 'Users', value: false },
       ],
       onFilter: (value, record) => record.isAdmin === value,
-      width: 100,
+      width: 150,
     },
   ];
 
