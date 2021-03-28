@@ -16,7 +16,7 @@ import TitleBar from '../../components/titlebar';
 import dataFetch from '../../utils/dataFetch';
 import AddRemoveCard from '../../components/admin/addRemoveCard';
 import useModal from '../../components/admin/useModal';
-import { verifyUserMutation } from '../../utils/mutations';
+import { verifyUserMutation, addToPlatformMutation } from '../../utils/mutations';
 
 const routes = [
   {
@@ -126,6 +126,9 @@ const Users = (props) => {
   const verifyUsersFetch = async (variables) =>
     dataFetch({ query: verifyUserMutation, variables });
 
+  const addToPlatform = async (variables) =>
+    dataFetch({ query: addToPlatformMutation, variables });
+
   const verifyUsers = () => {
     let usernames = [];
     selected.map((s) => {
@@ -133,6 +136,15 @@ const Users = (props) => {
     });
     const variables = { usernames };
     verifyUsersFetch(variables);
+  };
+
+  const addToGitLab = () => {
+    let usernames = [];
+    selected.map((s) => {
+      usernames.push(s.username);
+    });
+    const variables = { usernames, platform: "gitlab" };
+    addToPlatform(variables).then(r => alert('Successfully added them!'));
   };
 
   const columns = [
@@ -254,6 +266,14 @@ const Users = (props) => {
       />
       <div className="mx-4">
         <div className="float-right px-2 pb-2">
+          <Button
+            onClick={addToGitLab}
+            type="primary"
+            size="large"
+            disabled={Object.keys(selected).length === 0}
+          >
+            Add To GitLab
+          </Button>
           <Button
             onClick={verifyUsers}
             type="primary"

@@ -29,3 +29,9 @@ export const verifyUserMutation = `mutation ($usernames: [String]){
     status
   }
 }`;
+
+export const addToPlatformMutation = `mutation ($usernames: [String], $platform: String!){
+  addToPlatform(usernames: $usernames, platform: $platform){
+    status
+  }
+}`;
