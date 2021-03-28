@@ -175,6 +175,12 @@ const Users = (props) => {
       width: 200,
     },
     {
+      title: 'GitLab',
+      dataIndex: 'profile.gitlabUsername',
+      key: 'profile.gitlabUsername',
+      width: 100,
+    },
+    {
       title: 'Batch',
       dataIndex: 'profile.batch',
       key: 'profile.batch',
@@ -221,7 +227,7 @@ const Users = (props) => {
         { text: 'Users', value: false },
       ],
       onFilter: (value, record) => record.isAdmin === value,
-      width: 200,
+      width: 100,
     },
   ];
 
@@ -235,6 +241,7 @@ const Users = (props) => {
         profile{
           fullName
           batch
+          gitlabUsername
         }
       }
     }
