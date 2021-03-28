@@ -190,6 +190,7 @@ const Users = (props) => {
         { text: '2017', value: '2017' },
         { text: '2018', value: '2018' },
         { text: '2019', value: '2019' },
+        { text: '2020', value: '2020' },
       ],
       onFilter: (value, record) =>
         record.profile ? record.profile.batch.indexOf(value) === 0 : null,
