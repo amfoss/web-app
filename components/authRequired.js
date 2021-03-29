@@ -2,6 +2,7 @@ import React from 'react';
 import Result from 'antd/lib/result';
 import Button from 'antd/lib/button';
 import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 import LoadingScreen from './loadingScreen';
 import Base from './base';
@@ -12,9 +13,32 @@ const AuthRequired = ({
   isAdmin,
   isClubMember,
   verificationRequired,
+  adminRequired,
 }) => {
   return loaded ? (
-    isAdmin || isClubMember ? (
+    adminRequired ? (
+      isAdmin ? (
+        children
+      ) : (
+        <Base title={`Access Denied`} verificationRequired={false}>
+          <div
+            className="h-100 justify-content-center d-flex align-items-center"
+            style={{ minHeight: '100vh' }}
+          >
+            <Result
+              status="403"
+              title="403"
+              subTitle={`Sorry, you are not authorized to access this page.`}
+              extra={
+                <Button type="primary" onClick={() => Router.push('/')}>
+                  Back Home
+                </Button>
+              }
+            />
+          </div>
+        </Base>
+      )
+    ) : isAdmin || isClubMember ? (
       children
     ) : (
       <Base
@@ -54,8 +78,17 @@ const AuthRequired = ({
       </Base>
     )
   ) : (
-    <LoadingScreen text="Verifying your access!" />
+    <LoadingScreen text="Loading..." />
   );
+};
+
+AuthRequired.propTypes = {
+  loaded: PropTypes.bool,
+  children: PropTypes.node,
+  isAdmin: PropTypes.bool,
+  isClubMember: PropTypes.bool,
+  verificationRequired: PropTypes.bool,
+  adminRequired: PropTypes.bool,
 };
 
 export default AuthRequired;

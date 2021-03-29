@@ -46,8 +46,7 @@ const Base = ({
       if (!userLoaded) {
         fetchData().then((r) => {
           setData(r.data);
-          setUserLoaded(true);
-        });
+        }).finally(() => setUserLoaded(true));
       }
     };
     if (!loaded) {
@@ -95,6 +94,7 @@ const Base = ({
         isAdmin={data?.isAdmin}
         isClubMember={data?.isClubMember}
         verificationRequired={verificationRequired}
+        adminRequired={adminRequired}
       >
         <Header title={title} />
         <Sidebar isAdmin={data?.isAdmin} selected={router.pathname}>
