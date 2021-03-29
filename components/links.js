@@ -27,10 +27,10 @@ export const links = [
         key: 'dashboard',
         title: 'Dashboard',
       },
-      {
-        key: 'individual-report',
-        title: 'Individual Report',
-      },
+      // {
+      //   key: 'individual-report',
+      //   title: 'Individual Report',
+      // },
       {
         key: 'live-report',
         title: 'Live Attendance',
@@ -151,29 +151,29 @@ export const links = [
       },
     ],
   },
-  {
-    title: 'Settings',
-    key: 'settings',
-    icon: <SettingOutlined />,
-    items: [
-      {
-        key: 'general',
-        title: 'General Settings',
-      },
-      {
-        key: 'privacy',
-        title: 'Privacy',
-      },
-      {
-        key: 'appearance',
-        title: 'Appearance',
-      },
-      {
-        key: 'notifications',
-        title: 'Notifications',
-      },
-    ],
-  },
+  // {
+  //   title: 'Settings',
+  //   key: 'settings',
+  //   icon: <SettingOutlined />,
+  //   items: [
+  //     {
+  //       key: 'general',
+  //       title: 'General Settings',
+  //     },
+  //     {
+  //       key: 'privacy',
+  //       title: 'Privacy',
+  //     },
+  //     {
+  //       key: 'appearance',
+  //       title: 'Appearance',
+  //     },
+  //     {
+  //       key: 'notifications',
+  //       title: 'Notifications',
+  //     },
+  //   ],
+  // },
   {
     title: 'Logout',
     key: 'logout',

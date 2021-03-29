@@ -1,26 +1,21 @@
 const withPlugins = require('next-compose-plugins');
-const withSass = require('@zeit/next-sass');
-const withCss = require('@zeit/next-css');
-const withSourceMaps = require('@zeit/next-source-maps');
 const withOffline = require('next-offline');
 const optimizedImages = require('next-optimized-images');
+const path = require('path');
 
 const nextConfig = {
   target: 'serverless',
   devIndicators: {
     autoPrerender: false,
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
+  productionBrowserSourceMaps: true,
 };
 
 module.exports = withPlugins(
   [
-    [withSourceMaps],
-    [withCss],
-    [
-      withSass({
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|mp4)$/,
-      }),
-    ],
     [optimizedImages],
     [
       withOffline({
