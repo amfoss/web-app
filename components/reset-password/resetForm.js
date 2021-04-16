@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import dataFetch from '../../utils/dataFetch';
 import Link from 'next/link';
+
 import Result from 'antd/lib/result';
+import Card from "antd/lib/card";
+import Form from "antd/lib/form";
+import Input from "antd/lib/input";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import Button from "antd/lib/button";
 
 const ResetForm = () => {
-  const [loading, setLoaded] = useState(false);
-  const [email, sendEmail] = useState('');
+  const [isLoading, setLoaded] = useState(false);
   const [error, setErrorText] = useState('');
   const [success, setSuccessText] = useState('');
 
@@ -17,58 +22,58 @@ const ResetForm = () => {
 }
   `;
 
-  const submitForm = async (variables) => dataFetch({ query, variables });
+  const submitForm = async (variables) => await dataFetch({ query, variables });
 
-  const resetPassword = () => {
-    const variables = { email };
-    submitForm(variables).then((r) => {
-      if (Object.prototype.hasOwnProperty.call(r, 'errors')) {
-        setErrorText(r.errors[0].message);
+  const resetPassword = (values) => {
+    submitForm(values).then((response) => {
+      if (Object.prototype.hasOwnProperty.call(response, 'errors')) {
+        setErrorText(response.errors[0].message);
       } else {
-        setSuccessText(r.data.status);
+        setSuccessText(response.data.status);
         setErrorText('');
+        setLoaded(true);
       }
     });
   };
 
-  return !loading ? (
-    <div>
+  const onFinishFailed = (errorInfo) => {
+    console.error(errorInfo);
+  };
+
+  return !isLoading ? (
+    <Card className="login-card">
       <img src="/static/images/cms_logo.png" className="w-100 my-4" alt="CMS Logo" />
-      <form
-        className="form-group"
-        onSubmit={(e) => {
-          setLoaded(true);
-          resetPassword();
-          e.preventDefault();
-        }}
+      <Form
+        className="login-form"
+        layout="vertical"
+        name="login-form"
+        onFinish={resetPassword}
+        onFinishFailed={onFinishFailed}
       >
-        <div className="page-container">
-          <div className="row m-0">
-            <div className="col-md-12">
-              <label>Reset Password</label>
-              <div className="m-2">
-                <input
-                  type="email"
-                  placeholder="Enter Email"
-                  name="email"
-                  className="form-control"
-                  onChange={(e) => sendEmail(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div className="text-md-center m-3">
-            <button type="submit" className="button btn ant-btn-primary">
-              Reset Password
-            </button>
-          </div>
-        </div>
-      </form>
+        <Form.Item
+          name="email"
+          label="Email"
+          rules={[{ message: 'Please enter your email' }]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Email"
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="btn-block login-form-button"
+          >
+            Reset Password
+          </Button>
+        </Form.Item>
+      </Form>
       <Link href="/login">Already have an account? Login</Link>
-    </div>
+    </Card>
   ) : (
-    <div>
+    <Card className="login-form">
       {success !== '' ? (
         <Result status="success" title="Check your email for password" />
       ) : error !== '' ? (
@@ -76,7 +81,8 @@ const ResetForm = () => {
       ) : (
         <div className="alert alert-warning m-4">Submitting. Please Wait</div>
       )}
-    </div>
+      <Link href="/login">Back to Login</Link>
+    </Card>
   );
 };
 
