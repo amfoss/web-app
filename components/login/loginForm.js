@@ -110,8 +110,11 @@ const LoginForm = () => {
             Log in
           </Button>
         </Form.Item>
+        <Link href="/reset-password">Forgot Password?</Link>
+
       </Form>
       <Link href="/register">Don't have account? Register</Link>
+
     </Card>
   ) : (
     <h1>Loading</h1>
