@@ -129,10 +129,10 @@ export const links = [
     key: 'account',
     icon: <UserOutlined />,
     items: [
-      {
-        key: 'profile',
-        title: 'My Profile',
-      },
+      // {
+      //   key: 'profile',
+      //   title: 'My Profile',
+      // },
       {
         key: 'settings',
         title: 'Settings',
