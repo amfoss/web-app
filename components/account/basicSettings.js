@@ -29,6 +29,8 @@ const BasicSettings = () => {
   const [phoneNo, setPhoneNo] = useState('');
   const [githubUsername, setGithubUsername] = useState('');
   const [gitlabUsername, setGitlabUsername] = useState('');
+  const [twitterUsername, setTwitterUsername] = useState('');
+  const [telegramUsername, setTelegramUsername] = useState('');
   const [roll, setRoll] = useState('');
   const [batch, setBatch] = useState(0);
   const [about, setAbout] = useState('');
@@ -54,6 +56,8 @@ query user($username: String!){
       batch
       githubUsername
       gitlabUsername
+      telegramUsername
+      twitterUsername
       languages{
         name
       }
@@ -69,8 +73,8 @@ query user($username: String!){
 `;
 
   const updateProfileQuery = `
-    mutation ($about: String, $batch: Int, $email: String, $firstName: String!, $githubUsername: String, $lastName: String, $phoneNo: String, $roll: String, $gitlabUsername: String, $username: String, $languages: [String]){
-  UpdateProfile(about: $about, batch: $batch, email: $email, firstName: $firstName, githubUsername: $githubUsername, lastName:$lastName, phoneNo:$phoneNo, roll: $roll, gitlabUsername: $gitlabUsername, username: $username, languages: $languages){
+    mutation ($about: String, $batch: Int, $email: String, $firstName: String!, $githubUsername: String, $twitterUsername: String, $telegramUsername: String,$lastName: String, $phoneNo: String, $roll: String, $gitlabUsername: String, $username: String, $languages: [String]){
+  UpdateProfile(about: $about, batch: $batch, email: $email, firstName: $firstName, githubUsername: $githubUsername, twitterUsername: $twitterUsername, telegramUsername: $telegramUsername, lastName:$lastName, phoneNo:$phoneNo, roll: $roll, gitlabUsername: $gitlabUsername, username: $username, languages: $languages){
     id
   }
 }
@@ -107,6 +111,16 @@ query user($username: String!){
               ? r.data.user.profile.gitlabUsername
               : ''
           );
+          setTelegramUsername(
+            r.data.user.profile.telegramUsername
+              ? r.data.user.profile.telegramUsername
+              : ''
+          );
+          setTwitterUsername(
+            r.data.user.profile.twitterUsername
+              ? r.data.user.profile.twitterUsername
+              : ''
+          );
           setProfilePic(
             r.data.user.profile.profilePic ? r.data.user.profile.profilePic : ''
           );
@@ -130,6 +144,8 @@ query user($username: String!){
       roll,
       about,
       githubUsername,
+      telegramUsername,
+      twitterUsername,
       batch,
       phoneNo,
       languages: languages[0] ? languages : [],
@@ -263,6 +279,28 @@ query user($username: String!){
                   placeholder="GitLab Username"
                   value={gitlabUsername}
                   onChange={(e) => setGitlabUsername(e.target.value)}
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className="row mt-4">
+              <div className="col-md-6">
+                <label>Telegram Username</label>
+                <input
+                  type="text"
+                  placeholder="Telegram Username"
+                  value={telegramUsername}
+                  onChange={(e) => setTelegramUsername(e.target.value)}
+                  className="form-control"
+                />
+              </div>
+              <div className="col-md-6">
+                <label>Twitter Username</label>
+                <input
+                  type="text"
+                  placeholder="Twitter Username"
+                  value={twitterUsername}
+                  onChange={(e) => setTwitterUsername(e.target.value)}
                   className="form-control"
                 />
               </div>
