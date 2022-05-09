@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { marked } from "marked";
 
 // antd components
 import Card from 'antd/lib/card';
@@ -22,14 +23,21 @@ const routes = [
   },
 ];
 const Viewlist = (props) => {
-  const [current, setCurrent] = useState('basic');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://gitlab.com/api/v4/projects/20528933/repository/files/2020%2fadvaith.md/raw?private_token=glpat-TA_ZW_66kKtazaexHVCu&ref=master')
+    .then(response => response.text())
+    .then(data => setData(marked.parse(data)))
+  },[])
+
   return (
     <Base title="View list" {...props}>
       <TitleBar
         routes={routes}
         title="View Bucketlist"
       />
-Hi
+      <article dangerouslySetInnerHTML={{__html: data}}></article>
     </Base>
   );
 };
