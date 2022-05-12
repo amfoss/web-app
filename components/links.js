@@ -134,6 +134,10 @@ export const links = [
         key: 'view-list',
         title: 'View bucketlist',
       },
+      {
+        key: 'update-list',
+        title: 'Update bucketlist',
+      },
     ],
   },
   {
