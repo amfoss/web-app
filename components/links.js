@@ -165,6 +165,10 @@ export const links = [
         key: 'manage-users',
         title: 'Manage Users',
       },
+      {
+        key: 'bucketlist-tracker',
+        title: 'Bucketlist Tracker',
+      },
     ],
   },
   // {
