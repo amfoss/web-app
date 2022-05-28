@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { marked } from "marked";
+import { marked } from 'marked';
 import Cookies from 'universal-cookie';
 import dataFetch from '../../utils/dataFetch';
 
@@ -74,25 +74,21 @@ const Viewlist = (props) => {
   });
 
   useEffect(() => {
-    fetch(`https://gitlab.com/api/v4/projects/20528933/repository/files/${batch}%2f${usernameCookie}.md/raw?private_token=glpat-TA_ZW_66kKtazaexHVCu&ref=master`)
-    .then(response => response.text())
-    .then(data => setData(marked.parse(data)))
-  },[batch])
+    fetch(
+      `https://gitlab.com/api/v4/projects/20528933/repository/files/${batch}%2f${usernameCookie}.md/raw?private_token=glpat-TA_ZW_66kKtazaexHVCu&ref=master`
+    )
+      .then((response) => response.text())
+      .then((data) => setData(marked.parse(data)));
+  }, [batch]);
 
   return (
     <Base title="View list" {...props}>
-      <TitleBar
-        routes={routes}
-        title="View Bucketlist"
-      />
-        <div className="m-4" >
-          <Card
-            loading={!isLoaded}
-            type="inner"
-          >
-            <div dangerouslySetInnerHTML={{__html: data}}></div>
-          </Card>
-        </div>
+      <TitleBar routes={routes} title="View Bucketlist" />
+      <div className="m-4">
+        <Card loading={!isLoaded} type="inner">
+          <div dangerouslySetInnerHTML={{ __html: data }}></div>
+        </Card>
+      </div>
     </Base>
   );
 };
