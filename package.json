@@ -36,6 +36,7 @@
     "imagemin-optipng": "^7.1.0",
     "isomorphic-fetch": "^2.2.1",
     "markdown-it": "^11.0.0",
+    "marked": "^4.0.15",
     "moment": "^2.24.0",
     "moment-range": "^4.0.2",
     "next": "^9.3.5",

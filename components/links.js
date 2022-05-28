@@ -10,6 +10,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
   ContainerOutlined,
+  CheckSquareOutlined,
 } from '@ant-design/icons';
 
 export const links = [
@@ -125,6 +126,21 @@ export const links = [
     ],
   },
   {
+    title: 'Bucketlist',
+    key: 'bucketlist',
+    icon: <CheckSquareOutlined />,
+    items: [
+      {
+        key: 'view-list',
+        title: 'View bucketlist',
+      },
+      {
+        key: 'update-list',
+        title: 'Update bucketlist',
+      },
+    ],
+  },
+  {
     title: 'Account',
     key: 'account',
     icon: <UserOutlined />,
@@ -148,6 +164,10 @@ export const links = [
       {
         key: 'manage-users',
         title: 'Manage Users',
+      },
+      {
+        key: 'bucketlist-tracker',
+        title: 'Bucketlist Tracker',
       },
     ],
   },

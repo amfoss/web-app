@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-const API_URL = 'https://api.amfoss.in/';
+const API_URL = 'http://localhost:8000/';
 
 export default ({ query, variables }) => {
   const body = {
